@@ -1,0 +1,12 @@
+/*
+    These are css rules that had to be excluded from css files that were affected by yui compressor
+    which was breaking them by removing whitespaces around operators
+*/
+#technologydetails .capacity + .action,
+#technologydetails .capacity + .complex_action {
+    width: calc(100% - 201px);
+}
+
+#technologydetails .technology_tree::before {
+    left: calc(50% - 16px);
+}
