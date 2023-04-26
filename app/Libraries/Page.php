@@ -62,20 +62,8 @@ class Page
         $this->objects = new Objects();
     }
 
-    /**
-     * display
-     *
-     * @param string  $current_page Current page
-     * @param boolean $topnav       Show topnav
-     * @param string  $metatags     Meta tags
-     * @param boolean $menu         Show menu
-     *
-     * @return void
-     */
-    public function display($current_page, $topnav = true, $metatags = '', $menu = true)
+    public function display(string $current_page, bool $sidebar = true, bool $navigation = true, bool $footer = true): void
     {
-        $page = '';
-
         if (!defined('IN_MESSAGE')) {
             // For the Home page
             if (defined('IN_LOGIN')) {
@@ -84,35 +72,47 @@ class Page
         }
 
         // Anything else
-        if ($page == '') {
-            $page .= $this->gameHeader($metatags);
-            $page .= $topnav ? $this->gameNavbar() : ''; // TOP NAVIGATION BAR
-            $page .= $menu ? $this->gameMenu() : ''; // MENU
+        if ($navigation) {
+            $parse['navigation'] = $this->gameNavigation();
+            $parse['resources'] = $this->gameResources();
+            $parse['officers'] = $this->gameOfficers();
         }
 
-        // Merge: Header + Topnav + Menu + Page
-        if (!defined('IN_INSTALL')) {
-            $page .= "\n<center>\n" . $current_page . "\n</center>\n";
-        } else {
-            if (defined('IN_MESSAGE')) {
-                $page .= "\n<center>\n" . $current_page . "\n</center>\n";
-            } else {
-                $page .= $current_page;
-            }
+        if ($sidebar) {
+            $parse['sidebar'] = $this->gameMenu();
         }
 
-        // Footer
-        if (!defined('IN_INSTALL') && !defined('IN_LOGIN')) {
-            // Is inside the game
-            $page .= $this->template->set(
-                'general/footer',
-                []
-            );
+        if ($footer) {
+            $parse['footer'] = $this->gameFooter();
         }
+
+        $page = '';
+        $page .= $this->gamePage($current_page, ($parse ?? []), ($navigation && $sidebar && $footer));
 
         // Show result page
         die($page);
     }
+
+    private function gamePage(string $page, array $parse, bool $simple): string
+    {
+        return $this->template->set(
+            ($simple ? 'game/game_layout' : 'game/game_layout_simple'),
+            array_merge(
+                $this->langs->loadLang('adm/popups', true)->language,
+                $parse,
+                [
+                    'content' => $page,
+                    'game_title' => Functions::readConfig('game_name'),
+                    'version' => SYSTEM_VERSION,
+                    'css_path' => CSS_PATH,
+                    'js_path' => JS_PATH,
+                    'img_path' => IMG_PATH,
+                    'meta_tags' => ($metatags = '') ? $metatags : ""
+                ]
+            )
+        );
+    }
+
 
     /**
      * Display the installation page
@@ -440,34 +440,19 @@ class Page
         );
     }
 
-    /**
-     * gameHeader
-     *
-     * @param string $metatags Meta tags
-     *
-     * @return string
-     */
-    private function gameHeader($metatags = '')
+    private function gameNavigation()
     {
-        $parse['game_title'] = Functions::readConfig('game_name');
-        $parse['version'] = SYSTEM_VERSION;
-        $parse['css_path'] = CSS_PATH;
-        $parse['skin_path'] = DPATH;
-        $parse['js_path'] = JS_PATH;
-        $parse['meta_tags'] = ($metatags) ? $metatags : '';
+        $lang = $this->langs->loadLang('game/navigation', true);
 
         return $this->template->set(
-            'general/simple_header',
-            $parse
+            'general/navigation',
+            [
+                'player_name' => $this->current_user['user_name'],
+            ]
         );
     }
 
-    /**
-     * gameNavbar
-     *
-     * @return string
-     */
-    private function gameNavbar()
+    private function gameResources()
     {
         $lang = $this->langs->loadLang(['game/global', 'game/navigation', 'game/officier'], true);
 
@@ -507,7 +492,7 @@ class Page
         $darkmatter = FormatLib::prettyNumber($this->current_user['premium_dark_matter']);
         $energy = FormatLib::prettyNumber(
             $this->current_planet['planet_energy_max'] + $this->current_planet['planet_energy_used']
-        ) . '/' . FormatLib::prettyNumber($this->current_planet['planet_energy_max']);
+        ) . "/" . FormatLib::prettyNumber($this->current_planet['planet_energy_max']);
 
         // METAL
         if ($this->current_planet['planet_metal'] >= Production::maxStorable($this->current_planet['building_metal_store'])) {
@@ -539,17 +524,27 @@ class Page
             'general/topnav',
             array_merge(
                 $lang->language,
-                $parse,
-                $this->buildOfficersBlock($lang)
+                $parse
             )
         );
     }
 
-    /**
-     * gameMenu
-     *
-     * @return string
-     */
+    private function gameOfficers()
+    {
+        $lang = $this->langs->loadLang(['game/global', 'game/officier'], true);
+
+        return $this->template->set(
+            'general/officers',
+            array_merge(
+                $lang->language,
+                $this->buildOfficersBlock($lang),
+                [
+                    'img_path' => IMG_PATH
+                ]
+            )
+        );
+    }
+
     private function gameMenu()
     {
         $lang = $this->langs->loadLang('game/menu', true);
@@ -667,13 +662,14 @@ class Page
         );
     }
 
-    /**
-     * Removes speacial chars like tabs, new lines and carriage return.
-     *
-     * @param string $template Template
-     *
-     * @return string
-     */
+    public function gameFooter()
+    {
+        return $this->template->set(
+            'general/footer',
+            []
+        );
+    }
+    
     public function jsReady($template = '')
     {
         $output = str_replace(["\r\n", "\r"], "\n", $template);
