@@ -406,7 +406,7 @@ class InstallationController extends BaseController
         $data .= "defined('DB_PASS') ? null : define('DB_PASS', '" . $this->db_password . "');\n";
         $data .= "defined('DB_NAME') ? null : define('DB_NAME', '" . $this->db_name . "');\n";
         $data .= "defined('DB_PREFIX') ? null : define('DB_PREFIX', '" . $this->db_prefix . "');\n";
-        $data .= "defined('SECRETWORD') ? null : define('SECRETWORD', 'xgp-" . StringsHelper::randomString(16) . "');\n";
+        $data .= "defined('SECRETWORD') ? null : define('SECRETWORD', 'ogp-" . time() . '-' . StringsHelper::randomString(40) . "');\n";
         $data .= '?>';
 
         // create the new file
@@ -518,7 +518,7 @@ class InstallationController extends BaseController
      */
     private function validateDbData()
     {
-        return (!empty($this->db_host) && !empty($this->db_name) && !empty($this->db_user) && !empty($this->db_prefix));
+        return (!empty($this->db_host) && !empty($this->db_name) && !empty($this->db_user));
     }
 
     /**
