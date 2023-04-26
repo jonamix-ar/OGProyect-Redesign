@@ -1,0 +1,47 @@
+#
+# application
+#
+config/config.php
+
+#
+# public
+#
+public/compiles/*
+
+#
+# storage
+#
+storage/backups/*.sql
+storage/cache/*.html
+storage/logs/*.txt
+**/errors/*.html
+
+#
+# tests
+#
+tests/.phpunit.result.cache
+tests/build/
+tests/_reports/
+
+#
+# docs
+#
+.phpdoc/*
+/docs/*
+
+#
+# docker
+#
+data/xgp.sql
+
+#
+# IDE
+#
+*.code-workspace
+nbproject/
+
+#
+# composer
+#
+/vendor
+composer.lock
