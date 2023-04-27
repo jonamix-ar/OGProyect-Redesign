@@ -640,7 +640,7 @@ class Page
 		$sub_pages       = [
            ['resourceSettings', $lang->line('lm_resources'), '', 'FFF', '', '1', '4', ''],
            ['techtree', $lang->line('lm_technology'), '', 'FFF', '', '1', '9', 'true'],
-		   ['alliance', $lang->line('lm_technology'), '&mode=circular', 'FFF', '', '1', '9', ''],
+		   ['alliance', $lang->line('lm_alliance_circular'), '&mode=circular', 'FFF', '', '1', '9', ''],
 		   ['movement', $lang->line('lm_movement'), '', 'FFF', '', '1', '9', ''],
 		   ['traderOverview#page=traderResources&animation=false', $lang->line('lm_resource_trader'), '', 'FFF', '', '1', '9', ''],
 		   //['station', $lang->line('tech')[43], '', 'FFF', '', '1', '9', ''], //Muelle espacial
@@ -674,7 +674,7 @@ class Page
 			$parse['premium']		= ($data[9] == true ?' premiumHighligt' : '');
 			$parse['sub_name']		= isset($sub_pages[$data[8]][1]) ? $sub_pages[$data[8]][1] : '';
 			$parse['is_overlay']	= (isset($sub_pages[$data[8]][7]) && $sub_pages[$data[8]][7] == true) ? 'overlay ' : '';
-			$parse['sub_link']		= ($data[8] != '' ? 'href="http://' . BASE_PATH . '/index.php?page=' . $sub_pages[$data[8]][0] . ($sub_pages[$data[8]][2] != '' ? '&' . $sub_pages[$data[8]][2] : '') . '"' : '');
+			$parse['sub_link']		= ($data[8] != '' ? 'href="' . SYSTEM_ROOT . 'game.php?page=' . $sub_pages[$data[8]][0] . ($sub_pages[$data[8]][2] != '' ? $sub_pages[$data[8]][2] : '') . '"' : '');
 
 			$menu_block    .= $this->template->set($sub_template, $parse);
         }
