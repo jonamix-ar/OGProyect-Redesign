@@ -608,7 +608,7 @@ class Page
         $current_page = isset($_GET['page']) ? $_GET['page'] : null;
         $sub_template = 'general/left_menu_row_view';
         $adv_template = 'general/advice_row_view';
-        
+
         $fleetModel = new Fleet();
         $userFleets = $fleetModel->getUserFleetAlert($this->current_user['user_id']);
         $i = count($userFleets);
@@ -626,8 +626,8 @@ class Page
             ['imperium', $lang->line('lm_empire'), '', 'FFF', 'true', '1', '2', 'empire', '', ''],
             ['alliance', $lang->line('lm_alliance'), '', 'FFF', '', '2', '12', 'alliance', '2', ''],
             ['premium', $lang->line('lm_officiers'), '', 'FF8900', '', '2', '13', 'premium', '', 'true'],
-			['shop', $lang->line('lm_shop'), '', 'FF8900', '', '2', '13', 'shop', '5', 'true'],
-			['rewarding', $lang->line('lm_rewarding'), '', 'FF8900', '', '2', '13', 'rewarding', '6', 'true'],
+            ['shop', $lang->line('lm_shop'), '', 'FF8900', '', '2', '13', 'shop', '5', 'true'],
+            ['rewarding', $lang->line('lm_rewarding'), '', 'FF8900', '', '2', '13', 'rewarding', '6', 'true'],
         ];
 
         $sub_pages = [
@@ -636,9 +636,9 @@ class Page
             ['alliance', $lang->line('lm_alliance_circular'), '&mode=circular', 'FFF', '', '1', '9', ''],
             ['movement', $lang->line('lm_movement'), '', 'FFF', '', '1', '9', ''],
             ['traderOverview#page=traderResources&animation=false', $lang->line('lm_resource_trader'), '', 'FFF', '', '1', '9', ''],
-			['shop#page=inventory&category=d8d49c315fa620d9c7f1f19963970dea59a0e3be', $lang->line('lm_inventory'), '', 'FFF', '', '1', '9', ''],
-			['rewarding&tab=rewards&tier=1', $lang->line('lm_current_rank'), '', 'FFF', '', '1', '9', ''],
-			['rewards', '', '', 'FFF', '', '1', '9', ''],
+            ['shop#page=inventory&category=d8d49c315fa620d9c7f1f19963970dea59a0e3be', $lang->line('lm_inventory'), '', 'FFF', '', '1', '9', ''],
+            ['rewarding&tab=rewards&tier=1', $lang->line('lm_current_rank'), '', 'FFF', '', '1', '9', ''],
+            ['rewards', '', '', 'FFF', '', '1', '9', ''],
             //['station', $lang->line('tech')[43], '', 'FFF', '', '1', '9', ''], //Muelle espacial
         ];
 
@@ -675,21 +675,21 @@ class Page
             $menu_block .= $this->template->set($sub_template, $parse);
         }
 
-		// VACATION AND DELETE STRINGS AND ICONS
-		$vac_parse = [
-			'icon' => 'exclaim',
-			'message' => str_replace('%t', Timing::formatExtendedDate($this->current_user['preference_vacation_mode']), $lang->line('lm_vacation_mode')),
-		];
-		$del_parse = [
-			'icon' => 'trash',
-			'message' => str_replace('%t', Timing::formatExtendedDate($this->current_user['preference_delete_mode'] + ONE_WEEK), $lang->line('lm_delete_mode')),
-		];
+        // VACATION AND DELETE STRINGS AND ICONS
+        $vac_parse = [
+            'icon' => 'exclaim',
+            'message' => str_replace('%t', Timing::formatExtendedDate($this->current_user['preference_vacation_mode']), $lang->line('lm_vacation_mode')),
+        ];
+        $del_parse = [
+            'icon' => 'trash',
+            'message' => str_replace('%t', Timing::formatExtendedDate($this->current_user['preference_delete_mode'] + ONE_WEEK), $lang->line('lm_delete_mode')),
+        ];
 
         // PARSE THE MENU AND OTHER DATA
         $parse['menu_block'] = $menu_block;
         $parse['is_vacation']    = ($this->current_user['preference_vacation_mode'] > 0) ? $this->template->set($adv_template, $vac_parse) : '';
-		$parse['is_delete']    = ($this->current_user['preference_delete_mode'] > 0) ? $this->template->set($adv_template, $del_parse) : '';
-		$parse['admin_link']    = ($this->current_user['user_authlevel'] > 0) ? '<li>
+        $parse['is_delete']    = ($this->current_user['preference_delete_mode'] > 0) ? $this->template->set($adv_template, $del_parse) : '';
+        $parse['admin_link']    = ($this->current_user['user_authlevel'] > 0) ? '<li>
 			<span class="menu_icon">
 				<span class="menuImage alliance"></span>
 			</span>

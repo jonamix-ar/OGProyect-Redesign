@@ -3,6 +3,7 @@
 namespace App\Libraries;
 
 use App\Core\Language;
+use DateTime;
 
 abstract class TimingLibrary
 {
@@ -43,12 +44,17 @@ abstract class TimingLibrary
      */
     public static function formatExtendedDate($time)
     {
-        if (!is_numeric($time)) {
-            $time = strtotime($time);
+        if ($time === null) {
+            // manejar el valor nulo de alguna manera, por ejemplo:
+            $time = time(); // establecer la hora actual
         }
 
-        return date(Functions::readConfig('date_format_extended'), $time);
+        $date = new DateTime();
+        $date->setTimestamp($time);
+
+        return $date->format(Functions::readConfig('date_format_extended'));
     }
+
 
     /**
      * Format time based on system default short date config
