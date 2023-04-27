@@ -18,5 +18,11 @@ $lang = [
     'lm_technology' => 'Técnica',
     'lm_alliance' => 'Alianza',
 	'lm_alliance_circular' => 'Correo circular',
+	'lm_shop' => 'Tienda',
+	'lm_inventory' => 'Inventario',
+	'lm_rewarding' => 'Recompensas',
+	'lm_current_rank' => 'Rango actual',
     'lm_administration' => 'Administración',
+    'lm_vacation_mode' => 'Modo vacaciones|Esta cuenta está en modo vacaciones hasta al menos el %t.',
+    'lm_delete_mode' => 'Eliminar cuenta|Esta cuenta será eliminada el %t.',
 ];
