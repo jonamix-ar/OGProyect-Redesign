@@ -1,6 +1,6 @@
 <li>
 	<span class="menu_icon">
-		<a {{$sub_link}}
+		<a {!!$sub_link!!}
 			class="{{$is_overlay}} tooltipRight js_hideTipOnMobile "
 			target="_self"
 			title="{{$sub_name}}">
