@@ -92,6 +92,15 @@ class PlanetLib extends Model
         }
     }
 
+    public function getPlanetDataByType(int $galaxy, int $system, int $position, $type): ?array
+    {
+        return $this->db->queryFetch("SELECT * FROM " . PLANETS . " 
+            WHERE `planet_galaxy` = '" . $galaxy . "' 
+                AND `planet_system` = '" . $system . "' 
+                AND `planet_planet` = '" . $position . "' 
+                AND `planet_type` = '" . $type . "'");
+    }
+
     /**
      * Insert a new record into buildings table
      *

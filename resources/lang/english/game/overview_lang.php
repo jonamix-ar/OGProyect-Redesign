@@ -1,6 +1,7 @@
 <?php
 
 $lang = [
+    'ov_title' => 'Overview',
     'ov_have_new_message' => 'You have 1 new message',
     'ov_have_new_messages' => 'You have %m new messages',
     'ov_free' => 'Free',
@@ -12,10 +13,11 @@ $lang = [
     'ov_diameter' => 'Diameter',
     'ov_distance_unit' => 'km',
     'ov_temperature' => 'Temperature',
-    'ov_aprox' => 'approx.',
+    'ov_aprox' => '',
     'ov_temp_unit' => '&#186;C',
     'ov_to' => 'to',
     'ov_position' => 'Position',
     'ov_points' => 'Points',
     'ov_fields' => 'Fields',
+    'ov_switch' => 'Switch to ',
 ];

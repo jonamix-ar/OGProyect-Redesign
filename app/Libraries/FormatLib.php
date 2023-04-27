@@ -301,6 +301,11 @@ class FormatLib
         return sprintf('[%d:%d:%d]', $galaxy, $system, $planet);
     }
 
+    public static function formatName(string $name): string
+    {
+        return preg_replace('/[_0-9]+/', '', $name);;
+    }
+
     /**
      * strongText
      *

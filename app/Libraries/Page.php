@@ -96,12 +96,12 @@ class Page
         die($page);
     }
 
-    private function gamePage(string $page, array $parse, bool $simple): string
+    private function gamePage(string $page, array $parse, bool $full): string
     {
         $date = new DateTime();
 
         return $this->template->set(
-            ($simple ? 'game/game_layout' : 'game/game_layout_simple'),
+            ($full ? 'game/game_layout' : 'game/game_layout_simple'),
             array_merge(
                 $this->langs->loadLang('adm/popups', true)->language,
                 $parse,

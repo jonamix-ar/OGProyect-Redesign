@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Game;
 
 use App\Core\BaseController;
+use App\Core\Database;
 use App\Core\Enumerators\PlanetTypesEnumerator;
 use App\Helpers\UrlHelper;
 use App\Libraries\DevelopmentsLib;
@@ -14,6 +15,7 @@ use App\Libraries\TimingLibrary as Timing;
 use App\Libraries\UpdatesLibrary;
 use App\Libraries\Users;
 use App\Models\Game\Overview;
+use App\Models\Libraries\PlanetLib as Planet;
 
 class OverviewController extends BaseController
 {
@@ -47,7 +49,7 @@ class OverviewController extends BaseController
 
     private function buildPage(): void
     {
-        $moon = $this->getPlanetMoon();
+        $planetAsMoon = $this->getPlanetAsMoon();
 
         $this->page->display(
             $this->template->set(
@@ -55,16 +57,16 @@ class OverviewController extends BaseController
                 array_merge(
                     $this->langs->language,
                     [
-                        'dpath' => DPATH,
+                        'game_url' => SYSTEM_ROOT,
+                        'img_path' => strtr(IMG_PATH, ['\\' => '/']),
                         'planet_name' => $this->planet['planet_name'],
                         'user_name' => $this->user['user_name'],
                         'date_time' => Timing::formatExtendedDate(time()),
                         'Have_new_message' => $this->getMessages(),
                         'fleet_list' => $this->getFleetMovements(),
-                        'planet_image' => $this->planet['planet_image'],
+                        'planet_image' => $this->getPlanetName($this->planet['planet_type'], $this->planet['planet_image']),
                         'building' => $this->getCurrentWork($this->planet),
-                        'moon_img' => $moon['moon_img'],
-                        'moon' => $moon['moon'],
+                        'planet_as_moon' => $planetAsMoon['planet_as_moon'],
                         'anothers_planets' => $this->getPlanets(),
                         'planet_diameter' => FormatLib::prettyNumber($this->planet['planet_diameter']),
                         'planet_field_current' => $this->planet['planet_field_current'],
@@ -75,11 +77,18 @@ class OverviewController extends BaseController
                         'galaxy_system' => $this->planet['planet_system'],
                         'galaxy_planet' => $this->planet['planet_planet'],
                         'user_rank' => $this->getUserRank(),
+                        'overview_title' => $this->langs->line('ov_title'), 3
                     ]
                 )
             )
         );
     }
+
+    private function getPlanetName($user_planet, $planet_img)
+    {
+        return $user_planet == PlanetTypesEnumerator::PLANET ? 'header_' . FormatLib::formatName($planet_img) : $planet_img;
+    }
+
 
     /**
      * method getPlanets
@@ -314,24 +323,29 @@ class OverviewController extends BaseController
         return $fleet;
     }
 
-    /**
-     * method getPlanetMoon
-     * param
-     * return the moon image and data for the current planet
-     */
-    private function getPlanetMoon()
+    private function getPlanetAsMoon()
     {
-        $return['moon_img'] = '';
-        $return['moon'] = '';
+        $return['planet_as_moon'] = '';
 
-        if ($this->planet['moon_id'] != 0 && $this->planet['moon_destroyed'] == 0 && $this->planet['planet_type'] == PlanetTypesEnumerator::PLANET) {
-            $moon_name = $this->planet['moon_name'] . ' (' . $this->langs->line('moon') . ')';
+        if ($this->planet['moon_id'] != 0 && $this->planet['moon_destroyed'] == 0 && $this->planet['planet_type'] == 1) {
+            $name = $this->langs->line('ov_switch') . ' ' . $this->langs->line('moon') . ' ' . $this->planet['moon_name'];
             $url = 'game.php?page=overview&cp=' . $this->planet['moon_id'] . '&re=0';
-            $image = DPATH . 'planets/' . $this->planet['moon_image'] . '.jpg';
-            $attributes = 'height="50" width="50"';
+            $image = IMG_PATH . 'planets/large/' . $this->planet['moon_image'] . '.gif';
+            $attributes = 'class="tooltipBottom js_hideTipOnMobile" title="' . $this->planet['moon_name'] . '"';
 
-            $return['moon_img'] = UrlHelper::setUrl($url, Functions::setImage($image, $moon_name, $attributes), $moon_name);
-            $return['moon'] = $moon_name;
+            $return['planet_as_moon'] = '<div id="moon">' . UrlHelper::setUrl($url, Functions::setImage($image, $name, $attributes), $name) . '</div>';
+        } elseif ($this->planet['planet_type'] == 3) {
+            $planetLib = new Planet();
+            $planet = $planetLib->getPlanetDataByType($this->planet['planet_galaxy'], $this->planet['planet_system'], $this->planet['planet_planet'], PlanetTypesEnumerator::PLANET);
+
+            $name = $this->langs->line('ov_switch') . ' ' . $this->langs->line('planet') . ' ' . $planet['planet_name'];
+            $url = 'game.php?page=overview&cp=' . $planet['planet_id'] . '&re=0';
+            $image = IMG_PATH . 'planets/large/' . FormatLib::formatName($planet['planet_image']) . '.jpg';
+            $attributes = 'class="tooltipBottom js_hideTipOnMobile" title="' . $planet['planet_name'] . '"';
+
+            $return['planet_as_moon'] = '<div id="planet_as_moon">' . UrlHelper::setUrl($url, Functions::setImage($image, $name, $attributes), $name) . '</div>';
+        } else {
+            $return['planet_as_moon'] = '';
         }
 
         return $return;
@@ -389,7 +403,8 @@ class OverviewController extends BaseController
         $total_rank = $this->user['user_statistic_total_rank'] == '' ? $this->planet['stats_users'] : $this->user['user_statistic_total_rank'];
 
         if ($this->noob->isRankVisible($this->user['user_authlevel'])) {
-            $user_rank = FormatLib::prettyNumber($this->user['user_statistic_total_points']) . ' (' . $this->langs->line('ov_place') . ' ' . UrlHelper::setUrl('game.php?page=statistics&range=' . $total_rank, $total_rank, $total_rank) . ' ' . $this->langs->line('ov_of') . ' ' . $this->planet['stats_users'] . ')';
+
+            $user_rank = '<a href="' . SYSTEM_ROOT . 'game.php?page=highscore&range=' . $total_rank . '">' . $total_rank . ' (' . $this->langs->line('ov_place') . ' ' . FormatLib::prettyNumber($this->user['user_statistic_total_points']) . ' ' . $this->langs->line('ov_of') . ' ' . $this->planet['stats_users'] . ')<\/a>';
         }
 
         return $user_rank;

@@ -1,17 +1,17 @@
 <div id='overviewcomponent' class="maincontent">
     <div id="inhalt">
-        <div id="planet" style="background-image:url(/nocdn/9.2.2/img/planets/header/header_gas.jpg);">
+        <div id="planet" style="background-image:url({{ $img_path . 'planets/header/' . $planet_image . '.jpg' }});">
             <div id="detailWrapper">
-
+                {!! $planet_as_moon !!}
                 <div id="header_text">
                     <h2>
                         <a href="javascript:void(0);" class="openPlanetRenameGiveupBox">
-                            <p class="planetNameOverview">Resumen -</p>
+                            <p class="planetNameOverview">{{ $overview_title }} -</p>
                             <span id="planetNameHeader">
-                                Planeta Principal
+                                {{ $planet_name }}
                             </span>
                             <img class="hinted tooltip" title="abandona/renombra Planeta"
-                                src="public/img/navigation/icon-edit-a.gif" width="16" height="16" />
+                                src="{{ $img_path . 'navigation/icon-edit-a.gif' }}" width="16" height="16" />
                         </a>
                     </h2>
                 </div>
@@ -267,7 +267,7 @@ Si la reubicación se realiza correctamente, se te cobrará 240.000 de Materia O
     <script type="text/javascript">
         function openPlanetRenameGiveupBox() {
             openOverlay(
-                "https:\/\/s145-ar.ogame.gameforge.com\/game\/index.php?page=planetlayer", {
+                "{{ $game_url }}game.php?page=renameplanet", {
                     'title': "abandona\/renombra Planeta Principal",
                     'class': 'planetRenameOverlay'
                 }
@@ -289,14 +289,14 @@ Si la reubicación se realiza correctamente, se te cobrará 240.000 de Materia O
         // textContent[8] = "Puntos de honor:";
         // textContent[9] = "0";
         const textContent = [
-            "{{$ov_diameter}}:",
-            "12.800km (<span>0<\/span>\/<span>193<\/span>)",
-            "{{$ov_temperature}}:",
-            "de -32 \u00b0C  a 8 \u00b0C",
-            "{{$ov_position}}:",
-            `<a href="https://s145-ar.ogame.gameforge.com/game/index.php?page=ingame&component=galaxy&galaxy=2&system=85&position=12">[2:85:12]<\/a>`,
-            "{{$ov_points}}:",
-            `<a href="https://s145-ar.ogame.gameforge.com/game/index.php?page=highscore">0 (Lugar 195 de 199)<\/a>`,
+            "{{ $ov_diameter }}:",
+            "{{ $planet_diameter }}{{ $ov_distance_unit }} (<span>{{ $planet_field_current }}<\/span>\/<span>{{ $planet_field_max }}<\/span>)",
+            "{{ $ov_temperature }}:",
+            "{{ $ov_aprox }} {{ $planet_temp_min }} \u00b0C  {{ $ov_to }} 8 \u00b0C",
+            "{{ $ov_position }}:",
+            `<a href="game.php?page=galaxy&mode=0&galaxy={{ $galaxy_galaxy }}&system={{ $galaxy_system }}">[{{ $galaxy_galaxy }}:{{ $galaxy_system }}:{{ $galaxy_planet }}]</a>`,
+            "{{ $ov_points }}:",
+            `{!! $user_rank !!}`,
             "Puntos de honor:",
             "0"
         ];

@@ -1,15 +1,15 @@
 <div id="links">
     <ul id="menuTable" class="leftmenu">
-	{!!$menu_block!!}
+        {!! $menu_block !!}
     </ul>
     <div class="adviceWrapper">
-		<div id="advice-bar">
-		</div>
+        <div id="advice-bar">
+        </div>
     </div>
     <div id="toolLinksWrapper">
-		<ul id="menuTableTools" class="leftmenu">
-		</ul>
-	</div>
+        <ul id="menuTableTools" class="leftmenu">
+        </ul>
+    </div>
     <br class="clearfloat" />
-	{!!$is_vacation!!}
+    {!! $is_vacation !!}
 </div>

@@ -67,7 +67,8 @@ class RenameplanetController extends BaseController
             $this->template->set(
                 $current_view,
                 $parse
-            )
+            ),
+            $full = false
         );
     }
 

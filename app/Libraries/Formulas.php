@@ -93,54 +93,46 @@ abstract class Formulas
         return (int) pow(($diameter / 1000), 2);
     }
 
-    /**
-     * setPlanetImage
-     *
-     * @param int $system   Planet system
-     * @param int $position Planet position
-     *
-     * @return string
-     */
-    public static function setPlanetImage($system, $position)
+    public static function setPlanetImage(int $system, int $position): string
     {
         // Formula based on original game values
         // How many images do we have for each planet type
         $planets_availables = [
-            'dschjungel' => 10, // jungle
-            'eis' => 10, // ice
-            'gas' => 8, // gas
-            'normaltemp' => 7, // normal
+            'jungle' => 10, // jungle
+            'ice' => 10, // ice
+            'gas' => 10, // gas
+            'normal' => 10, // normal
             'trocken' => 10, // dry
-            'wasser' => 9, // water
-            'wuesten' => 4, // desert
+            'water' => 10, // water
+            'desert' => 10, // desert
         ];
 
         if ($position >= 1 && $position <= 3) {
-            $type = ['trocken', 'wuesten'];
+            $type = ['dry', 'desert'];
         }
 
         if ($position >= 4 && $position <= 5) {
-            $type = ['normaltemp', 'trocken'];
+            $type = ['normal', 'dry'];
         }
 
         if ($position >= 6 && $position <= 7) {
-            $type = ['dschjungel', 'normaltemp'];
+            $type = ['jungle', 'normal'];
         }
 
         if ($position >= 8 && $position <= 9) {
-            $type = ['wasser', 'dschjungel'];
+            $type = ['water', 'jungle'];
         }
 
         if ($position >= 10 && $position <= 11) {
-            $type = ['eis', 'wasser'];
+            $type = ['ice', 'water'];
         }
 
         if ($position >= 12 && $position <= 13) {
-            $type = ['gas', 'eis'];
+            $type = ['gas', 'ice'];
         }
 
         if ($position >= 14 && $position <= 15) {
-            $type = ['normaltemp', 'gas'];
+            $type = ['normal', 'gas'];
         }
 
         // if it's an even number, we will get second element postion in the array
@@ -153,10 +145,10 @@ abstract class Formulas
         $image_id = mt_rand(1, $planets_availables[$type[$even]]);
 
         if ($image_id < 10) {
-            $image_id = '0' . $image_id;
+            $image_id = $image_id;
         }
 
-        return $type[$even] . 'planet' . $image_id;
+        return $type[$even] . '_' . $image_id;
     }
 
     /**
