@@ -66,7 +66,7 @@ class OfficiersLib
             $time_left = Timing::formatHoursMinutesLeft($expiration);
         }
 
-        if (Timing::getDaysLeft($expiration) > 1 && Timing::getDaysLeft($expiration) < 2) {
+        if (Timing::getDaysLeft($expiration) > 1 && Timing::getDaysLeft($expiration) <= 2) {
             $lang_line = 'of_time_remaining_one';
             $time_left = '';
         }
@@ -75,5 +75,17 @@ class OfficiersLib
             $lang[$lang_line],
             [$time_left]
         );
+    }
+
+    public static function getOfficierShortTime(int $expiration): string
+    {
+        $seconds_left = $expiration - time();
+        $days_left = floor($seconds_left / (60 * 60 * 24));
+
+        if ($days_left == 2) {
+            return 'shortTime';
+        } else {
+            return '';
+        }
     }
 }

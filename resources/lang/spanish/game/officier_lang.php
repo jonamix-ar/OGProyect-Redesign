@@ -17,7 +17,7 @@ $lang = [
     'of_hire_engineer' => 'Contratar ingeniero',
     'of_hire_geologist' => 'Contratar geólogo',
     'of_hire_technocrat' => 'Contratar tecnócrata',
-    'of_add_premium_officier_commander' => '+40 favoritos, Lista de construcción, Escáner de transportes, Sin publicidad',
+    'of_add_premium_officier_commander' => '+40 favoritos, Lista de construcción, Escáner de transportes, Sin publicidad*<span style="font-size:10px;line-height:10px;">(*excepto mensajes sobre el juego)</span>',
     'of_add_premium_officier_admiral' => 'Huecos de flota máximos +2, tasa de retirada de flotas mejorada',
     'of_add_premium_officier_engineer' => 'Minimiza las perdidas de las defensas a la mitad, +10% de producción de energía',
     'of_add_premium_officier_geologist' => '+10% producción de mineral',

@@ -86,9 +86,11 @@ abstract class TimingLibrary
      * @param int $time
      * @return float
      */
-    public static function getDaysLeft(int $time): float
+    public static function getDaysLeft(int $expiration): int
     {
-        return (($time - time()) / 24 / 3600);
+        $now = time();
+        $diff = $expiration - $now;
+        return ceil($diff / ONE_DAY);
     }
 
     /**

@@ -84,13 +84,11 @@ class FormatLib
         $now = new DateTime();
         $ago = new DateTime($datetime);
         $diff = $now->diff($ago);
-        $weeks = floor($diff->d / 7);
-        $diff->d -= $weeks * 7;
+        $days = $diff->days;
 
         $string = [
-            'y' => 'year',
-            'm' => 'month',
-            'w' => 'week',
+            // 'y' => 'year',
+            // 'm' => 'month',
             'd' => 'day',
             'h' => 'hour',
             'i' => 'minute',
@@ -98,15 +96,15 @@ class FormatLib
         ];
 
         foreach ($string as $k => &$v) {
-            if ($k !== 'w') {
+            if ($k !== 'd') {
                 if ($diff->$k) {
                     $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
                 } else {
                     unset($string[$k]);
                 }
             } else {
-                if (!empty($weeks)) {
-                    $v = $weeks . ' ' . $v . ($weeks > 1 ? 's' : '');
+                if (!empty($days)) {
+                    $v = $days . ' ' . $v . ($days > 1 ? 's' : '');
                 } else {
                     unset($string[$k]);
                 }
@@ -119,6 +117,7 @@ class FormatLib
 
         return $string ? implode(', ', $string) : '';
     }
+
 
     /**
      * colorNumber

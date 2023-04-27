@@ -728,17 +728,20 @@ class Page
         $list_of_officiers = [];
 
         foreach ($officers as $officer) {
-            $inactive = '_un';
+            $inactive = '';
             $details = $lang->language['of_add_' . $objects[$officer]];
             $expiration = $this->current_user[$objects[$officer]];
+            $shortTime = '';
 
             if (OfficiersLib::isOfficierActive($expiration)) {
-                $inactive = '';
+                $inactive = 'on';
                 $details = OfficiersLib::getOfficierTimeLeft($expiration, $lang->language);
+                $shortTime = OfficiersLib::getOfficierShortTime($expiration);
             }
 
             $list_of_officiers['img_' . $objects[$officer]] = $inactive;
             $list_of_officiers['add_' . $objects[$officer]] = $details;
+            $list_of_officiers['short_time_' . $objects[$officer]] = $shortTime;
         }
 
         return $list_of_officiers;
