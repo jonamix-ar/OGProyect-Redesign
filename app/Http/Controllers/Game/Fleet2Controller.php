@@ -7,7 +7,7 @@ use App\Core\Enumerators\PlanetTypesEnumerator as PlanetTypes;
 use App\Libraries\FleetsLib;
 use App\Libraries\FormatLib;
 use App\Libraries\Functions;
-use App\Libraries\OfficiersLib;
+use App\Libraries\Officiers;
 use App\Libraries\Premium\Premium;
 use App\Libraries\Research\Researches;
 use App\Libraries\Users;
@@ -194,7 +194,7 @@ class Fleet2Controller extends BaseController
      */
     private function buildShortcutsBlock()
     {
-        if (!OfficiersLib::isOfficierActive($this->_premium->getCurrentPremium()->getPremiumOfficierCommander())) {
+        if (!Officiers::isOfficierActive($this->_premium->getCurrentPremium()->getPremiumOfficierCommander())) {
             return '';
         }
 

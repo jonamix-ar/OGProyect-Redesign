@@ -152,6 +152,37 @@ class FormatLib
         return $s;
     }
 
+
+    public static function classColorNumber($n, $s = '')
+    {
+        if ($n >= 0) {
+            if ($s != '') {
+                $s = self::undermark($s);
+            } else {
+                $s = self::undermark($n);
+            }
+        } elseif ($n < 0) {
+            if ($s != '') {
+                $s = self::colorRed($s);
+            } else {
+                $s = self::colorRed($n);
+            }
+        } else {
+            if ($s != '') {
+                $s = $s;
+            } else {
+                $s = $n;
+            }
+        }
+
+        return $s;
+    }
+
+    public function undermark($string)
+    {
+        return 'undermark';
+    }
+
     /**
      * Set a red color
      *

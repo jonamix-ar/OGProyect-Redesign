@@ -7,7 +7,7 @@ use App\Helpers\StringsHelper;
 use App\Libraries\FleetsLib;
 use App\Libraries\FormatLib;
 use App\Libraries\Functions;
-use App\Libraries\OfficiersLib;
+use App\Libraries\Officiers;
 
 class Spy extends Missions
 {
@@ -50,8 +50,8 @@ class Spy extends Missions
                 ],
             ]);
 
-            $CurrentSpyLvl = OfficiersLib::getMaxEspionage($current_data['research_espionage_technology'], $current_data['premium_officier_technocrat']);
-            $TargetSpyLvl = OfficiersLib::getMaxEspionage($target_data['research_espionage_technology'], $target_data['premium_officier_technocrat']);
+            $CurrentSpyLvl = Officiers::getMaxEspionage($current_data['research_espionage_technology'], $current_data['premium_officier_technocrat']);
+            $TargetSpyLvl = Officiers::getMaxEspionage($target_data['research_espionage_technology'], $target_data['premium_officier_technocrat']);
             $fleet = FleetsLib::getFleetShipsArray($fleet_row['fleet_array']);
 
             foreach ($fleet as $id => $amount) {

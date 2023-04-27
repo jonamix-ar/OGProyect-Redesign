@@ -3,7 +3,7 @@
 namespace App\Libraries\Buildings;
 
 use App\Libraries\DevelopmentsLib;
-use App\Libraries\OfficiersLib;
+use App\Libraries\Officiers;
 
 class Building
 {
@@ -153,7 +153,7 @@ class Building
     {
         $queue_size = 1;
 
-        if (OfficiersLib::isOfficierActive($this->_user['premium_officier_commander'])) {
+        if (Officiers::isOfficierActive($this->_user['premium_officier_commander'])) {
             $queue_size = MAX_BUILDING_QUEUE_SIZE;
         }
 

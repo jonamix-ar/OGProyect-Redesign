@@ -9,7 +9,7 @@ use App\Libraries\Buildings\Building;
 use App\Libraries\DevelopmentsLib as Developments;
 use App\Libraries\FormatLib;
 use App\Libraries\Functions;
-use App\Libraries\OfficiersLib;
+use App\Libraries\Officiers;
 use App\Libraries\TimingLibrary as Timing;
 use App\Libraries\UpdatesLibrary;
 use App\Libraries\Users;
@@ -68,7 +68,7 @@ class BuildingsController extends BaseController
         );
 
         $this->_allowed_buildings = $this->getAllowedBuildings();
-        $this->_commander_active = OfficiersLib::isOfficierActive($this->user['premium_officier_commander']);
+        $this->_commander_active = Officiers::isOfficierActive($this->user['premium_officier_commander']);
     }
 
     /**

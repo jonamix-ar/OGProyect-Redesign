@@ -8,7 +8,7 @@ use App\Core\Enumerators\SwitchIntEnumerator as SwitchInt;
 use App\Helpers\ArraysHelper;
 use App\Helpers\UrlHelper;
 use App\Libraries\Functions;
-use App\Libraries\OfficiersLib;
+use App\Libraries\Officiers;
 use App\Libraries\Users;
 use App\Models\Game\Messages;
 
@@ -58,7 +58,7 @@ class MessagesController extends BaseController
      */
     private function getCurrentSection(): string
     {
-        if (OfficiersLib::isOfficierActive($this->user['premium_officier_commander'])) {
+        if (Officiers::isOfficierActive($this->user['premium_officier_commander'])) {
             return 'premium';
         }
 

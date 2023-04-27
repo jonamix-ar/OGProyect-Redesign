@@ -745,10 +745,10 @@ class Page
             $expiration = $this->current_user[$objects[$officer]];
             $shortTime = '';
 
-            if (OfficiersLib::isOfficierActive($expiration)) {
+            if (Officiers::isOfficierActive($expiration)) {
                 $inactive = 'on';
-                $details = OfficiersLib::getOfficierTimeLeft($expiration, $lang->language);
-                $shortTime = OfficiersLib::getOfficierShortTime($expiration);
+                $details = Officiers::getOfficierTimeLeft($expiration, $lang->language);
+                $shortTime = Officiers::getOfficierShortTime($expiration);
             }
 
             $list_of_officiers['img_' . $objects[$officer]] = $inactive;

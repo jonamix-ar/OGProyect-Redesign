@@ -185,7 +185,7 @@ class DevelopmentsLib
             }
 
             $time = Formulas::getResearchTime($cost_metal, $cost_crystal, $lablevel, $current_user[$resource[Research::research_astrophysics]]);
-            $time = floor($time * (1 - ((OfficiersLib::isOfficierActive($current_user['premium_officier_technocrat'])) ? TECHNOCRATE_SPEED : 0)));
+            $time = floor($time * (1 - ((Officiers::isOfficierActive($current_user['premium_officier_technocrat'])) ? TECHNOCRATE_SPEED : 0)));
         }
 
         if (in_array($element, $reslist['defense']) or in_array($element, $reslist['fleet'])) {
@@ -305,7 +305,7 @@ class DevelopmentsLib
         // check a commander plus
         switch ($element) {
             case 106:
-                if (OfficiersLib::isOfficierActive($current_user['premium_officier_technocrat'])) {
+                if (Officiers::isOfficierActive($current_user['premium_officier_technocrat'])) {
                     $return_level .= FormatLib::strongText(
                         FormatLib::colorGreen(' +' . TECHNOCRATE_SPY . $lang->line('re_spy'))
                     );
@@ -314,7 +314,7 @@ class DevelopmentsLib
                 break;
 
             case 108:
-                if (OfficiersLib::isOfficierActive($current_user['premium_officier_admiral'])) {
+                if (Officiers::isOfficierActive($current_user['premium_officier_admiral'])) {
                     $return_level .= FormatLib::strongText(
                         FormatLib::colorGreen(' +' . AMIRAL . $lang->line('re_commander'))
                     );

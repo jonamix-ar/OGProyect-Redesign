@@ -12,7 +12,7 @@ use App\Libraries\FleetsLib;
 use App\Libraries\FormatLib;
 use App\Libraries\Formulas;
 use App\Libraries\Functions;
-use App\Libraries\OfficiersLib;
+use App\Libraries\Officiers;
 use App\Libraries\ProductionLib;
 use App\Libraries\Users;
 use App\Models\Game\Infos;
@@ -449,8 +449,8 @@ class InfosController extends BaseController
         $game_resource_multiplier = Functions::readConfig('resource_multiplier');
 
         // BOOST
-        $geologe_boost = 1 + (1 * (OfficiersLib::isOfficierActive($this->user['premium_officier_geologist']) ? GEOLOGUE : 0));
-        $engineer_boost = 1 + (1 * (OfficiersLib::isOfficierActive($this->user['premium_officier_engineer']) ? ENGINEER_ENERGY : 0));
+        $geologe_boost = 1 + (1 * (Officiers::isOfficierActive($this->user['premium_officier_geologist']) ? GEOLOGUE : 0));
+        $engineer_boost = 1 + (1 * (Officiers::isOfficierActive($this->user['premium_officier_engineer']) ? ENGINEER_ENERGY : 0));
 
         // PRODUCTION FORMULAS
         $metal_prod = eval($this->_prod_grid[$this->_element_id]['formule']['metal']);

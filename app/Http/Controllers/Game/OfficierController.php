@@ -6,7 +6,7 @@ use App\Core\BaseController;
 use App\Core\Enumerators\OfficiersEnumerator as OE;
 use App\Libraries\FormatLib;
 use App\Libraries\Functions;
-use App\Libraries\OfficiersLib;
+use App\Libraries\Officiers;
 use App\Libraries\Users;
 use App\Models\Game\Officier;
 
@@ -69,7 +69,7 @@ class OfficierController extends BaseController
                 $price = $this->getOfficierPrice($data['offi'], $time);
                 $officier = $this->objects->getObjects($data['offi']);
 
-                if (OfficiersLib::isOfficierActive($this->user[$officier])) {
+                if (Officiers::isOfficierActive($this->user[$officier])) {
                     $time_to_add = $this->user[$officier] + $set_time;
                 } else {
                     $time_to_add = time() + $set_time;
@@ -155,9 +155,9 @@ class OfficierController extends BaseController
      */
     private function setOfficierStatusWithFormat(int $item_id): string
     {
-        if (OfficiersLib::isOfficierActive($this->user[$this->objects->getObjects($item_id)])) {
+        if (Officiers::isOfficierActive($this->user[$this->objects->getObjects($item_id)])) {
             return FormatLib::customColor(
-                OfficiersLib::getOfficierTimeLeft(
+                Officiers::getOfficierTimeLeft(
                     $this->user[$this->objects->getObjects($item_id)],
                     $this->langs->language
                 ),

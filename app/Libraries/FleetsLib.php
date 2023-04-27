@@ -146,7 +146,7 @@ class FleetsLib
 
     public static function getMaxFleets($computerTech, $amiralLevel): int
     {
-        return OfficiersLib::getMaxComputer($computerTech, $amiralLevel);
+        return Officiers::getMaxComputer($computerTech, $amiralLevel);
     }
 
     public static function getMaxExpeditions(int $astrophysicsTech): int
@@ -244,7 +244,7 @@ class FleetsLib
         $pop_up = "<a href='#' onmouseover=\"return overlib('";
         $pop_up .= '<table width=200>';
 
-        $espionage_tech = OfficiersLib::getMaxEspionage(
+        $espionage_tech = Officiers::getMaxEspionage(
             $current_user['research_espionage_technology'],
             $current_user['premium_officier_technocrat']
         );

@@ -9,7 +9,7 @@ use App\Core\Objects;
 use App\Helpers\UrlHelper;
 use App\Libraries\DevelopmentsLib as Developments;
 use App\Libraries\FormatLib as Format;
-use App\Libraries\OfficiersLib as Officiers;
+use App\Libraries\Officiers;
 use App\Libraries\ProductionLib as Production;
 use App\Models\Libraries\UpdatesLibrary as UpdatesLibraryModel;
 
