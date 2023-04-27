@@ -1,6 +1,6 @@
 <div id='overviewcomponent' class="maincontent">
     <div id="inhalt">
-        <div id="planet" style="background-image:url(/nocdn/9.2.2/img/planets/header/header_gas.jpg);">
+        <div id="planet" style="background-image:url(img/planets/header/header_gas.jpg);">
             <div id="detailWrapper">
 
                 <div id="header_text">

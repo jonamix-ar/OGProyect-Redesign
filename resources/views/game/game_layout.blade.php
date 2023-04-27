@@ -417,7 +417,7 @@
                         </div>
                         <div id="eventboxLoading" class="textCenter textBeefy" style="display: block;">
                             <img height="16" width="16" alt="ajax spinner"
-                                src="/nocdn/9.2.2/img/ajax-loader.gif" />
+                                src="img/ajax-loader.gif" />
                             cargando...
                         </div>
                         <div id="eventboxBlank" class="textCenter" style="display: none;">
@@ -439,14 +439,7 @@
                         title="Vista general del tutorial&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=rewards&quot;&gt;&lt;/a&gt;">?</a>
                 </div>
             </div>
-            <div id='toolbarcomponent' class="">
-                {!! $sidebar !!}
-            </div>
-            <div id='advicebarcomponent' class="">
-                <div class="adviceWrapper">
-                    <div id="advice-bar"></div>
-                </div>
-            </div>
+			{!! $sidebar !!}
         </div>
         <div id="middle">
             <div id='eventlistcomponent' class="">
@@ -549,7 +542,7 @@
                                         title="&lt;b&gt;Planeta Principal [2:85:12]&lt;/b&gt;&lt;br/&gt;Forma de vida: Humanos&lt;br/&gt;12.800km (0/193)&lt;br&gt;de -32 °C  a 8 °C&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=overview&amp;cp=33650641&quot;&gt;Visión general&lt;/a&gt;&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=supplies&amp;cp=33650641&quot;&gt;Recursos&lt;/a&gt;&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=lfbuildings&amp;cp=33650641&quot;&gt;Forma de vida&lt;/a&gt;&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=research&amp;cp=33650641&quot;&gt;Investigación&lt;/a&gt;&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=facilities&amp;cp=33650641&quot;&gt;Instalaciones&lt;/a&gt;&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=shipyard&amp;cp=33650641&quot;&gt;Hangar&lt;/a&gt;&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=defenses&amp;cp=33650641&quot;&gt;Defensa&lt;/a&gt;&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=fleetdispatch&amp;cp=33650641&quot;&gt;Flota&lt;/a&gt;&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=galaxy&amp;cp=33650641&amp;galaxy=2&amp;system=85&amp;position=12&quot;&gt;Galaxia&lt;/a&gt;"
                                         class="planetlink  tooltipRight tooltipClose js_hideTipOnMobile">
                                         <img class="planetPic js_replace2x" alt="Planeta Prin..."
-                                            src="/nocdn/9.2.2/img/planets/gas_8_3.png" width="48"
+                                            src="img/planets/gas_8_3.png" width="48"
                                             height="48" />
                                         <span class="planet-name ">Planeta Prin...</span>
                                         <span class="planet-koords ">[2:85:12]</span>
@@ -564,7 +557,7 @@
                 <div id="banner_skyscraper" class="desktop" name="banner_skyscraper">
                     <div style="position: relative;">
                         <a class="tooltipLeft " title="" href="javascript:void(0);">
-                            <img src="/nocdn/9.2.2/img/promotion/itemEvents/allTimeReductions/ar_OGame_160x600_final.jpg"
+                            <img src="img/promotion/itemEvents/allTimeReductions/ar_OGame_160x600_final.jpg"
                                 alt="" />
                         </a>
                     </div>
@@ -655,7 +648,7 @@
                 "associations": []
             };
 
-            (function($) {
+            /*(function($) {
                 ogproyect.chat.showPlayerList('#chatBarPlayerList .cb_playerlist_box'); //list in chat bar
                 ogproyect.chat.showPlayerList('#sideBar'); // list in chat
 
@@ -669,7 +662,7 @@
                         ogproyect.chat.updateCustomScrollbar($('.scrollContainer'));
                     }
                 }
-            })(jQuery);
+            })(jQuery);*/
         </script>
         <div id="chatBar">
             <ul class="chat_bar_list">
