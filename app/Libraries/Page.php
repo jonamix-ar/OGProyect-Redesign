@@ -601,30 +601,49 @@ class Page
     private function gameMenu()
     {
         $lang = $this->langs->loadLang('game/menu', true);
+		$db = new Database();
 
-        $menu_block1 = '';
-        $menu_block2 = '';
-        $menu_block3 = '';
+        $menu_block = '';
         $modules_array = explode(';', Functions::readConfig('modules'));
+		$current_page   = isset($_GET['page']) ? $_GET['page'] : null;
+		$sub_template   = 'general/left_menu_row_view';
+		$adv_template	= 'general/advice_row_view';
+		$tota_rank      = $this->current_user['user_statistic_total_rank'] == '' ?
+        $this->current_planet['stats_users'] : $this->current_user['user_statistic_total_rank'];
 
-        $pages = [
-            ['overview', $lang->line('lm_overview'), '', 'FFF', '', '1', '1'],
-            ['empire', $lang->line('lm_empire'), '', 'FFF', '', '1', '2'],
-            ['resources', $lang->line('lm_resources'), '', 'FFF', '', '1', '3'],
-            ['resourceSettings', $lang->line('lm_resources_settings'), '', 'FFF', '', '1', '4'],
-            ['station', $lang->line('lm_station'), '', 'FFF', '', '1', '3'],
-            ['traderOverview', $lang->line('lm_trader'), '', 'FF8900', '', '1', '5'],
-            ['research', $lang->line('lm_research'), '', 'FFF', '', '1', '6'],
-            ['techtree', $lang->line('lm_technology'), '', 'FFF', '', '1', '10'],
-            ['shipyard', $lang->line('lm_shipyard'), '', 'FFF', '', '1', '7'],
-            ['defense', $lang->line('lm_defenses'), '', 'FFF', '', '1', '12'],
-            ['fleet1', $lang->line('lm_fleet'), '', 'FFF', '', '1', '8'],
-            ['movement', $lang->line('lm_movement'), '', 'FFF', '', '1', '9'],
-            ['galaxy', $lang->line('lm_galaxy'), 'mode=0', 'FFF', '', '1', '11'],
-            ['alliance', $lang->line('lm_alliance'), '', 'FFF', '', '1', '13'],
-            ['officier', $lang->line('lm_officiers'), '', 'FF8900', '', '1', '15'],
-            ['messages', $lang->line('lm_messages'), '', 'FFF', '', '1', '18'],
-            ['forums', $lang->line('lm_forums'), '', 'FFF', '', '3', '14'],
+		$i=0;
+		$fq = $db->query("SELECT *
+                                        FROM " . FLEETS . "
+                                        WHERE fleet_owner = '" . $this->current_user['user_id'] . "'
+										ORDER BY fleet_end_time");
+
+		while ($f = $db->fetchArray($fq)) {
+			$i++;
+		}
+
+        $pages          = [
+           ['overview', $lang->line('lm_overview'), '', 'FFF', '', '1', '1', 'overview', '', ''],
+           ['resources', $lang->line('lm_resources'), '', 'FFF', '', '1', '3', 'resources', '0', ''],
+		   ['station', $lang->line('lm_station'), '', 'FFF', '', '1', '3', 'station', '', ''],
+           ['traderOverview', $lang->line('lm_trader'), '', 'FF8900', '', '1', '5', 'traderOverview', '4', 'true'],
+           ['research', $lang->line('lm_research'), '', 'FFF', '', '1', '6', 'research', '1', ''],
+           ['shipyard', $lang->line('lm_shipyard'), '', 'FFF', '', '1', '7', 'shipyard', '', ''],
+           ['defense', $lang->line('lm_defenses'), '', 'FFF', '', '1', '11', 'defense', '', ''],
+		   ['fleet1', $lang->line('lm_fleet'), '', 'FFF', '', '1', '8', 'fleet1', '3', ''],
+		   ['galaxy', $lang->line('lm_galaxy'), 'mode=0', 'FFF', '', '1', '10', 'galaxy', '', ''],
+		   ['imperium', $lang->line('lm_empire'), '', 'FFF', 'true', '1', '2', 'empire', '', ''],
+           ['alliance', $lang->line('lm_alliance'), '', 'FFF', '', '2', '12', 'alliance', '2', ''],
+           ['premium', $lang->line('lm_officiers'), '', 'FF8900', '', '2', '13', 'premium', '', 'true'],
+		   ['feedback', 'Feedback', '', 'FF8900', '', '2', '13', 'feedback', '', 'true']
+        ];
+
+		$sub_pages       = [
+           ['resourceSettings', $lang->line('lm_resources'), '', 'FFF', '', '1', '4', ''],
+           ['techtree', $lang->line('lm_technology'), '', 'FFF', '', '1', '9', 'true'],
+		   ['alliance', $lang->line('lm_technology'), '&mode=circular', 'FFF', '', '1', '9', ''],
+		   ['movement', $lang->line('lm_movement'), '', 'FFF', '', '1', '9', ''],
+		   ['traderOverview#page=traderResources&animation=false', $lang->line('lm_resource_trader'), '', 'FFF', '', '1', '9', ''],
+		   //['station', $lang->line('tech')[43], '', 'FFF', '', '1', '9', ''], //Muelle espacial
         ];
 
         // BUILD THE MENU
@@ -641,66 +660,31 @@ class Page
                 $link = 'game.php?page=' . $data[0];
             }
 
-            // POP UP OR NOT
-            if ($data[4] == 'true') {
-                $link_type = '<a href="#" onClick="f(\'' . $link . '\', \'' . $data[1] . '\')">
-                    <font color="' . (($data[3] != 'FFF') ? $data[3] : '') . '">' . $data[1] . '</font></a>';
-            } else {
-                $link_type = '<a href="' . $link . '">
-                    <font color="' . (($data[3] != 'FFF') ? $data[3] : '') . '">' . $data[1] . '</font></a>';
-            }
-
             // COLOR AND URL
             $parse['color'] = $data[3];
-            $parse['menu_link'] = $link_type;
+			$parse['menu_object']   = $data[7];
+			$parse['menu_item']		= $data[1];
+			$parse['menu_link'] 	= $link;
+			$parse['selected']		= ($current_page == $data[0] ? ' selected' : '');
+			$parse['selected']		= (($data[8] != '' && $current_page == $sub_pages[$data[8]][0]) ? ' selected' : $parse['selected']);
+			$parse['selected2']		= ($current_page == $data[0] ? ' highlighted' : '');
+			$parse['selected2']		= (($data[8] != '' && $current_page == $sub_pages[$data[8]][0]) ? ' highlighted' : $parse['selected2']);
+			$parse['selected2']		= ($i > 0 && @$sub_pages[$data[8]][0] == 'movement') ? 'active' : $parse['selected2'];
+			$parse['target']		= ($data[4] == true ?'_blank' : '_self');
+			$parse['premium']		= ($data[9] == true ?' premiumHighligt' : '');
+			$parse['sub_name']		= isset($sub_pages[$data[8]][1]) ? $sub_pages[$data[8]][1] : '';
+			$parse['is_overlay']	= (isset($sub_pages[$data[8]][7]) && $sub_pages[$data[8]][7] == true) ? 'overlay ' : '';
+			$parse['sub_link']		= ($data[8] != '' ? 'href="http://' . BASE_PATH . '/index.php?page=' . $sub_pages[$data[8]][0] . ($sub_pages[$data[8]][2] != '' ? '&' . $sub_pages[$data[8]][2] : '') . '"' : '');
 
-            // ONLY FOR THE CHANGELOG
-            if ($data[5] == 0) {
-                $parse['changelog'] = '(' . $link_type . ')';
-            }
-
-            // MENU BLOCK [1 - 2 - 3]
-            switch ($data[5]) {
-                case '1':
-                    $menu_block1 .= $this->template->set(
-                        'general/left_menu_row_view',
-                        $parse
-                    );
-
-                    break;
-
-                case '2':
-                    $menu_block2 .= $this->template->set(
-                        'general/left_menu_row_view',
-                        $parse
-                    );
-
-                    break;
-
-                case '3':
-                    $menu_block3 .= $this->template->set(
-                        'general/left_menu_row_view',
-                        $parse
-                    );
-
-                    break;
-            }
+			$menu_block    .= $this->template->set($sub_template, $parse);
         }
 
         // PARSE THE MENU AND OTHER DATA
-        $parse['dpath'] = DPATH;
-        $parse['lm_players'] = $lang->line('lm_players');
-        $parse['user_name'] = UrlHelper::setUrl('game.php?page=preferences', $this->current_user['user_name']);
-        $parse['menu_block1'] = $menu_block1;
-        $parse['menu_block2'] = $menu_block2;
-        $parse['menu_block3'] = $menu_block3;
+        $parse['menu_block'] = $menu_block;
         $parse['admin_link'] = (($this->current_user['user_authlevel'] > 0) ?
             '<tr><td><div align="center"><a href="admin.php" target="_blank">
             <font color="lime">' . $lang->line('lm_administration') . '</font></a></div></td></tr>' : '');
-        $parse['servername'] = Functions::readConfig('game_name');
-        $parse['changelog'] = UrlHelper::setUrl('game.php?page=changelog', SYSTEM_VERSION);
-        $parse['version'] = SYSTEM_VERSION;
-        $parse['year'] = $this->current_year;
+        $parse['is_vacation']	= ($this->current_user['preference_vacation_mode'] > 0) ? $this->template->set($adv_template, $parse) : '';
 
         return $this->template->set(
             'general/left_menu_view',
