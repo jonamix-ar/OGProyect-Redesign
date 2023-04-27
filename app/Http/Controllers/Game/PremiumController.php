@@ -10,7 +10,7 @@ use App\Libraries\Officiers;
 use App\Libraries\Users;
 use App\Models\Game\Officier;
 
-class OfficierController extends BaseController
+class PremiumController extends BaseController
 {
     public const MODULE_ID = 15;
 
@@ -77,7 +77,7 @@ class OfficierController extends BaseController
 
                 $this->officierModel->setPremium($this->user['user_id'], $price, $officier, $time_to_add);
 
-                Functions::redirect('game.php?page=officier');
+                Functions::redirect('game.php?page=premium');
             }
         }
     }
@@ -89,7 +89,7 @@ class OfficierController extends BaseController
          */
         $page = [];
         $page['dpath'] = DPATH;
-        $page['premium_pay_url'] = Functions::readConfig('premium_url') != '' ? Functions::readConfig('premium_url') : 'game.php?page=officier';
+        $page['premium_pay_url'] = Functions::readConfig('premium_url') != '' ? Functions::readConfig('premium_url') : 'game.php?page=premium';
         $page['officier_list'] = $this->buildOfficiersList();
 
         // display the page
@@ -141,8 +141,8 @@ class OfficierController extends BaseController
         $item_to_parse['week_price'] = FormatLib::prettyNumber($this->getOfficierPrice($item_id, 'darkmatter_week'));
         $item_to_parse['img_big'] = $this->getOfficierImage($item_id, 'img_big');
         $item_to_parse['img_small'] = $this->getOfficierImage($item_id, 'img_small');
-        $item_to_parse['link_month'] = 'game.php?page=officier&offi=' . $item_id . '&time=month';
-        $item_to_parse['link_week'] = 'game.php?page=officier&offi=' . $item_id . '&time=week';
+        $item_to_parse['link_month'] = 'game.php?page=premium&offi=' . $item_id . '&time=month';
+        $item_to_parse['link_week'] = 'game.php?page=premium&offi=' . $item_id . '&time=week';
 
         return $item_to_parse;
     }
