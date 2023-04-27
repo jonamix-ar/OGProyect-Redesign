@@ -77,7 +77,7 @@ class OverviewController extends BaseController
                         'galaxy_system' => $this->planet['planet_system'],
                         'galaxy_planet' => $this->planet['planet_planet'],
                         'user_rank' => $this->getUserRank(),
-                        'overview_title' => $this->langs->line('ov_title'), 3
+                        'overview_title' => $this->langs->line('ov_title'),
                     ]
                 )
             )
@@ -99,7 +99,7 @@ class OverviewController extends BaseController
     private function getCurrentWork($user_planet, $is_current_planet = true)
     {
         // THE PLANET IS "FREE" BY DEFAULT
-        $building_block = $this->langs->line('ov_free');
+        $building_block = '';
 
         if (!$is_current_planet) {
             // UPDATE THE PLANET INFORMATION FIRST, MAY BE SOMETHING HAS JUST FINISHED
@@ -116,21 +116,46 @@ class OverviewController extends BaseController
 
                 // THE BUILDING BLOCK
                 if ($is_current_planet) {
-                    $building_block = DevelopmentsLib::currentBuilding('overview', $this->langs->language, $building);
-                    $building_block .= $this->langs->language[$this->objects->getObjects($building)] . ' (' . $level . ')';
-                    $building_block .= '<br /><div id="blc" class="z">' . FormatLib::prettyTime($time_to_end) . '</div>';
-                    $building_block .= "\n<script language=\"JavaScript\">";
-                    $building_block .= "\n	pp = \"" . $time_to_end . "\";\n";
-                    $building_block .= "\n	pk = \"" . 1 . "\";\n";
-                    $building_block .= "\n	pm = \"cancel\";\n";
-                    $building_block .= "\n	pl = \"" . $this->planet['planet_id'] . "\";\n";
-                    $building_block .= "\n	t();\n";
-                    $building_block .= "\n</script>\n";
+                    // $building_block = DevelopmentsLib::currentBuilding('overview', $this->langs->language, $building);
+                    $building_block = $this->template->set(
+                        'overview/overview_building_process',
+                        array_merge(
+                            $this->langs->language,
+                            [
+                                'game_url' => SYSTEM_ROOT,
+                                'img_path' => IMG_PATH,
+                                'building_id' => $building,
+                                'building_name' => $this->langs->language[$this->objects->getObjects($building)],
+                                'level' => $level,
+                                'time_end_format' => FormatLib::prettyTime($time_to_end),
+                                'time_to_end' => $time_to_end,
+                                'planet_id' => $this->planet['planet_id'],
+                                'build_time' => $user_planet['planet_b_building'],
+                                'build_current' => $current_building[2],
+                                'build_cancel' =>  strtr($this->langs->line('ov_cancel_building'), [
+                                    '%n' => $this->langs->language[$this->objects->getObjects($building)],
+                                    '%l' => $level
+                                ]),
+                            ]
+                        )
+                    );
                 } else {
                     $building_block = '' . $this->langs->language[$this->objects->getObjects($building)] . ' (' . $level . ')';
                     $building_block .= '<br><font color="#7f7f7f">(' . FormatLib::prettyTime($time_to_end) . ')</font>';
                 }
             }
+        } else {
+            $building_block = $this->template->set(
+                'overview/overview_building_empty',
+                array_merge(
+                    $this->langs->language,
+                    [
+                        'building_empty_tip' => $this->langs->line('ov_building_empty'),
+                        'current_page' => SYSTEM_ROOT . 'game.php?page=resources',
+                        'building_text' => $this->langs->line('ov_building_text')
+                    ]
+                )
+            );
         }
 
         // BACK TO THE PLANET!

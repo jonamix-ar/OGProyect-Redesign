@@ -119,55 +119,13 @@ Si la reubicación se realiza correctamente, se te cobrará 240.000 de Materia O
                         <div class="content">
                             <table cellspacing="0" cellpadding="0" class="construction active">
                                 <tbody>
-                                    <tr>
-                                        <td colspan="2" class="idle">
-                                            <a class="tooltip js_hideTipOnMobile "
-                                                title="En este momento no hay ningún edificio construyéndose en este planeta. Hacé click aquí para ir a recursos."
-                                                href="https://s145-ar.ogame.gameforge.com/game/index.php?page=ingame&amp;component=supplies">
-                                                No hay edificios en construcción.
-                                                <br />
-                                                (A los recursos)
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    {!! $building !!}
                                 </tbody>
                             </table>
                         </div>
                         <div class="footer"></div>
                     </div>
-                    <script type="text/javascript">
-                        $(function() {});
-                    </script>
                 </div>
-                {{-- <div id='productionboxlfbuildingcomponent'
-                    class='productionboxlfbuilding injectedComponent parent overview'>
-                    <div class="content-box-s">
-                        <div class="header">
-                            <h3>Edificios de forma de vida</h3>
-                        </div>
-                        <div class="content">
-                            <table cellspacing="0" cellpadding="0" class="construction active">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2" class="idle">
-                                            <a class="tooltip js_hideTipOnMobile "
-                                                title="Esta forma de vida no está trabajando en edificios. Haz clic aquí para ir al apartado de edificios."
-                                                href="https://s145-ar.ogame.gameforge.com/game/index.php?page=ingame&amp;component=lfbuildings">
-                                                No hay edificios en construcción.
-                                                <br />
-                                                (Ir a los edificios)
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="footer"></div>
-                    </div>
-                    <script type="text/javascript">
-                        $(function() {});
-                    </script>
-                </div> --}}
             </div>
             <div class="produxtionBoxResearch boxColumn research">
                 <div id='productionboxresearchcomponent'
@@ -195,39 +153,7 @@ Si la reubicación se realiza correctamente, se te cobrará 240.000 de Materia O
                         </div>
                         <div class="footer"></div>
                     </div>
-                    <script type="text/javascript">
-                        $(function() {});
-                    </script>
                 </div>
-                {{-- <div id='productionboxlfresearchcomponent'
-                    class='productionboxlfresearch injectedComponent parent overview'>
-                    <div class="content-box-s">
-                        <div class="header">
-                            <h3>Investigación de forma de vida</h3>
-                        </div>
-                        <div class="content">
-                            <table cellspacing="0" cellpadding="0" class="construction active">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2" class="idle">
-                                            <a class="tooltip js_hideTipOnMobile "
-                                                title="Ahora mismo no se está investigando. Haz clic aquí para ir a la investigación de formas de vida."
-                                                href="https://s145-ar.ogame.gameforge.com/game/index.php?page=ingame&amp;component=lfresearch">
-                                                No hay ninguna investigación en progreso.
-                                                <br />
-                                                (Ir al desarrollo de forma de vida)
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="footer"></div>
-                    </div>
-                    <script type="text/javascript">
-                        $(function() {});
-                    </script>
-                </div> --}}
             </div>
             <div class="produxtionBoxShips boxColumn ship">
 
@@ -257,9 +183,6 @@ Si la reubicación se realiza correctamente, se te cobrará 240.000 de Materia O
                         </div>
                         <div class="footer"></div>
                     </div>
-                    <script type="text/javascript">
-                        $(function() {});
-                    </script>
                 </div>
             </div>
         </div>
@@ -274,20 +197,6 @@ Si la reubicación se realiza correctamente, se te cobrará 240.000 de Materia O
             );
         }
 
-        // var textContent = [];
-
-        // textContent[0] = "Di\u00e1metro:";
-        // textContent[1] = "12.800km (<span>0<\/span>\/<span>193<\/span>)";
-        // textContent[2] = "Temperatura";
-        // textContent[3] = "de -32 \u00b0C  a 8 \u00b0C";
-        // textContent[4] = "Posici\u00f3n";
-        // textContent[5] =
-        //     "<a  href=\"https:\/\/s145-ar.ogame.gameforge.com\/game\/index.php?page=ingame&component=galaxy&galaxy=2&system=85&position=12\" >[2:85:12]<\/a>";
-        // textContent[6] = "Puntos:";
-        // textContent[7] =
-        //     "<a href='https:\/\/s145-ar.ogame.gameforge.com\/game\/index.php?page=highscore'>0 (Lugar 195 de 199)<\/a>";
-        // textContent[8] = "Puntos de honor:";
-        // textContent[9] = "0";
         const textContent = [
             "{{ $ov_diameter }}:",
             "{{ $planet_diameter }}{{ $ov_distance_unit }} (<span>{{ $planet_field_current }}<\/span>\/<span>{{ $planet_field_max }}<\/span>)",
@@ -474,45 +383,3 @@ Si la reubicación se realiza correctamente, se te cobrará 240.000 de Materia O
         });
     </script>
 </div>
-{{-- <br />
-<div id="content">
-    <table width="519">
-        <tr>
-            <td class="c" colspan="4"><a href="game.php?page=renameplanet" title="{Planet_menu}">{{$ov_planet}} "{{$planet_name}}"</a> ({{$user_name}})</td>
-        </tr>
-        {!! $Have_new_message !!}
-        <tr>
-            <th>{{$ov_server_time}}</th>
-            <th colspan="3">{{$date_time}}</th>
-        </tr>
-        <tr>
-            <td colspan="4" class="c">{{$ov_events}}</td>
-        </tr>
-        {!! $fleet_list !!}
-        <tr>
-            <th>{!! $moon_img !!}<br>{{$moon}}</th>
-            <th colspan="2"><img src="{{$dpath}}planets/{{$planet_image}}.jpg" height="200" width="200"><br>{!! $building !!}</th>
-            <th class="s">
-                <table class="s" align="top" border="0">
-                    <tr>{!! $anothers_planets !!}</tr>
-                </table>
-            </th>
-        </tr>
-        <tr>
-            <th>{{$ov_diameter}}</th>
-            <th colspan="3">{{$planet_diameter}} {{$ov_distance_unit}} ({{$planet_field_current}} / {{$planet_field_max}} {{$ov_fields}})</th>
-        </tr>
-        <tr>
-            <th>{{$ov_temperature}}</th>
-            <th colspan="3">{{$ov_aprox}} {{$planet_temp_min}}{{$ov_temp_unit}} {{$ov_to}} {{$planet_temp_max}}{{$ov_temp_unit}}</th>
-        </tr>
-        <tr>
-            <th>{{$ov_position}}</th>
-            <th colspan="3"><a href="game.php?page=galaxy&mode=0&galaxy={{$galaxy_galaxy}}&system={{$galaxy_system}}">[{{$galaxy_galaxy}}:{{$galaxy_system}}:{{$galaxy_planet}}]</a></th>
-        </tr>
-        <tr>
-            <th>{{$ov_points}}</th>
-            <th colspan="3">{{$user_rank}}</td>
-        </tr>
-    </table>
-</div> --}}

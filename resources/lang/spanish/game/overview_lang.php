@@ -20,4 +20,13 @@ $lang = [
     'ov_points' => 'Puntos',
     'ov_fields' => 'Campos',
     'ov_switch' => 'Cambiar a ',
+    'ov_improve_to' => 'Mejorar a',
+    'ov_duration' => 'Duración',
+    'ov_level' => 'Nivel',
+    'ov_cancel_building' => '¿Cancelar la mejora de %n al Nivel %l?',
+    'ov_building' => 'Edificios',
+    'ov_research' => 'Investigación',
+    'ov_shipyard' => 'Hangar',
+    'ov_building_empty' => 'En este momento no hay ningún edificio construyéndose en este planeta. Hacé click aquí para ir a recursos.',
+    'ov_building_text' => 'No hay edificios en construcción.<br />(A los recursos)'
 ];
