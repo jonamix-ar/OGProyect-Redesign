@@ -265,8 +265,8 @@
         var isMobile = false;
         var isMobileApp = false;
         var bbcodePreviewUrl = "https://s145-ar.ogproyect.gameforge.com/game/index.php?page=bbcodePreview&ajax=1";
-        var ogameUrl = "http:\/\/localhost/OG-Proyect";
-        var startpageUrl = "http:\/\/localhost/OG-Proyect";
+        var ogameUrl = "{{ $game_url }}";
+        var startpageUrl = "{{ $game_url }}";
         var LocalizationStrings = {
             "timeunits": {
                 "short": {
@@ -345,7 +345,7 @@
         var overlayHeight = 600;
         var isRTLEnabled = 0;
         var isStandalonePage = false;
-        var serverTime = new Date(2023, 3, 23, 9, 42, 38);
+        var serverTime = {{ $date_js }}
         var serverTimeZoneOffsetInMinutes = 180;
         var localTime = new Date();
         var localTimeZoneOffsetInMinutes = localTime.getTimezoneOffset();

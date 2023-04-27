@@ -11,6 +11,7 @@ use App\Helpers\UrlHelper;
 use App\Libraries\ProductionLib as Production;
 use App\Libraries\TimingLibrary as Timing;
 use CiLang;
+use DateTime;
 
 class Page
 {
@@ -95,6 +96,8 @@ class Page
 
     private function gamePage(string $page, array $parse, bool $simple): string
     {
+        $date = new DateTime();
+
         return $this->template->set(
             ($simple ? 'game/game_layout' : 'game/game_layout_simple'),
             array_merge(
@@ -103,11 +106,14 @@ class Page
                 [
                     'content' => $page,
                     'game_title' => Functions::readConfig('game_name'),
+                    'game_url' => SYSTEM_ROOT,
                     'version' => SYSTEM_VERSION,
                     'css_path' => CSS_PATH,
                     'js_path' => JS_PATH,
                     'img_path' => IMG_PATH,
-                    'meta_tags' => ($metatags = '') ? $metatags : ""
+                    'meta_tags' => ($metatags = '') ? $metatags : "",
+                    'date_js' => 'new Date(' . $date->format('Y, n - 1, j, G, i, s') . ')',
+                   
                 ]
             )
         );
@@ -444,10 +450,57 @@ class Page
     {
         $lang = $this->langs->loadLang('game/navigation', true);
 
+        $navigation_menu = '';
+        $tota_rank = $this->current_user['user_statistic_total_rank'] == '' ?
+            $this->current_planet['stats_users'] : $this->current_user['user_statistic_total_rank'];
+
+        $pages = [
+            ['highscore', $lang->line('tn_highscore'), '&range=' . $tota_rank, '', ''],
+            ['notices', $lang->line('tn_notices'), '', '', 'true'],
+            ['buddies', $lang->line('tn_buddies'), '', '', ''],
+            ['search', $lang->line('tn_search'), '&ajax=1', '', 'true'],
+            ['preferences', $lang->line('tn_preferences'), '', '', ''],
+            ['support', $lang->line('tn_support'), '', '', ''],
+            ['logout', $lang->line('tn_logout'), '', '', ''],
+        ];
+
+        //&site=2&category=1&searchRelId=102605 // Search next
+
+        foreach ($pages as $key => $data) {
+            // overlay
+
+            if ($data[0] == 'highscore') {
+                $total_points = ' (' . $tota_rank . ')';
+            } else {
+                $total_points = '';
+            }
+
+            if ($data[0] == 'notices') {
+                $attributes = 'data-overlay-title="Mis notas" data-overlay-class="notices" data-overlay-popup-width="750" data-overlay-popup-height="480"';
+            }
+
+            if ($data[0] == 'search') {
+                $attributes = 'data-overlay-title="Buscar en el Universo" data-overlay-close="__default closeSearch" data-overlay-class="search"';
+            }
+
+            if ($data[4] == 'true') {
+                $link = '<li><a href="' . SYSTEM_ROOT . 'game.php?page=' . $data[0] . $data[2] . '" class="overlay"' . $attributes . '>' . $data[1] . '</a></li>';
+            } else {
+                $link = '<li><a class="" href="' . SYSTEM_ROOT . 'game.php?page=' . $data[0] . $data[2] . '">' . $data[1] . '</a>' . $total_points . '</li>';
+            }
+
+
+            $navigation_menu .= $link;
+        }
+
         return $this->template->set(
             'general/navigation',
             [
                 'player_name' => $this->current_user['user_name'],
+                'player_text' => $lang->line('tn_player'),
+                'navigation_menu' => $navigation_menu,
+                'date' => date(Functions::readConfig('date_format'), time()),
+                'time' => date('H:i:s', time()),
             ]
         );
     }
@@ -456,7 +509,7 @@ class Page
     {
         $lang = $this->langs->loadLang(['game/global', 'game/navigation', 'game/officier'], true);
 
-        $parse['dpath'] = DPATH;
+        $parse['img_path'] = IMG_PATH;
         $parse['image'] = $this->current_planet['planet_image'];
         $parse['planetlist'] = $this->buildPlanetList();
         $parse['show_umod_notice'] = '';
@@ -553,8 +606,7 @@ class Page
         $menu_block2 = '';
         $menu_block3 = '';
         $modules_array = explode(';', Functions::readConfig('modules'));
-        $tota_rank = $this->current_user['user_statistic_total_rank'] == '' ?
-        $this->current_planet['stats_users'] : $this->current_user['user_statistic_total_rank'];
+
         $pages = [
             ['overview', $lang->line('lm_overview'), '', 'FFF', '', '1', '1'],
             ['empire', $lang->line('lm_empire'), '', 'FFF', '', '1', '2'],
@@ -572,12 +624,6 @@ class Page
             ['alliance', $lang->line('lm_alliance'), '', 'FFF', '', '1', '13'],
             ['officier', $lang->line('lm_officiers'), '', 'FF8900', '', '1', '15'],
             ['messages', $lang->line('lm_messages'), '', 'FFF', '', '1', '18'],
-            ['statistics', $lang->line('lm_statistics'), 'range=' . $tota_rank, 'FFF', '', '2', '16'],
-            ['notes', $lang->line('lm_notes'), '', 'FFF', 'true', '2', '19'],
-            ['buddies', $lang->line('lm_buddylist'), '', 'FFF', '', '2', '20'],
-            ['search', $lang->line('lm_search'), '', 'FFF', '', '2', '17'],
-            ['preferences', $lang->line('lm_options'), '', 'FFF', '', '2', '21'],
-            ['logout', $lang->line('lm_logout'), '', 'FFF', '', '2', ''],
             ['forums', $lang->line('lm_forums'), '', 'FFF', '', '3', '14'],
         ];
 
@@ -669,7 +715,7 @@ class Page
             []
         );
     }
-    
+
     public function jsReady($template = '')
     {
         $output = str_replace(["\r\n", "\r"], "\n", $template);
