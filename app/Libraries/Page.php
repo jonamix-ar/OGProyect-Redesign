@@ -10,6 +10,8 @@ use App\Core\Template;
 use App\Helpers\UrlHelper;
 use App\Libraries\ProductionLib as Production;
 use App\Libraries\TimingLibrary as Timing;
+use App\Models\Game\Fleet;
+use App\Models\Libraries\Alert;
 use CiLang;
 use DateTime;
 
@@ -113,7 +115,7 @@ class Page
                     'img_path' => IMG_PATH,
                     'meta_tags' => ($metatags = '') ? $metatags : "",
                     'date_js' => 'new Date(' . $date->format('Y, n - 1, j, G, i, s') . ')',
-                   
+
                 ]
             )
         );
@@ -601,82 +603,72 @@ class Page
     private function gameMenu()
     {
         $lang = $this->langs->loadLang('game/menu', true);
-		$db = new Database();
-
         $menu_block = '';
         $modules_array = explode(';', Functions::readConfig('modules'));
-		$current_page   = isset($_GET['page']) ? $_GET['page'] : null;
-		$sub_template   = 'general/left_menu_row_view';
-		$adv_template	= 'general/advice_row_view';
-		$tota_rank      = $this->current_user['user_statistic_total_rank'] == '' ?
-        $this->current_planet['stats_users'] : $this->current_user['user_statistic_total_rank'];
+        $current_page = isset($_GET['page']) ? $_GET['page'] : null;
+        $sub_template = 'general/left_menu_row_view';
+        $adv_template = 'general/advice_row_view';
+        
+        $fleetModel = new Fleet();
+        $userFleets = $fleetModel->getUserFleetAlert($this->current_user['user_id']);
+        
+        $i = count($userFleets);
 
-		$i=0;
-		$fq = $db->query("SELECT *
-                                        FROM " . FLEETS . "
-                                        WHERE fleet_owner = '" . $this->current_user['user_id'] . "'
-										ORDER BY fleet_end_time");
-
-		while ($f = $db->fetchArray($fq)) {
-			$i++;
-		}
-
-        $pages          = [
-           ['overview', $lang->line('lm_overview'), '', 'FFF', '', '1', '1', 'overview', '', ''],
-           ['resources', $lang->line('lm_resources'), '', 'FFF', '', '1', '3', 'resources', '0', ''],
-		   ['station', $lang->line('lm_station'), '', 'FFF', '', '1', '3', 'station', '', ''],
-           ['traderOverview', $lang->line('lm_trader'), '', 'FF8900', '', '1', '5', 'traderOverview', '4', 'true'],
-           ['research', $lang->line('lm_research'), '', 'FFF', '', '1', '6', 'research', '1', ''],
-           ['shipyard', $lang->line('lm_shipyard'), '', 'FFF', '', '1', '7', 'shipyard', '', ''],
-           ['defense', $lang->line('lm_defenses'), '', 'FFF', '', '1', '11', 'defense', '', ''],
-		   ['fleet1', $lang->line('lm_fleet'), '', 'FFF', '', '1', '8', 'fleet1', '3', ''],
-		   ['galaxy', $lang->line('lm_galaxy'), 'mode=0', 'FFF', '', '1', '10', 'galaxy', '', ''],
-		   ['imperium', $lang->line('lm_empire'), '', 'FFF', 'true', '1', '2', 'empire', '', ''],
-           ['alliance', $lang->line('lm_alliance'), '', 'FFF', '', '2', '12', 'alliance', '2', ''],
-           ['premium', $lang->line('lm_officiers'), '', 'FF8900', '', '2', '13', 'premium', '', 'true'],
-		   ['feedback', 'Feedback', '', 'FF8900', '', '2', '13', 'feedback', '', 'true']
+        $pages = [
+            ['overview', $lang->line('lm_overview'), '', 'FFF', '', '1', '1', 'overview', '', ''],
+            ['resources', $lang->line('lm_resources'), '', 'FFF', '', '1', '3', 'resources', '0', ''],
+            ['station', $lang->line('lm_station'), '', 'FFF', '', '1', '3', 'station', '', ''],
+            ['traderOverview', $lang->line('lm_trader'), '', 'FF8900', '', '1', '5', 'traderOverview', '4', 'true'],
+            ['research', $lang->line('lm_research'), '', 'FFF', '', '1', '6', 'research', '1', ''],
+            ['shipyard', $lang->line('lm_shipyard'), '', 'FFF', '', '1', '7', 'shipyard', '', ''],
+            ['defense', $lang->line('lm_defenses'), '', 'FFF', '', '1', '11', 'defense', '', ''],
+            ['fleet1', $lang->line('lm_fleet'), '', 'FFF', '', '1', '8', 'fleet1', '3', ''],
+            ['galaxy', $lang->line('lm_galaxy'), 'mode=0', 'FFF', '', '1', '10', 'galaxy', '', ''],
+            ['imperium', $lang->line('lm_empire'), '', 'FFF', 'true', '1', '2', 'empire', '', ''],
+            ['alliance', $lang->line('lm_alliance'), '', 'FFF', '', '2', '12', 'alliance', '2', ''],
+            ['premium', $lang->line('lm_officiers'), '', 'FF8900', '', '2', '13', 'premium', '', 'true']
         ];
 
-		$sub_pages       = [
-           ['resourceSettings', $lang->line('lm_resources'), '', 'FFF', '', '1', '4', ''],
-           ['techtree', $lang->line('lm_technology'), '', 'FFF', '', '1', '9', 'true'],
-		   ['alliance', $lang->line('lm_technology'), '&mode=circular', 'FFF', '', '1', '9', ''],
-		   ['movement', $lang->line('lm_movement'), '', 'FFF', '', '1', '9', ''],
-		   ['traderOverview#page=traderResources&animation=false', $lang->line('lm_resource_trader'), '', 'FFF', '', '1', '9', ''],
-		   //['station', $lang->line('tech')[43], '', 'FFF', '', '1', '9', ''], //Muelle espacial
+        $sub_pages = [
+            ['resourceSettings', $lang->line('lm_resources'), '', 'FFF', '', '1', '4', ''],
+            ['techtree', $lang->line('lm_technology'), '', 'FFF', '', '1', '9', 'true'],
+            ['alliance', $lang->line('lm_technology'), '&mode=circular', 'FFF', '', '1', '9', ''],
+            ['movement', $lang->line('lm_movement'), '', 'FFF', '', '1', '9', ''],
+            ['traderOverview#page=traderResources&animation=false', $lang->line('lm_resource_trader'), '', 'FFF', '', '1', '9', ''],
+            //['station', $lang->line('tech')[43], '', 'FFF', '', '1', '9', ''], //Muelle espacial
         ];
 
         // BUILD THE MENU
         foreach ($pages as $key => $data) {
-            // IF THE MODULE IT'S NOT ENABLED, CONTINUE!
-            if (isset($modules_array[$data[6]]) && $modules_array[$data[6]] == 0 && $modules_array[$data[6]] != '') {
+            $moduleEnabled = !isset($modules_array[$data[6]]) || $modules_array[$data[6]] != 0 || $modules_array[$data[6]] == '';
+            if (!$moduleEnabled) {
                 continue;
             }
 
-            // BUILD URL
-            if ($data[2] != '') {
-                $link = 'game.php?page=' . $data[0] . '&' . $data[2];
-            } else {
-                $link = 'game.php?page=' . $data[0];
-            }
+            $link = 'game.php?page=' . $data[0] . ($data[2] != '' ? '&' . $data[2] : '');
 
-            // COLOR AND URL
-            $parse['color'] = $data[3];
-			$parse['menu_object']   = $data[7];
-			$parse['menu_item']		= $data[1];
-			$parse['menu_link'] 	= $link;
-			$parse['selected']		= ($current_page == $data[0] ? ' selected' : '');
-			$parse['selected']		= (($data[8] != '' && $current_page == $sub_pages[$data[8]][0]) ? ' selected' : $parse['selected']);
-			$parse['selected2']		= ($current_page == $data[0] ? ' highlighted' : '');
-			$parse['selected2']		= (($data[8] != '' && $current_page == $sub_pages[$data[8]][0]) ? ' highlighted' : $parse['selected2']);
-			$parse['selected2']		= ($i > 0 && @$sub_pages[$data[8]][0] == 'movement') ? 'active' : $parse['selected2'];
-			$parse['target']		= ($data[4] == true ?'_blank' : '_self');
-			$parse['premium']		= ($data[9] == true ?' premiumHighligt' : '');
-			$parse['sub_name']		= isset($sub_pages[$data[8]][1]) ? $sub_pages[$data[8]][1] : '';
-			$parse['is_overlay']	= (isset($sub_pages[$data[8]][7]) && $sub_pages[$data[8]][7] == true) ? 'overlay ' : '';
-			$parse['sub_link']		= ($data[8] != '' ? 'href="http://' . BASE_PATH . '/index.php?page=' . $sub_pages[$data[8]][0] . ($sub_pages[$data[8]][2] != '' ? '&' . $sub_pages[$data[8]][2] : '') . '"' : '');
+            $selected = ($current_page == $data[0]) || ($data[8] != '' && $current_page == $sub_pages[$data[8]][0]);
+            $highlighted = $selected && $i > 0 && @$sub_pages[$data[8]][0] == 'movement';
 
-			$menu_block    .= $this->template->set($sub_template, $parse);
+            $sub_name = isset($sub_pages[$data[8]][1]) ? $sub_pages[$data[8]][1] : '';
+            $is_overlay = isset($sub_pages[$data[8]][7]) && $sub_pages[$data[8]][7] == true ? 'overlay ' : '';
+            $sub_link = $data[8] != '' ? 'href=game.php?page=' . $sub_pages[$data[8]][0] . ($sub_pages[$data[8]][2] != '' ? '&' . $sub_pages[$data[8]][2] : '') . '' : '';
+
+            $parse = [
+                'color' => $data[3],
+                'menu_object' => $data[7],
+                'menu_item' => $data[1],
+                'menu_link' => $link,
+                'selected' => $selected ? ' selected' : '',
+                'selected2' => $highlighted ? 'active' : ($selected ? ' highlighted' : ''),
+                'target' => $data[4] == true ? '_blank' : '_self',
+                'premium' => $data[9] == true ? ' premiumHighligt' : '',
+                'sub_name' => $sub_name,
+                'is_overlay' => $is_overlay,
+                'sub_link' => $sub_link
+            ];
+
+            $menu_block .= $this->template->set($sub_template, $parse);
         }
 
         // PARSE THE MENU AND OTHER DATA
@@ -684,7 +676,7 @@ class Page
         $parse['admin_link'] = (($this->current_user['user_authlevel'] > 0) ?
             '<tr><td><div align="center"><a href="admin.php" target="_blank">
             <font color="lime">' . $lang->line('lm_administration') . '</font></a></div></td></tr>' : '');
-        $parse['is_vacation']	= ($this->current_user['preference_vacation_mode'] > 0) ? $this->template->set($adv_template, $parse) : '';
+        $parse['is_vacation']    = ($this->current_user['preference_vacation_mode'] > 0) ? $this->template->set($adv_template, $parse) : '';
 
         return $this->template->set(
             'general/left_menu_view',
@@ -741,7 +733,7 @@ class Page
 
             $list_of_officiers['img_' . $objects[$officer]] = $inactive;
             $list_of_officiers['add_' . $objects[$officer]] = $details;
-            $list_of_officiers['short_time_' . $objects[$officer]] = $shortTime;
+            $list_of_officiers['end_' . $objects[$officer]] = $shortTime;
         }
 
         return $list_of_officiers;
