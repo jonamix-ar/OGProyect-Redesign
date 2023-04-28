@@ -1,6 +1,6 @@
 <li>
     <span class="menu_icon">
-        <a {!! $game_url . $sub_link !!} class="{{ $is_overlay }} tooltipRight js_hideTipOnMobile " target="_self"
+        <a {!! $sub_link !!} class="{{ $is_overlay }} tooltipRight js_hideTipOnMobile " target="_self"
             title="{{ $sub_name }}">
             <div class="menuImage {{ $selected2 }} {{ $menu_object }}"></div>
         </a>
