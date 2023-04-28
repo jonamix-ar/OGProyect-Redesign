@@ -238,10 +238,8 @@ class OverviewController extends BaseController
                 $shipyard = explode(';', $this->planet['planet_b_hangar_id']);
                 $shipyard_data = explode(",", $shipyard[0]);
 
-
                 $shipyard_time = DevelopmentsLib::developmentTime($this->user, $this->planet, $shipyard_data[0]);
                 $shipyard_time_formated = FormatLib::prettyTime($shipyard_time);
-                var_dump($shipyard_time);
 
                 $shipyard_queue_time  = $shipyard_time * $shipyard_data[1];
                 $shipyard_total_time   = $shipyard_queue_time - $users_planet['planet_b_hangar'];
@@ -256,7 +254,7 @@ class OverviewController extends BaseController
                             'shipyard_id' => $shipyard_data[0],
                             'shipyard_name' => $this->langs->language[$this->objects->getObjects($shipyard_data[0])],
                             'shipyard_count' => $shipyard_data[1],
-                            'shipyard_time' => $shipyard_time,
+                            'shipyard_time' => $shipyard_time - $this->planet['planet_b_hangar'],
                             'shipyard_time_formated' => $shipyard_time_formated,
                             'shipyard_queue_time' => $shipyard_queue_time,
                             'shipyard_total_time' => $shipyard_total_time
