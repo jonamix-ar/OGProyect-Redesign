@@ -70,7 +70,7 @@ class TechtreeController extends BaseController
                     $this->langs->language,
                     $page
                 )
-            )
+            ), false
         );
     }
 
