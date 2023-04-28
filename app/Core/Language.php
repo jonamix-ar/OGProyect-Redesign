@@ -14,7 +14,7 @@ class Language
      *
      * @return mixed
      */
-    public function loadLang($language_file, $return = false)
+    public function loadLang($languageFile, $return = false)
     {
         try {
             // require langugage library
@@ -22,7 +22,7 @@ class Language
 
             if (!file_exists($langPath)) {
                 // not found
-                throw new Exception('Language file "' . $language_file . '" not defined');
+                throw new Exception('Language file "' . $languageFile . '" not defined');
                 return;
             }
 
@@ -36,12 +36,12 @@ class Language
 
             if ($return) {
                 $lang = new CiLang();
-                $lang->load($language_file, DEFAULT_LANG);
+                $lang->load($languageFile, DEFAULT_LANG);
                 return $lang;
             }
 
             $this->langs = new CiLang();
-            $this->langs->load($language_file, DEFAULT_LANG);
+            $this->langs->load($languageFile, DEFAULT_LANG);
         } catch (Exception $e) {
             die('Fatal error: ' . $e->getMessage());
         }
