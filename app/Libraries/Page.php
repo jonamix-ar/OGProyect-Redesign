@@ -678,7 +678,7 @@ class Page
 
             $sub_name = isset($sub_pages[$data[8]][1]) ? $sub_pages[$data[8]][1] : '';
             $is_overlay = isset($sub_pages[$data[8]][7]) && $sub_pages[$data[8]][7] == true ? 'overlay ' : '';
-            $sub_link = $data[8] != '' ? 'href=game.php?page=' . $sub_pages[$data[8]][0] . ($sub_pages[$data[8]][2] != '' ? '&' . $sub_pages[$data[8]][2] : '') . '' : '';
+            $sub_link = $data[8] != '' ? 'href=' . ADM_URL . 'game.php?page=' . $sub_pages[$data[8]][0] . ($sub_pages[$data[8]][2] != '' ? '&' . $sub_pages[$data[8]][2] : '') . '' : '';
 
             $block = [
                 'color' => $data[3],
@@ -691,7 +691,7 @@ class Page
                 'premium' => $data[9] == true ? ' premiumHighligt' : '',
                 'sub_name' => $sub_name,
                 'is_overlay' => $is_overlay,
-                'sub_link' => $sub_link
+                'sub_link' => $sub_link,
             ];
 
             $menu_block .= $this->template->set($sub_template, $block);
