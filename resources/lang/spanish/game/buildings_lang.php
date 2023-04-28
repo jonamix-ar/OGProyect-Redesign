@@ -19,6 +19,7 @@ $lang = [
         'building_deuterium_sintetizer' => 'El deuterio se usa como combustible para naves, y se recolecta en el mar profundo. Es una sustancia muy escasa, y por ello, relativamente cara.',
         'building_solar_plant' => 'Las plantas de energía solar convierten energía fotónica en energía eléctrica, para su uso en casi todos los edificios y estructuras.',
         'building_fusion_reactor' => 'Un reactor de fusión nuclear que produce un átomo de helio a partir de dos átomos de deuterio usando una presión extremadamente alta y una elevadísima temperatura.',
+        'ship_solar_satellite' => 'Los satélites solares son simples satélites en órbita equipados con células fotovoltaicas y transmisores para llevar la energía al planeta. Se transmite por este medio a la tierra usando un rayo láser especial.',
         'building_robot_factory' => 'Las fábricas de robots proporcionan unidades baratas y de fácil construcción que pueden ser usadas para mejorar o construir cualquier estructura planetaria. Cada nivel de mejora de la fábrica aumenta la eficiencia y el numero de unidades robóticas que ayudan en la construcción.',
         'building_nano_factory' => 'La fábrica de nanobots es la última evolución de la robótica. Cada mejora proporciona nanobots más y más eficientes que incrementan la velocidad de construcción.',
         'building_hangar' => 'El hangar es el lugar donde se construyen naves y estructuras de defensa planetaria.',

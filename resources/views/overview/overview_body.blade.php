@@ -19,7 +19,6 @@
                     <div id="techDetailLoading"></div>
                 </div>
                 <div id="planetdata">
-
                     <div class="overlay"></div>
                     <div id="planetDetails">
                         <table cellpadding="0" cellspacing="0" width="100%">
@@ -55,56 +54,31 @@
                                     <span id="scoreContentField"></span>
                                 </td>
                             </tr>
-
-                            {{-- <tr>
-                                <td class="desc">
-                                    <span id="honorField"></span>
-                                </td>
-                                <td class="data ">
-                                    <span id="honorContentField"></span>
-                                </td>
-                            </tr> --}}
+                            {{-- HONNOR POINTS --}}
                         </table>
                     </div>
                     <div id="planetOptions">
-
+                        {{-- 
                         <div class="planetMoveStart fleft" style="display: inline">
                             <a class="tooltipLeft dark_highlight_tablet fleft" style="display: inline-block"
                                 href='https://s145-ar.ogame.gameforge.com/game/index.php?page=ingame&amp;component=galaxy'
-                                title='La reubicación te permite mover tu planeta a otra posición en un sistema todo lo alejado que quieras.&lt;br /&gt;
-&lt;br /&gt;
-La reubicación en sí no tiene lugar hasta 24 horas después de activarla. Durante este tiempo puedes usar el planeta de forma normal. Verás el tiempo restante hasta la reubicación en una cuenta atrás.&lt;br /&gt;
-&lt;br /&gt;
-Cuando la cuenta atrás finalice y se lleve a cabo la reubicación de tu planeta, no podrás tener activa ninguna flota estacionada. En ese momento tampoco podrás construir reparar ni investigar nada. Si cuando termine la cuenta atrás hay alguna orden de construcción, de reparación o alguna flota activos, la reubicación se cancelará.&lt;br /&gt;
-&lt;br /&gt;
-Si la reubicación se realiza correctamente, se te cobrará 240.000 de Materia Oscura. La luna, los edificios y los recursos almacenados se reubicarán inmediatamente junto con el planeta. Tus flotas te seguirán automáticamente a las nuevas coordenadas a la velocidad de la nave más lenta. El salto cuántico de una luna trasladada permanecerá desactivado durante 24 horas.'
-                                data-tooltip-button="A la galaxia">
+                                title='{{ $overview_planet_move_tooltip }}' data-tooltip-button="A la galaxia">
                                 <span class="planetMoveIcons settings planetMoveDefault icon fleft"></span>
-                                <span class="planetMoveOverviewMoveLink">Reubicar</span>
+                                <span class="planetMoveOverviewMoveLink">{{ $overview_planet_move }}</span>
                             </a>
-                        </div>
+                        </div> --}}
 
                         <a class="dark_highlight_tablet float_right openPlanetRenameGiveupBox"
                             href="javascript:void(0);">
-                            <span class="planetMoveOverviewGivUpLink">abandonar/renombrar</span>
-                            <span class="planetMoveIcons settings planetMoveGiveUp icon"></span>
+                            <span class="planetMoveOverviewGivUpLink">{{ $overview_rename_abandon_planet }}</span>
+                            <span
+                                class="planetMoveIcons settings planetMoveGiveUp icon"></span>
                         </a>
                     </div>
 
                 </div>
             </div>
-
-            {{-- <div id="buffBar" class="sliderWrapper">
-                <div data-uuid="" data-id="" class="add_item">
-                    <a class="activate_item border3px" href="javascript:void(0);"ref="1"></a>
-                </div>
-                <ul class="active_items hidden">
-                    <li>
-                    </li>
-                </ul>
-            </div> --}}
-
-
+            {{-- ITEMS --}}
         </div>
         <div class="c-left"></div>
         <div class="c-right"></div>
@@ -114,14 +88,10 @@ Si la reubicación se realiza correctamente, se te cobrará 240.000 de Materia O
                     class='productionboxbuilding injectedComponent parent overview'>
                     <div class="content-box-s">
                         <div class="header">
-                            <h3>Edificios</h3>
+                            <h3>{{ $overview_buildings }}</h3>
                         </div>
                         <div class="content">
-                            <table cellspacing="0" cellpadding="0" class="construction active">
-                                <tbody>
-                                    {!! $building !!}
-                                </tbody>
-                            </table>
+                            {!! $building !!}
                         </div>
                         <div class="footer"></div>
                     </div>
@@ -132,24 +102,10 @@ Si la reubicación se realiza correctamente, se te cobrará 240.000 de Materia O
                     class='productionboxresearch injectedComponent parent overview'>
                     <div class="content-box-s">
                         <div class="header">
-                            <h3>Investigación</h3>
+                            <h3>{{ $overview_researchs }}</h3>
                         </div>
                         <div class="content">
-                            <table cellspacing="0" cellpadding="0" class="construction active">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2" class="idle">
-                                            <a class="tooltip js_hideTipOnMobile "
-                                                title="No hay ninguna investigación. Hacé click acá para construir tu laboratorio de investigaciones."
-                                                href="https://s145-ar.ogame.gameforge.com/game/index.php?page=ingame&amp;component=research">
-                                                No hay ninguna investigación en progreso.
-                                                <br />
-                                                (A la investigación)
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            {!! $research !!}
                         </div>
                         <div class="footer"></div>
                     </div>
@@ -161,23 +117,11 @@ Si la reubicación se realiza correctamente, se te cobrará 240.000 de Materia O
                     class='productionboxshipyard injectedComponent parent overview'>
                     <div class="content-box-s">
                         <div class="header">
-                            <h3>Hangar</h3>
+                            <h3>{{ $overview_shipyards }}</h3>
                         </div>
                         <div class="content">
                             <table cellspacing="0" cellpadding="0" class="construction active">
                                 <tbody>
-                                    <tr>
-                                        <td colspan="2" class="idle">
-                                            <a class="tooltip js_hideTipOnMobile "
-                                                title="En este momento no hay naves o defensa construyéndose en este planeta. Hacé click aquí para ir al hangar."
-                                                href="https://s145-ar.ogame.gameforge.com/game/index.php?page=ingame&amp;component=shipyard">
-                                                No se está construyendo ninguna nave o defensa en este
-                                                momento.
-                                                <br />
-                                                (Al hangar)
-                                            </a>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -191,20 +135,20 @@ Si la reubicación se realiza correctamente, se te cobrará 240.000 de Materia O
         function openPlanetRenameGiveupBox() {
             openOverlay(
                 "{{ $game_url }}game.php?page=renameplanet", {
-                    'title': "abandona\/renombra Planeta Principal",
+                    'title': "{{ $overview_rename_abandon_planet_title }}",
                     'class': 'planetRenameOverlay'
                 }
             );
         }
 
         const textContent = [
-            "{{ $ov_diameter }}:",
-            "{{ $planet_diameter }}{{ $ov_distance_unit }} (<span>{{ $planet_field_current }}<\/span>\/<span>{{ $planet_field_max }}<\/span>)",
-            "{{ $ov_temperature }}:",
-            "{{ $ov_aprox }} {{ $planet_temp_min }} \u00b0C  {{ $ov_to }} 8 \u00b0C",
-            "{{ $ov_position }}:",
+            "{{ $overview_diameter }}:",
+            "{{ $planet_diameter }}{{ $overview_distance_unit }} (<span>{{ $planet_field_current }}<\/span>\/<span>{{ $planet_field_max }}<\/span>)",
+            "{{ $overview_temperature }}:",
+            "{{ $overview_aprox }} {{ $planet_temp_min }} \u00b0C  {{ $overview_to }} 8 \u00b0C",
+            "{{ $overview_position }}:",
             `<a href="game.php?page=galaxy&mode=0&galaxy={{ $galaxy_galaxy }}&system={{ $galaxy_system }}">[{{ $galaxy_galaxy }}:{{ $galaxy_system }}:{{ $galaxy_planet }}]</a>`,
-            "{{ $ov_points }}:",
+            "{{ $overview_points }}:",
             `{!! $user_rank !!}`,
             "Puntos de honor:",
             "0"
@@ -226,8 +170,8 @@ Si la reubicación se realiza correctamente, se te cobrará 240.000 de Materia O
                 "error": "Error",
                 "errorNotEnoughDM": "\u00a1No hay suficiente Materia Oscura disponible! \u00bfDeseas comprar m\u00e1s ahora?",
                 "notice": "Referencia",
-                "planetGiveupQuestion": "\u00bfQuieres realmente abandonar el planeta %planetName% %planetCoordinates%?",
-                "moonGiveupQuestion": "\u00bfQuieres realmente abandonar la luna %planetName% %planetCoordinates%?"
+                "planetGiveupQuestion": "{{ $overview_rename_abandon_planet_question }}",
+                "moonGiveupQuestion": "{{ $overview_rename_abandon_moon_question }}"
             }
         );
 

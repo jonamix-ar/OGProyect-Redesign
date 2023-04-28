@@ -34,6 +34,11 @@ $lang = [
     'module_not_accesible' => 'Page could not be found.',
     'level' => 'Level ',
 
+    // buildings global
+    'improve_to' => 'Improve to',
+    'research_to' => 'Research to',
+    'duration' => 'Duration',
+
     // banning
     'bg_banned' => '<br>YOUR ACCOUNT HAS BEEN SUSPENDED!<br><br><br>The suspension to the account will be removed on %s<br><br>',
 
