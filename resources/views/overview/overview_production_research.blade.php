@@ -7,16 +7,15 @@
             <td class="first" rowspan="3">
                 <div>
                     <a href="javascript:void(0);" class="tooltip js_hideTipOnMobile" style="display: block;"
-                        onclick="cancelresearch({{ $research_id }}, {{ $research_time_cancel }}, &quot;{{ $button_cancel_text }}&quot;); return false;"
+                        onclick="cancelresearch({{ $research_id }}, {{ $research_time_cancel }}, &quot;{{ $research_button_cancel }}&quot;); return false;"
                         title="{{ $button_cancel_text }}">
                         <img class="queuePic" width="40" height="40"
                             src="{{ $img_path . 'small/small_' . $research_id . '.jpg' }}" alt="{{ $research_name }}">
                     </a>
                     <a href="javascript:void(0);" class="tooltip js_hideTipOnMobile abortNow"
-                        onclick="cancelresearch({{ $research_id }}, {{ $research_time_cancel }}, &quot;{{ $button_cancel_text }}&quot;); return false;"
+                        onclick="cancelresearch({{ $research_id }}, {{ $research_time_cancel }}, &quot;{{ $research_button_cancel }}&quot;); return false;"
                         title="{{ $button_cancel_text }}">
-                        <img src="https://gf2.geo.gfsrv.net/cdndf/3e567d6f16d040326c7a0ea29a4f41.gif" height="15"
-                            width="15">
+                        <img src="{{ $img_path . 'layout/pixel.gif' }}" height="15" width="15">
                     </a>
                 </div>
             </td>

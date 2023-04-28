@@ -10,7 +10,7 @@
                         onclick="cancelbuilding({{ $building_id }}, {{ $building_current }}, '{{ $building_cancel }}'}); return false;"
                         title="{{ $building_cancel }}">
                         <img class="queuePic" width="40" height="40"
-                            src="{{ $img_path . 'small/small_' . $building_id . '.jpg' }}" alt="Metal Mine">
+                            src="{{ $img_path . 'small/small_' . $building_id . '.jpg' }}" alt="{{ $building_name }}">
                     </a>
                     <a href="javascript:void(0);" class="tooltip js_hideTipOnMobile abortNow"
                         onclick="cancelbuilding({{ $building_id }}, {{ $building_current }}, '{{ $building_cancel }}'); return false;"

@@ -71,8 +71,7 @@
                         <a class="dark_highlight_tablet float_right openPlanetRenameGiveupBox"
                             href="javascript:void(0);">
                             <span class="planetMoveOverviewGivUpLink">{{ $overview_rename_abandon_planet }}</span>
-                            <span
-                                class="planetMoveIcons settings planetMoveGiveUp icon"></span>
+                            <span class="planetMoveIcons settings planetMoveGiveUp icon"></span>
                         </a>
                     </div>
 
@@ -88,7 +87,7 @@
                     class='productionboxbuilding injectedComponent parent overview'>
                     <div class="content-box-s">
                         <div class="header">
-                            <h3>{{ $overview_buildings }}</h3>
+                            <h3>{{ $overview_building }}</h3>
                         </div>
                         <div class="content">
                             {!! $building !!}
@@ -102,7 +101,7 @@
                     class='productionboxresearch injectedComponent parent overview'>
                     <div class="content-box-s">
                         <div class="header">
-                            <h3>{{ $overview_researchs }}</h3>
+                            <h3>{{ $overview_research }}</h3>
                         </div>
                         <div class="content">
                             {!! $research !!}
@@ -117,13 +116,10 @@
                     class='productionboxshipyard injectedComponent parent overview'>
                     <div class="content-box-s">
                         <div class="header">
-                            <h3>{{ $overview_shipyards }}</h3>
+                            <h3>{{ $overview_shipyard }}</h3>
                         </div>
                         <div class="content">
-                            <table cellspacing="0" cellpadding="0" class="construction active">
-                                <tbody>
-                                </tbody>
-                            </table>
+                            {!! $shipyard !!}
                         </div>
                         <div class="footer"></div>
                     </div>

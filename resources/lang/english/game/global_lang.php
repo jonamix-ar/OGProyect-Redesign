@@ -38,6 +38,8 @@ $lang = [
     'improve_to' => 'Improve to',
     'research_to' => 'Research to',
     'duration' => 'Duration',
+    'building_duration' => 'Building duration',
+    'total_time' => 'Total time',
 
     // banning
     'bg_banned' => '<br>YOUR ACCOUNT HAS BEEN SUSPENDED!<br><br><br>The suspension to the account will be removed on %s<br><br>',
