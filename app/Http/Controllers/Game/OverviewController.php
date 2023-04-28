@@ -230,45 +230,47 @@ class OverviewController extends BaseController
         if ($users_planet['planet_b_hangar_id'] != 0) {
             // Si se trata del planeta actual, mostrar información detallada
             if ($is_current_planet) {
-                $shipyard = explode(';', $this->planet['planet_b_hangar_id']);
-                $shipyard_data = explode(",", $shipyard[0]);
-                $shipyard_time = DevelopmentsLib::developmentTime($this->user, $this->planet, $shipyard_data[0]);
-                $shipyard_time_formated = FormatLib::prettyTime($shipyard_time);
-                $shipyard_queue_time  = $shipyard_time * $shipyard_data[1];
-                $shipyard_total_time   = $shipyard_queue_time - $users_planet['planet_b_hangar'];
+                if (!empty($shipyard)) {
+                    $shipyard = explode(';', $this->planet['planet_b_hangar_id']);
+                    $shipyard_data = explode(",", $shipyard[0]);
+                    $shipyard_time = DevelopmentsLib::developmentTime($this->user, $this->planet, $shipyard_data[0]);
+                    $shipyard_time_formated = FormatLib::prettyTime($shipyard_time);
+                    $shipyard_queue_time  = $shipyard_time * $shipyard_data[1];
+                    $shipyard_total_time   = $shipyard_queue_time - $users_planet['planet_b_hangar'];
 
-                if (!is_null($shipyard) && !empty($shipyard)) {
-                    $shipyard_queue = $this->template->set(
-                        'overview/overview_production_shipyard_queue',
-                        [
-                            'shipyard' => $shipyard,
-                            'game_url' => SYSTEM_ROOT,
-                            'img_path' => IMG_PATH,
-                            'objects' => new Objects(),
-                            'langs' => $this->langs->language,
-                        ],
+                    if (!is_null($shipyard) && !empty($shipyard)) {
+                        $shipyard_queue = $this->template->set(
+                            'overview/overview_production_shipyard_queue',
+                            [
+                                'shipyard' => $shipyard,
+                                'game_url' => SYSTEM_ROOT,
+                                'img_path' => IMG_PATH,
+                                'objects' => new Objects(),
+                                'langs' => $this->langs->language,
+                            ],
+                        );
+                    }
+
+                    // Mostrar detalles de la investigación en proceso
+                    $shipyard_row = $this->template->set(
+                        'overview/overview_production_shipyard',
+                        array_merge(
+                            $this->langs->language,
+                            [
+                                'game_url' => SYSTEM_ROOT,
+                                'img_path' => IMG_PATH,
+                                'shipyard_id' => $shipyard_data[0],
+                                'shipyard_name' => $this->langs->language[$this->objects->getObjects($shipyard_data[0])],
+                                'shipyard_count' => $shipyard_data[1],
+                                'shipyard_time' => $shipyard_time - $this->planet['planet_b_hangar'],
+                                'shipyard_time_formated' => $shipyard_time_formated,
+                                'shipyard_queue_time' => $shipyard_queue_time,
+                                'shipyard_total_time' => $shipyard_total_time,
+                                'shipyard_queue' => $shipyard_queue
+                            ]
+                        )
                     );
                 }
-
-                // Mostrar detalles de la investigación en proceso
-                $shipyard_row = $this->template->set(
-                    'overview/overview_production_shipyard',
-                    array_merge(
-                        $this->langs->language,
-                        [
-                            'game_url' => SYSTEM_ROOT,
-                            'img_path' => IMG_PATH,
-                            'shipyard_id' => $shipyard_data[0],
-                            'shipyard_name' => $this->langs->language[$this->objects->getObjects($shipyard_data[0])],
-                            'shipyard_count' => $shipyard_data[1],
-                            'shipyard_time' => $shipyard_time - $this->planet['planet_b_hangar'],
-                            'shipyard_time_formated' => $shipyard_time_formated,
-                            'shipyard_queue_time' => $shipyard_queue_time,
-                            'shipyard_total_time' => $shipyard_total_time,
-                            'shipyard_queue' => $shipyard_queue
-                        ]
-                    )
-                );
             }
         } else {
         }
