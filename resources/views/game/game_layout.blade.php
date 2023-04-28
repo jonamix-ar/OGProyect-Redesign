@@ -67,13 +67,13 @@
     <script type='text/javascript' src='{{ $js_path . 'ogproyect-default.js' }}'></script>
 
     <script type="text/javascript">
-        var changeSettingsLink = "https:\/\/s145-ar.ogproyect.gameforge.com\/game\/index.php?page=changeSettings";
+        var changeSettingsLink = "{{ $game_url_js }}game.php?page=changeSettings";
         var changeSettingsToken = "810573ac5ca7652431d6ad0419049b49";
-        var redirectLogoutLink = "https:\/\/s145-ar.ogproyect.gameforge.com\/game\/index.php?page=logout";
-        var redirectPremiumLink = "https:\/\/s145-ar.ogproyect.gameforge.com\/game\/index.php?page=premium&showDarkMatter=1";
-        var redirectOverviewLink = "https:\/\/s145-ar.ogproyect.gameforge.com\/game\/index.php?page=ingame&component=overview";
+        var redirectLogoutLink = "{{ $game_url_js }}game.php?page=logout";
+        var redirectPremiumLink = "{{ $game_url_js }}game.php?page=premium&showDarkMatter=1";
+        var redirectOverviewLink = "{{ $game_url_js }}game.php?page=ingame&component=overview";
         var redirectSpaceDockLink =
-            "https:\/\/s145-ar.ogproyect.gameforge.com\/game\/index.php?page=ingame&component=facilities&openTech=36";
+            "{{ $game_url_js }}game.php?page=ingame&component=facilities&openTech=36";
         var constants = {
             "lifeformEnabled": true,
             "espionage": 6,
@@ -84,7 +84,7 @@
         };
         var currentPage = "overview";
         var changeNickLink =
-            "https:\/\/s145-ar.ogproyect.gameforge.com\/game\/index.php?page=ajax&component=changenick&asJson=1";
+            "{{ $game_url_js }}game.php?page=ajax&component=changenick&asJson=1";
     </script>
 
     <script type="text/javascript">
@@ -346,7 +346,7 @@
         var isRTLEnabled = 0;
         var isStandalonePage = false;
         var serverTime = {{ $date_js }}
-        var serverTimeZoneOffsetInMinutes = 180;
+        var serverTimeZoneOffsetInMinutes = {{ $serverTimeZoneOffsetInMinutes }};
         var localTime = new Date();
         var localTimeZoneOffsetInMinutes = localTime.getTimezoneOffset();
         var timeDiff = serverTime - localTime;
@@ -361,9 +361,9 @@
 
         var token = "360c2c4ecaefa02d4d39f2fc6b6ed27c";
         var miniFleetLink =
-            "https:\/\/s145-ar.ogproyect.gameforge.com\/game\/index.php?page=ingame&component=fleetdispatch&action=miniFleet&ajax=1&asJson=1";
+            "{{ $game_url_js }}game.php?page=ingame&component=fleetdispatch&action=miniFleet&ajax=1&asJson=1";
 
-        var jumpGateLink = "https:\/\/s145-ar.ogproyect.gameforge.com\/game\/index.php?page=jumpgatelayer";
+        var jumpGateLink = "{{ $game_url_js }}game.php?page=jumpgatelayer";
         var jumpGateLoca = {
             "LOCA_STATION_JUMPGATE_HEADLINE": "Usar salto cu\u00e1ntico"
         };

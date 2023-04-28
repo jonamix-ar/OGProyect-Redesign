@@ -14,6 +14,7 @@ use App\Models\Game\Fleet;
 use App\Models\Libraries\Alert;
 use CiLang;
 use DateTime;
+use DateTimeZone;
 
 class Page
 {
@@ -79,12 +80,12 @@ class Page
             $parse['navigation'] = $this->gameNavigation();
             $parse['resources'] = $this->gameResources();
             $parse['officers'] = $this->gameOfficers();
-			$parse['notifications'] = $this->gameNotifications();
+            $parse['notifications'] = $this->gameNotifications();
         }
 
         if ($sidebar) {
             $parse['sidebar'] = $this->gameMenu();
-			$parse['planetbar'] = $this->planetMenu();
+            $parse['planetbar'] = $this->planetMenu();
         }
 
         if ($footer) {
@@ -101,7 +102,9 @@ class Page
     private function gamePage(string $page, array $parse, bool $full): string
     {
         $date = new DateTime();
-
+        $timezone = new DateTimeZone(Functions::readConfig('date_time_zone'));
+        $offset = $timezone->getOffset(new DateTime("now"));
+        $serverTimeZoneOffsetInMinutes = $offset / 60;
         return $this->template->set(
             ($full ? 'game/game_layout' : 'game/game_layout_simple'),
             array_merge(
@@ -117,7 +120,8 @@ class Page
                     'img_path' => IMG_PATH,
                     'meta_tags' => ($metatags = '') ? $metatags : "",
                     'date_js' => 'new Date(' . $date->format('Y, n - 1, j, G, i, s') . ')',
-
+                    'game_url_js' => str_replace('/', '\/', SYSTEM_ROOT),
+                    'serverTimeZoneOffsetInMinutes' => abs($serverTimeZoneOffsetInMinutes),
                 ]
             )
         );
@@ -605,16 +609,16 @@ class Page
     private function gameNotifications()
     {
         $lang = $this->langs->loadLang(['game/global', 'game/notification'], true);
-		$parse['message_alert']	= (($this->current_user['new_message'] == 0) ? ' noMessage' : '');
-		$parse['message_count']	= $this->current_user['new_message'];
+        $parse['message_alert']    = (($this->current_user['new_message'] == 0) ? ' noMessage' : '');
+        $parse['message_count']    = $this->current_user['new_message'];
 
-		$parse['attack_alert'] = (Functions::getAttackers($this->current_user['user_id']) > 0) ? 'soon' : 'noAttack';
+        $parse['attack_alert'] = (Functions::getAttackers($this->current_user['user_id']) > 0) ? 'soon' : 'noAttack';
 
         return $this->template->set(
             'general/notification',
             array_merge(
                 $lang->language,
-				$parse,
+                $parse,
                 [
                     'img_path' => IMG_PATH
                 ]
@@ -708,7 +712,7 @@ class Page
         ];
 
         // PARSE THE MENU AND OTHER DATA
-		$parse['lm_tutorial_overview'] = $lang->line('lm_tutorial_overview');
+        $parse['lm_tutorial_overview'] = $lang->line('lm_tutorial_overview');
         $parse['menu_block'] = $menu_block;
         $parse['is_vacation']    = ($this->current_user['preference_vacation_mode'] > 0) ? $this->template->set($adv_template, $vac_parse) : '';
         $parse['is_delete']    = ($this->current_user['preference_delete_mode'] > 0) ? $this->template->set($adv_template, $del_parse) : '';
@@ -727,28 +731,28 @@ class Page
         );
     }
 
-	/**
+    /**
      * planetMenu
      *
      * @return string
      */
     private function planetMenu()
     {
-		$lang = $this->langs->loadLang('game/menu', true);
-		$db = new Database();
-		$parse['system_version'] = SYSTEM_VERSION;
-		$parse['planetlist']    = Functions::buildPlanetList($this->current_user);
+        $lang = $this->langs->loadLang('game/menu', true);
+        $db = new Database();
+        $parse['system_version'] = SYSTEM_VERSION;
+        $parse['planetlist']    = Functions::buildPlanetList($this->current_user);
 
-		$planet_count = $db->numRows($db->query("SELECT * FROM " . PLANETS . "
+        $planet_count = $db->numRows($db->query("SELECT * FROM " . PLANETS . "
 			WHERE `planet_user_id` = '" . $this->current_user['user_id'] . "'
 			AND `planet_type` = 1
 			AND `planet_destroyed` = 0"));
 
-		$parse['lm_planets']	= $lang->line('lm_planets');
-		$parse['row_type_1']	= ($planet_count > 5) ? 'cutty' : 'norm';
-		$parse['row_type_2']	= ($planet_count > 5) ? 'myPlanets' : 'myWorlds';
-		$parse['planet_count']	= $planet_count;
-		$parse['planet_max']	= FleetsLib::getMaxColonies($this->current_user['research_astrophysics']);
+        $parse['lm_planets']    = $lang->line('lm_planets');
+        $parse['row_type_1']    = ($planet_count > 5) ? 'cutty' : 'norm';
+        $parse['row_type_2']    = ($planet_count > 5) ? 'myPlanets' : 'myWorlds';
+        $parse['planet_count']    = $planet_count;
+        $parse['planet_max']    = FleetsLib::getMaxColonies($this->current_user['research_astrophysics']);
 
         return $this->template->set('general/right_menu_view', $parse);
     }
