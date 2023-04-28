@@ -225,18 +225,19 @@ class OverviewController extends BaseController
             UpdatesLibrary::updateBuildingsQueue($user_planet, $this->user);
         }
 
+        $current_page = '';
 
         // Si hay una investigación en proceso
-        if ($users_planet['planet_b_hangar_id'] != 0) {
+        if ($users_planet['planet_b_hangar'] != 0) {
             // Si se trata del planeta actual, mostrar información detallada
             if ($is_current_planet) {
-                if (!empty($shipyard)) {
+                if (empty($shipyard)) {
                     $shipyard = explode(';', $this->planet['planet_b_hangar_id']);
                     $shipyard_data = explode(",", $shipyard[0]);
                     $shipyard_time = DevelopmentsLib::developmentTime($this->user, $this->planet, $shipyard_data[0]);
                     $shipyard_time_formated = FormatLib::prettyTime($shipyard_time);
-                    $shipyard_queue_time  = $shipyard_time * $shipyard_data[1];
-                    $shipyard_total_time   = $shipyard_queue_time - $users_planet['planet_b_hangar'];
+                    $shipyard_queue_time = $shipyard_time * $shipyard_data[1];
+                    $shipyard_total_time = $shipyard_queue_time - $users_planet['planet_b_hangar'];
 
                     if (!is_null($shipyard) && !empty($shipyard)) {
                         $shipyard_queue = $this->template->set(
@@ -249,6 +250,14 @@ class OverviewController extends BaseController
                                 'langs' => $this->langs->language,
                             ],
                         );
+                    }
+
+                    if ($shipyard_data[0] >= 200 && $shipyard_data[0] <= 299) {
+                        $current_page .= 'shipyard';
+                    }
+
+                    if ($shipyard_data[0] >= 400 && $shipyard_data[0] <= 550) {
+                        $current_page .= 'defense';
                     }
 
                     // Mostrar detalles de la investigación en proceso
@@ -273,8 +282,19 @@ class OverviewController extends BaseController
                 }
             }
         } else {
+            // Si no hay hangar en proceso, mostrar mensaje de que no hay hangar.
+            $shipyard_row = $this->template->set(
+                'overview/overview_production_empty',
+                array_merge(
+                    $this->langs->language,
+                    [
+                        'production_empty_tooltip' => $this->langs->line('overview_production_shipyard_tooltip'),
+                        'production_current_page' => SYSTEM_ROOT . 'game.php?page=' . $current_page,
+                        'production_description' => $this->langs->line('overview_production_shipyard_description')
+                    ]
+                )
+            );
         }
-
 
         return $shipyard_row;
     }

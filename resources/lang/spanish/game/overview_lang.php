@@ -33,6 +33,8 @@ $lang = [
     'overview_production_building_description' => 'No hay edificios en construcción.<br />(A los recursos)',
     'overview_production_research_tooltip' => 'No hay ninguna investigación. Hacé click acá para construir tu laboratorio de investigaciones.',
     'overview_production_research_description' => 'No hay ninguna investigación en progreso.<br />(A la investigación)',
+    'overview_production_shipyard_tooltip' => 'En este momento no hay naves o defensa construyéndose en este planeta. Hacé click aquí para ir al hangar.',
+    'overview_production_shipyard_description' => 'No se está construyendo ninguna nave o defensa en este momento.<br />(Al hangar)',
     'overview_button_building_cancel' => '¿Cancelar la mejora de %building% al Nivel %level%?',
     'overview_button_research_cancel' => 'Investigación: ¿quieres interrumpir %tech% nivel %level% en el %type% %planet% %cord%?',
 ];
