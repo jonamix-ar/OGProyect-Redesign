@@ -7,6 +7,7 @@ $lang = [
     'building_deuterium_sintetizer' => 'Deuterium Synthesizer',
     'building_solar_plant' => 'Solar Plant',
     'building_fusion_reactor' => 'Fusion Reactor',
+	'ship_solar_satellite' => 'Solar satelite',
     'building_robot_factory' => 'Robotics Factory',
     'building_nano_factory' => 'Nanite Factory',
     'building_hangar' => 'Shipyard',
