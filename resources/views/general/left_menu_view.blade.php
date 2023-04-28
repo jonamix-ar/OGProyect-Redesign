@@ -1,3 +1,10 @@
+<div id='tutorialiconcomponent' class="">
+	<div id="helper">
+		<a class="tooltip tooltipClose"
+			href="game.php?page=tutorial"
+			title="{{$lm_tutorial_overview}}">?</a>
+	</div>
+</div>
 <div id='toolbarcomponent' class="">
 	<div id="links">
 		<ul id="menuTable" class="leftmenu">
@@ -16,4 +23,3 @@
 		{!!$is_delete!!}
 	</div>
 </div>
-

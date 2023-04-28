@@ -39,8 +39,8 @@
 
     <script type="text/javascript">
         var ajaxEventboxURI =
-            'https://s145-ar.ogproyect.gameforge.com/game/index.php?page=componentOnly&component=eventList&action=fetchEventBox&ajax=1&asJson=1';
-        var ajaxResourceboxURI = 'https://s145-ar.ogproyect.gameforge.com/game/index.php?page=fetchResources&ajax=1';
+            'game.php?page=componentOnly&component=eventList&action=fetchEventBox&ajax=1&asJson=1';
+        var ajaxResourceboxURI = 'game.php?page=fetchResources&ajax=1';
         var eventboxLoca = {
             "mission": "Misi\u00f3n",
             "missions": "Encargos",
@@ -53,7 +53,7 @@
             "nextEventText": "Tipo"
         };
         var eventlistLink =
-            "https:\/\/s145-ar.ogproyect.gameforge.com\/game\/index.php?page=componentOnly&component=eventList&ajax=1";
+            "game.php?page=componentOnly&component=eventList&ajax=1";
     </script>
 
     <link rel="stylesheet" type="text/css" href="{{ $css_path . 'ogproyect-default.css' }}" />
@@ -393,52 +393,10 @@
                 {!! $officers !!}
             </div>
             <div id='notificationbarcomponent' class="">
-                <div id="message-wrapper">
-                    <a class=" comm_menu messages tooltip js_hideTipOnMobile"
-                        href="https://s145-ar.ogproyect.gameforge.com/game/index.php?page=messages"
-                        title="1 nuevos mensaje(s)">
-                        <span class="new_msg_count totalMessages news " data-new-messages="1">
-                            1
-                        </span>
-                    </a>
-                    <a class=" comm_menu chat tooltip js_hideTipOnMobile"
-                        href="https://s145-ar.ogproyect.gameforge.com/game/index.php?page=chat"
-                        title="1 nuevos mensaje(s)">
-                        <span class="new_msg_count totalChatMessages noMessage" data-new-messages="0">
-                            0
-                        </span>
-                    </a>
-                    <div id="messages_collapsed">
-                        <div id="eventboxFilled" class="eventToggle" style="display: none;">
-                            <a id="js_eventDetailsClosed" class="tooltipRight js_hideTipOnMobile"
-                                href="javascript:void(0);" title="Mas detalles"></a>
-                            <a id="js_eventDetailsOpen" class="tooltipRight open js_hideTipOnMobile"
-                                href="javascript:void(0);" title="Menos detalles"></a>
-                        </div>
-                        <div id="eventboxLoading" class="textCenter textBeefy" style="display: block;">
-                            <img height="16" width="16" alt="ajax spinner"
-                                src="img/ajax-loader.gif" />
-                            cargando...
-                        </div>
-                        <div id="eventboxBlank" class="textCenter" style="display: none;">
-                            No hay movimiento de flota
-                        </div>
-                    </div>
-                    <div id="attack_alert" class="tooltip noAttack" title="">
-                        <a href="https://s145-ar.ogproyect.gameforge.com/game/index.php?page=componentOnly&amp;component=eventList"
-                            class=" tooltipHTML js_hideTipOnMobile"></a>
-                    </div>
-                </div>
+				{!! $notifications !!}
             </div>
         </div>
         <div id="left">
-            <div id='tutorialiconcomponent' class="">
-                <div id="helper">
-                    <a class="tooltip tooltipClose"
-                        href="https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=tutorial"
-                        title="Vista general del tutorial&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=rewards&quot;&gt;&lt;/a&gt;">?</a>
-                </div>
-            </div>
 			{!! $sidebar !!}
         </div>
         <div id="middle">
@@ -527,31 +485,7 @@
         </div>
         <div id="right">
             <div id='planetbarcomponent' class="">
-                <div id="rechts">
-                    <div id="norm">
-                        <div id="myWorlds">
-                            <div id="countColonies">
-                                <p class="textCenter">
-                                    <span>1/1</span> Planetas
-                                </p>
-                            </div>
-                            <div id="planetList">
-                                <div class="smallplanet   " id="planet-33650641">
-                                    <a href="https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=overview&amp;cp=33650641"
-                                        data-link="https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=overview&amp;cp=33650641"
-                                        title="&lt;b&gt;Planeta Principal [2:85:12]&lt;/b&gt;&lt;br/&gt;Forma de vida: Humanos&lt;br/&gt;12.800km (0/193)&lt;br&gt;de -32 °C  a 8 °C&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=overview&amp;cp=33650641&quot;&gt;Visión general&lt;/a&gt;&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=supplies&amp;cp=33650641&quot;&gt;Recursos&lt;/a&gt;&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=lfbuildings&amp;cp=33650641&quot;&gt;Forma de vida&lt;/a&gt;&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=research&amp;cp=33650641&quot;&gt;Investigación&lt;/a&gt;&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=facilities&amp;cp=33650641&quot;&gt;Instalaciones&lt;/a&gt;&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=shipyard&amp;cp=33650641&quot;&gt;Hangar&lt;/a&gt;&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=defenses&amp;cp=33650641&quot;&gt;Defensa&lt;/a&gt;&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=fleetdispatch&amp;cp=33650641&quot;&gt;Flota&lt;/a&gt;&lt;br/&gt;&lt;a href=&quot;https://s145-ar.ogproyect.gameforge.com/game/index.php?page=ingame&amp;component=galaxy&amp;cp=33650641&amp;galaxy=2&amp;system=85&amp;position=12&quot;&gt;Galaxia&lt;/a&gt;"
-                                        class="planetlink  tooltipRight tooltipClose js_hideTipOnMobile">
-                                        <img class="planetPic js_replace2x" alt="Planeta Prin..."
-                                            src="img/planets/gas_8_3.png" width="48"
-                                            height="48" />
-                                        <span class="planet-name ">Planeta Prin...</span>
-                                        <span class="planet-koords ">[2:85:12]</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+				{!! $planetbar !!}
             </div>
             <div id='bannerSkyscrapercomponent' class="">
                 <div id="banner_skyscraper" class="desktop" name="banner_skyscraper">

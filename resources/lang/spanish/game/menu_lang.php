@@ -1,7 +1,7 @@
 <?php
 
 $lang = [
-    'lm_players' => 'Jugadores:',
+	'lm_tutorial_overview' => 'Vista general del tutorial',
     'lm_overview' => 'Resumen',
     'lm_galaxy' => 'Galaxia',
     'lm_empire' => 'Imperio',
@@ -25,4 +25,12 @@ $lang = [
     'lm_administration' => 'Administración',
     'lm_vacation_mode' => 'Modo vacaciones|Esta cuenta está en modo vacaciones hasta al menos el %t.',
     'lm_delete_mode' => 'Eliminar cuenta|Esta cuenta será eliminada el %t.',
+	'lm_planets' => 'Planetas',
+	'lm_diameter' => 'Diámetro',
+    'lm_distance_unit' => 'km',
+    'lm_temperature' => 'Temperatura',
+    'lm_aprox' => '',
+    'lm_temp_unit' => '&#186;C',
+    'lm_to' => 'a',
+	'lm_of' => 'de',
 ];

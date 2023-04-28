@@ -377,6 +377,224 @@ abstract class Functions
         return '<img src="' . $path . '" title="' . $title . '" border="0"' . $attributes . '>';
     }
 
+	/**
+     * sortPlanets
+     *
+     * @param array $current_user Current user
+     *
+     * @return array
+     */
+    public static function sortPlanets($current_user)
+    {
+		$db		= new Database();
+        $order  = $current_user['preference_planet_sort_sequence'] == 1 ? "DESC" : "ASC";
+        $sort   = $current_user['preference_planet_sort'];
+
+        $planets = "SELECT `planet_id`, `planet_name`, `planet_galaxy`, `planet_system`, `planet_planet`, `planet_type`, `planet_image`, `planet_diameter`, `planet_field_current`, `planet_field_max`, `planet_temp_min`, `planet_temp_max`, `planet_b_building_id`
+                    FROM " . PLANETS . "
+                    WHERE `planet_type` = 1 AND `planet_user_id` = '" . (int) $current_user['user_id'] . "'
+                        AND `planet_destroyed` = 0 ORDER BY ";
+
+        switch ($sort) {
+            case 0:
+                $planets    .= "`planet_id` " . $order;
+
+                break;
+
+            case 1:
+                $planets    .= "`planet_galaxy`, `planet_system`, `planet_planet`, `planet_type` " . $order;
+
+                break;
+
+            case 2:
+                $planets    .= "`planet_name` " . $order;
+
+                break;
+        }
+
+        return $db->query($planets);
+    }
+
+    /**
+     * buildPlanetList
+     *
+     * @param array $current_user      Current user
+     * @param int   $current_planet_id Current planet ID
+     *
+     * @return mixed
+     */
+    public static function buildPlanetList($current_user, $current_planet_id = 0)
+    {
+		$db = new Database();
+		$template = new Template();
+		$langs = new Language();
+		$lang = $langs->loadLang(['game/global', 'game/menu'], true);
+		$list           = '';
+		$parse['system_version'] = SYSTEM_VERSION;
+        $user_planets   = self::sortPlanets($current_user);
+		$sub_template   = 'general/right_menu_row_view';
+
+        $page   = isset($_GET['page']) ? $_GET['page'] : '';
+        $gid    = isset($_GET['gid']) ? $_GET['gid'] : '';
+        $mode   = isset($_GET['mode']) ? $_GET['mode'] : '';
+		$parse['planet_size_1'] = ($db->numRows($user_planets) > 5) ? 'smaller' : '';
+		$parse['planet_size_2'] = ($db->numRows($user_planets) > 5) ? '1' : '3';
+		$parse['planet_size_3'] = ($db->numRows($user_planets) > 5) ? '30' : '48';
+
+        if ($user_planets)
+		{
+            while ($planets = $db->fetchArray($user_planets))
+			{
+				if($planets['planet_b_building_id'] > 0)
+				{
+					$current_build = explode(',', $planets['planet_b_building_id']);
+					$parse['is_build']		= '<a class="constructionIcon tooltip js_hideTipOnMobile" href="index.php?page=' . $page . '&amp;cp=' . $planets['planet_id'] . '" title="' . $planets['planet_id']/*$lang->line('tech')[$current_build[0]]*/ . '">
+													<span class="icon12px icon_wrench"></span>
+												</a>';
+				} else {
+					$parse['is_build'] 		= '';
+				}
+
+				if(self::getAttackers($current_user['user_id']) > 0)
+				{
+					$parse['is_activity'] = '<a class="alert tooltip js_hideTipOnMobile eventToggle" href="javascript:void(0);" title="¡Atacá!">
+													<span class="activity"></span>
+												</a>';
+				}
+
+				$parse['current_page']			= $page;
+				$parse['planet_name']			= $planets['planet_name'];
+				$parse['planet_id']				= $planets['planet_id'];
+				$parse['planet_galaxy'] 		= $planets['planet_galaxy'];
+				$parse['planet_system']			= $planets['planet_system'];
+				$parse['planet_planet']			= $planets['planet_planet'];
+				$parse['actual_planet'] 		= (($planets['planet_id'] == $current_user['user_current_planet'] ) ? ' active' : '');
+				$parse['planet_diameter'] 		= FormatLib::prettyNumber($planets['planet_diameter']);
+				$parse['planet_field_current'] 	= $planets['planet_field_current'];
+				$parse['planet_field_max'] 		= $planets['planet_field_max'];
+				$parse['planet_temp_min'] 		= $planets['planet_temp_min'];
+				$parse['planet_temp_max'] 		= $planets['planet_temp_max'];
+				$parse['planet_image'] 			= $planets['planet_image'];
+				$parse['moon_img']				= self::moonInfo($current_user,
+																	$planets['planet_galaxy'],
+																	$planets['planet_system'],
+																	$planets['planet_planet']
+																);
+
+				$list .= $template->set($sub_template, array_merge($lang->language, $parse));
+            }
+        }
+
+        // IF THE LIST OF PLANETS IS EMPTY WE SHOULD RETURN false
+        if ($list !== '') {
+
+            return $list;
+        } else {
+
+            return false;
+        }
+    }
+
+	/**
+     * moonInfo
+     *
+     * @param array $current_user      Current user
+     * @param int   $planet_id 		   Planet ID
+     *
+     * @return mixed
+     */
+    public static function moonInfo($current_user, $galaxy, $system, $position)
+    {
+		$list           = '';
+		$template = new Template();
+		$db = new Database();
+		$langs = new Language();
+		$lang = $langs->loadLang(['game/global', 'game/menu'], true);
+		$parse['system_version'] = SYSTEM_VERSION;
+		$sub_template   = 'general/right_menu_moon_row';
+
+        $page   = isset($_GET['page']) ? $_GET['page'] : '';
+        $gid    = isset($_GET['gid']) ? $_GET['gid'] : '';
+        $mode   = isset($_GET['mode']) ? $_GET['mode'] : '';
+
+		$planets = $db->fetchArray($db->query("SELECT `planet_id`, `planet_name`, `planet_galaxy`, `planet_system`, `planet_planet`, `planet_type`, `planet_image`, `planet_diameter`, `planet_field_current`, `planet_field_max`, `planet_temp_min`, `planet_temp_max`, `planet_b_building_id`
+                    FROM " . PLANETS . "
+                    WHERE `planet_type` = 3
+						AND `planet_user_id` = '" . $current_user['user_id'] . "'
+						AND `planet_galaxy` = '" . $galaxy . "'
+						AND `planet_system` = '" . $system . "'
+						AND `planet_planet` = '" . $position . "'
+                        AND `planet_destroyed` = 0"));
+
+        if ($planets)
+		{
+
+			if($planets['planet_b_building_id'] > 0)
+			{
+				$current_build = explode(',', $planets['planet_b_building_id']);
+				$parse['is_build']		= '<a class="constructionIcon moon tooltip js_hideTipOnMobile"
+												href="index.php?page=overview&amp;cp=' . $planets['planet_id'] . '"
+												title="' . $current_build[0] /*parent::$lang['tech'][$current_build[0]]*/ . '"
+											 >
+												<span class="icon12px icon_wrench"></span>
+											 </a>';
+			} else {
+				$parse['is_build'] 		= '';
+			}
+
+			$parse['current_page']			= $page;
+			$parse['planet_name']			= $planets['planet_name'];
+			$parse['planet_id']				= $planets['planet_id'];
+			$parse['planet_galaxy'] 		= $planets['planet_galaxy'];
+			$parse['planet_system']			= $planets['planet_system'];
+			$parse['planet_planet']			= $planets['planet_planet'];
+			$parse['actual_planet'] 		= (($planets['planet_id'] == $current_user['user_current_planet'] ) ? ' active' : '');
+			$parse['planet_diameter'] 		= FormatLib::prettyNumber($planets['planet_diameter']);
+			$parse['planet_field_current'] 	= $planets['planet_field_current'];
+			$parse['planet_field_max'] 		= $planets['planet_field_max'];
+			$parse['planet_temp_min'] 		= $planets['planet_temp_min'];
+			$parse['planet_temp_max'] 		= $planets['planet_temp_max'];
+			$parse['planet_image'] 			= $planets['planet_image'];
+
+			$list .= $template->set($sub_template, array_merge($lang->language, $parse));
+        }
+
+        // IF THE LIST OF PLANETS IS EMPTY WE SHOULD RETURN false
+        if ($list !== '') {
+
+            return $list;
+        } else {
+
+            return false;
+        }
+    }
+
+	 /**
+     * getAttackers
+	 *
+     * @param int $user_id	User ID
+	 *
+     * @return num of attackers
+     */
+    public static function getAttackers($user_id)
+    {
+
+		if ((int)$user_id > 0)
+		{
+			$db = new Database();
+            return $db->numRows($db->query("SELECT *
+				FROM " . FLEETS . "
+				WHERE `fleet_target_owner` = '" . $user_id . "'
+					AND (`fleet_mission` = '1'
+						OR `fleet_mission` = '6'
+						OR `fleet_mission` = '2')
+					AND `fleet_mess` = '0';"
+			));
+        }
+        
+        return null;
+    }
+
     /**
      * redirect
      *
