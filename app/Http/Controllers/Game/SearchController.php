@@ -106,7 +106,7 @@ class SearchController extends BaseController
                     $this->search_terms,
                     $this->langs->language
                 )
-            )
+            ), false
         );
     }
 
