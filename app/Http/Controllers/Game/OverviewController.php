@@ -60,15 +60,11 @@ class OverviewController extends BaseController
                         'img_path' => strtr(IMG_PATH, ['\\' => '/']),
                         'planet_name' => $this->planet['planet_name'],
                         'user_name' => $this->user['user_name'],
-
-
-
                         'planet_image' => $this->getPlanetName($this->planet['planet_type'], $this->planet['planet_image']),
                         'building' => $this->getBuildingCurrentWork($this->planet),
                         'research' => $this->getResearchCurrentWork($this->planet),
                         'shipyard' => $this->getShipyardCurrentWork($this->planet),
                         'planet_as_moon' => $planetAsMoon['planet_as_moon'],
-
                         'planet_diameter' => FormatLib::prettyNumber($this->planet['planet_diameter']),
                         'planet_field_current' => $this->planet['planet_field_current'],
                         'planet_field_max' => DevelopmentsLib::maxFields($this->planet),
@@ -236,15 +232,12 @@ class OverviewController extends BaseController
             if ($is_current_planet) {
                 $shipyard = explode(';', $this->planet['planet_b_hangar_id']);
                 $shipyard_data = explode(",", $shipyard[0]);
-
                 $shipyard_time = DevelopmentsLib::developmentTime($this->user, $this->planet, $shipyard_data[0]);
                 $shipyard_time_formated = FormatLib::prettyTime($shipyard_time);
-
                 $shipyard_queue_time  = $shipyard_time * $shipyard_data[1];
                 $shipyard_total_time   = $shipyard_queue_time - $users_planet['planet_b_hangar'];
 
                 if (!is_null($shipyard) && !empty($shipyard)) {
-                    var_dump($shipyard);
                     $shipyard_queue = $this->template->set(
                         'overview/overview_production_shipyard_queue',
                         [
