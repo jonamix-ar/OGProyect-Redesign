@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Game;
 
+use App\Core\Objects;
 use App\Core\BaseController;
-use App\Core\Database;
 use App\Core\Enumerators\PlanetTypesEnumerator;
+use App\Core\Language;
 use App\Helpers\UrlHelper;
 use App\Libraries\DevelopmentsLib;
-use App\Libraries\FleetsLib;
 use App\Libraries\FormatLib;
 use App\Libraries\Functions;
 use App\Libraries\NoobsProtectionLib;
-use App\Libraries\TimingLibrary as Timing;
 use App\Libraries\UpdatesLibrary;
 use App\Libraries\Users;
 use App\Models\Game\Overview;
@@ -32,7 +31,7 @@ class OverviewController extends BaseController
         Users::checkSession();
 
         // load Language
-        parent::loadLang(['game/global', 'game/overview', 'game/buildings', 'game/constructions', 'game/technologies']);
+        parent::loadLang(['game/global', 'game/overview', 'game/buildings', 'game/constructions', 'game/technologies', 'game/ships', 'game/defenses']);
 
         $this->overviewModel = new Overview();
         $this->noob = new NoobsProtectionLib();
@@ -243,6 +242,21 @@ class OverviewController extends BaseController
 
                 $shipyard_queue_time  = $shipyard_time * $shipyard_data[1];
                 $shipyard_total_time   = $shipyard_queue_time - $users_planet['planet_b_hangar'];
+
+                if (!is_null($shipyard) && !empty($shipyard)) {
+                    var_dump($shipyard);
+                    $shipyard_queue = $this->template->set(
+                        'overview/overview_production_shipyard_queue',
+                        [
+                            'shipyard' => $shipyard,
+                            'game_url' => SYSTEM_ROOT,
+                            'img_path' => IMG_PATH,
+                            'objects' => new Objects(),
+                            'langs' => $this->langs->language,
+                        ],
+                    );
+                }
+
                 // Mostrar detalles de la investigación en proceso
                 $shipyard_row = $this->template->set(
                     'overview/overview_production_shipyard',
@@ -257,7 +271,8 @@ class OverviewController extends BaseController
                             'shipyard_time' => $shipyard_time - $this->planet['planet_b_hangar'],
                             'shipyard_time_formated' => $shipyard_time_formated,
                             'shipyard_queue_time' => $shipyard_queue_time,
-                            'shipyard_total_time' => $shipyard_total_time
+                            'shipyard_total_time' => $shipyard_total_time,
+                            'shipyard_queue' => $shipyard_queue
                         ]
                     )
                 );

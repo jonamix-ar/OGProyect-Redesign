@@ -32,8 +32,7 @@
         </tr>
     </tbody>
 </table>
-
-
+{!! $shipyard_queue !!}
 <script type="text/javascript">
     var refreshLinkship = '{{ $game_url }}game.php?page=overview';
     var cancelLinkship =
