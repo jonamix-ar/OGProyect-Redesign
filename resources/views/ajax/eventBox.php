@@ -1,0 +1,17 @@
+<div id="eventListWrap">
+	<div id="eventHeader">
+		<a class="close_details eventToggle" href="javascript:toggleEvents();"></a>
+		<h2>Resultados</h2>
+	</div>
+	<table id="eventContent">
+		<tbody></tbody>
+	</table>
+	<div id="eventFooter"></div>
+</div>
+<script type="text/javascript">
+	var timeDelta = 1682643429000 - (new Date()).getTime();
+	var LocalizationStrings = {"timeunits":{"short":{"year":"y","month":"M","week":"se.","day":"d","hour":"h","minute":"m","second":"s"}},"status":{"ready":"hecho"},"decimalPoint":".","thousandSeperator":".","unitMega":"M","unitKilo":"K","unitMilliard":"Mrd","question":"Pregunta","error":"Error","loading":"cargando...","notice":"Referencia","yes":"si","no":"No","ok":"Ok","attention":"Cuidado","outlawWarning":"Est\u00e1s a punto de atacar a un jugador m\u00e1s fuerte. Si lo haces tu protecci\u00f3n contra ataques se desactivar\u00e1 durante 7 d\u00edas y todos los jugadores podr\u00e1n atacarte sin piedad. \u00bfSeguro que quieres continuar?","lastSlotWarningMoon":"Este edificio va a utilizar el \u00faltimo espacio de construcci\u00f3n disponible. Construye una base lunar para conseguir m\u00e1s espacios. \u00bfDe verdad quieres construir el edificio?","lastSlotWarningPlanet":"Este edificio va a utilizar el \u00faltimo espacio de construcci\u00f3n disponible. Construye un Terraformer o compra un objeto de campo de planeta para conseguir m\u00e1s espacios. \u00bfDe verdad quieres construir el edificio?","forcedVacationWarning":"\u00a1Verifica tu cuenta de la antesala y te regalamos Materia Oscura en cada universo!","planetMoveBreakUpWarning":"\u00a1Atenci\u00f3n! Esta misi\u00f3n puede seguir en curso una vez que comience el per\u00edodo de reubicaci\u00f3n y si \u00e9ste es el caso, el proceso ser\u00e1 cancelado. \u00bfDe verdad deseas continuar?","moreDetails":"Mas detalles","lessDetails":"Menos detalles","planetOrder":{"lock":"Fijar orden","unlock":"Desbloquear orden"},"darkMatter":"Materia Oscura","errorNotEnoughDM":"\u00a1No hay suficiente Materia Oscura disponible! \u00bfDeseas comprar m\u00e1s ahora?","activateItem":{"upgradeItemQuestion":"\u00bfEst\u00e1s seguro de querer reemplazar el \u00edtem existente? La bonificaci\u00f3n antigua se perder\u00e1 durante el proceso.","upgradeItemQuestionHeader":"\u00bfReemplazar \u00edtem?"},"characterClassItem":{"buyAndActivateItemQuestion":"\u00bfQuieres activar la clase #characterClassName# a cambio de #darkmatter# de Materia Oscura? Perder\u00e1s tu clase actual.","activateItemQuestion":"\u00bfQuieres activar la clase #characterClassName#? Perder\u00e1s tu clase actual."},"allianceClassItem":{"buyAndActivateItemQuestion":"\u00bfQuieres activar la clase de alianza #allianceClassName# a cambio de #darkmatter# de Materia Oscura? La clase de alianza actual se perder\u00e1.","activateItemQuestion":"\u00bfQuieres activar la clase de alianza #allianceClassName#? La clase de alianza actual se perder\u00e1.","appendCurrentClassQuestion":"<br><br>Clase de alianza actual: #currentAllianceClassName#<br><br>\u00daltima modificaci\u00f3n: #lastAllianceClassChange#"},"LOCA_ALL_NETWORK_ATTENTION":"Cuidado","LOCA_ALL_YES":"si","LOCA_ALL_NO":"No","redirectMessage":"Al seguir este enlace, abandonar\u00e1s OGame. \u00bfQuieres continuar?"};
+	(function($){
+	
+	})(jQuery);
+</script>

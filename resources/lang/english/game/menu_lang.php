@@ -1,7 +1,7 @@
 <?php
 
 $lang = [
-    'lm_players' => 'Player:',
+	'lm_tutorial_overview' => 'Toturial overview',
     'lm_overview' => 'Overview',
     'lm_galaxy' => 'Galaxy',
     'lm_empire' => 'Empire',
@@ -25,4 +25,10 @@ $lang = [
     'lm_administration' => 'Administration',
 	'lm_vacation_mode' => 'Vacation mode|This account is in vacation mode until %t.',
     'lm_delete_mode' => 'Delete account|This account will be deleted at %t.',
+	'lm_planets' => 'Planets',
+    'lm_distance_unit' => 'km',
+    'lm_temperature' => 'Temperature',
+    'lm_temp_unit' => '&#186;C',
+    'lm_to' => 'to',
+	'lm_of' => 'of',
 ];
