@@ -102,7 +102,7 @@ abstract class Formulas
             'ice' => 10, // ice
             'gas' => 10, // gas
             'normal' => 10, // normal
-            'trocken' => 10, // dry
+            'dry' => 10, // dry
             'water' => 10, // water
             'desert' => 10, // desert
         ];
