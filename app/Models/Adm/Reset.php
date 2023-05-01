@@ -27,7 +27,7 @@ class Reset extends Model
             `defense_plasma_turret` = '0',
             `defense_small_shield_dome` = '0',
             `defense_large_shield_dome` = '0',
-            `defense_anti-ballistic_missile` = '0',
+            `defense_anti_ballistic_missile` = '0',
             `defense_interplanetary_missile` = '0'"
         );
     }

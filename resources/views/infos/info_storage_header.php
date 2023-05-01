@@ -1,5 +1,6 @@
 <tr>
-    <td class="c">{level}</td>
-    <td class="c">{in_storage_capacity}</td>
-    <td class="c">{in_difference}</td>
+	<th>{level}</th>
+	<th>Cap. almac. en %</th>
+	<th>{in_difference}</th>
+	<th>{in_lvl_difference}</th>
 </tr>

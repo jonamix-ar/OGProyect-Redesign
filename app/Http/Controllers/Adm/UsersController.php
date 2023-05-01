@@ -1161,7 +1161,7 @@ class UsersController extends BaseController
         $exclude_buildings = [''];
 
         if ($type == 3) {
-            $exclude_buildings = ['defense_anti-ballistic_missile', 'defense_interplanetary_missile'];
+            $exclude_buildings = ['defense_anti_ballistic_missile', 'defense_interplanetary_missile'];
         }
 
         $prepare_table = [];

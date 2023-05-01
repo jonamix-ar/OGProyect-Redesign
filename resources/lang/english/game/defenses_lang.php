@@ -11,6 +11,6 @@ $lang = [
     'defense_plasma_turret' => 'Plasma Turret',
     'defense_small_shield_dome' => 'Small Shield Dome',
     'defense_large_shield_dome' => 'Large Shield Dome',
-    'defense_anti-ballistic_missile' => 'Anti-Ballistic Missiles',
+    'defense_anti_ballistic_missile' => 'Anti-Ballistic Missiles',
     'defense_interplanetary_missile' => 'Interplanetary Missiles',
 ];

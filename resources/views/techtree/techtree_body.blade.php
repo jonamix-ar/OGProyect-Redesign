@@ -5,36 +5,36 @@
 				<a class="overlay"
 				   data-action="technologytree"
 				   data-overlay-same="true"
-				   href="game.php?page=techtree&amp;technologyId=1&amp;tab=1"
+				   href="game.php?page=techtree&amp;technologyId={{$tech_id}}&amp;tab=1"
 				>
-					Tecnología
+					{{$tt_techtree}}
 				</a>
 			</li>
 			<li>
 				<a class="overlay"
 				   data-action="applications"
 				   data-overlay-same="true"
-				   href="game.php?page=techtree&amp;technologyId=1&amp;tab=4"
+				   href="game.php?page=techtree&amp;technologyId={{$tech_id}}&amp;tab=4"
 				>
-					Aplicaciones
+					{{$tt_applications}}
 				</a>
 			</li>
 			<li>
 				<a class="overlay"
 				   data-action="technologyinformation"
 				   data-overlay-same="true"
-				   href="game.php?page=techtree&amp;technologyId=1&amp;tab=2"
+				   href="game.php?page=techtree&amp;technologyId={{$tech_id}}&amp;tab=2"
 				>
-					Información
+					{{$tt_techinfo}}
 				</a>
 			</li>
 			<li>
 				<a class="overlay"
 				   data-action="technologies"
 				   data-overlay-same="true"
-				   href="game.php?page=techtree&amp;technologyId=1&amp;tab=3"
+				   href="game.php?page=techtree&amp;technologyId={{$tech_id}}&amp;tab=3"
 				>
-					Técnica
+					{{$tt_technology}}
 				</a>
 			</li>
 		</ul>

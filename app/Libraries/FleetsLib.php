@@ -156,7 +156,9 @@ class FleetsLib
 
     public static function getMaxColonies($astrophysicsTech): int
     {
-        return ceil($astrophysicsTech / 2);
+		$result = ceil($astrophysicsTech / 2);
+
+        return ($result == 0) ? 1 : $result+1;
     }
 
     public static function startLink(array $fleetRow, string $fleetType): string
