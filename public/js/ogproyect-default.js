@@ -31456,7 +31456,7 @@ function activateItem(uuid) {
           }); // Add a new buff
 
           if (isNew == true) {
-            var $newItem = $('<div data-uuid="' + item.ref + '" data-id="' + data.message.buffId + '">' + '<div class="js_duration" style="display: none;"></div>' + '<a href="javascript:void(0);" ref="' + item.ref + '" class="detail_button slideIn active_item active r_' + data.message.item.rarity + ' border3px tooltipHTML" title="' + data.message.item.toolTip + '">' + '<div class="pusher" style="height: 0%; "></div>' + '<img src="/cdn/img/item-images/' + item.image + '-small.png" alt=""/>' + '</a>' + '</div>');
+            var $newItem = $('<div data-uuid="' + item.ref + '" data-id="' + data.message.buffId + '">' + '<div class="js_duration" style="display: none;"></div>' + '<a href="javascript:void(0);" ref="' + item.ref + '" class="detail_button slideIn active_item active r_' + data.message.item.rarity + ' border3px tooltipHTML" title="' + data.message.item.toolTip + '">' + '<div class="pusher" style="height: 0%; "></div>' + '<img src="img/item-images/' + item.image + '-small.png" alt=""/>' + '</a>' + '</div>');
             var numberOfVisibleItemsInARow = 14; // gleicher Name in PHP
             // Store the number of the currently viewed page
             // In case the new item is appended to the page we already see, do not animate the slider
@@ -31524,7 +31524,7 @@ function activateItem(uuid) {
             $buffElement = $newItem;
           } else {
             console.log(item.ref);
-            var $oldItem = $('<div data-uuid="' + item.ref + '" data-id="' + data.message.buffId + '">' + '<div class="js_duration" style="display: none;"></div>' + '<a href="javascript:void(0);" ref="' + item.ref + '" class="detail_button slideIn active_item active r_' + data.message.item.rarity + ' border3px tooltipHTML" title="' + data.message.item.toolTip + '">' + '<div class="pusher" style="height: 0%; "></div>' + '<img src="/cdn/img/item-images/' + item.image + '-small.png" alt=""/>' + '</a>' + '</div>');
+            var $oldItem = $('<div data-uuid="' + item.ref + '" data-id="' + data.message.buffId + '">' + '<div class="js_duration" style="display: none;"></div>' + '<a href="javascript:void(0);" ref="' + item.ref + '" class="detail_button slideIn active_item active r_' + data.message.item.rarity + ' border3px tooltipHTML" title="' + data.message.item.toolTip + '">' + '<div class="pusher" style="height: 0%; "></div>' + '<img src="img/item-images/' + item.image + '-small.png" alt=""/>' + '</a>' + '</div>');
             var upgradedUuid = item.ref;
             $activeItems.find('div[data-uuid=' + upgradedUuid + ']').remove();
             $oldItem.hide().appendTo($activeItems.children().last()).show('pulsate');
@@ -31849,7 +31849,7 @@ function eventBDayInit() {
       }
 
       if (eventBoxData[boxId].eventImgSrc === undefined && eventBoxData[boxId].eventTypeClass === 'future') {
-        $('#eventBox' + boxId + ' #BDayEventImg').attr('src', '/cdn/img/event-birthday/gift.png');
+        $('#eventBox' + boxId + ' #BDayEventImg').attr('src', 'img/event-birthday/gift.png');
       } else {
         $('#eventBox' + boxId + ' #BDayEventImg').attr('src', eventBoxData[boxId].eventImgSrc);
       }
@@ -31893,7 +31893,7 @@ function toggleEvents(doNotClose) {
     $('#js_eventDetailsOpen').show();
 
     if (typeof toggleEvents.loaded == 'undefined' || !toggleEvents.loaded) {
-      $("#eventboxContent").html('<img height="16" width="16" src="/cdn/img/ajax-loader.gif" />');
+      $("#eventboxContent").html('<img height="16" width="16" src="img/ajax-loader.gif" />');
       $.ajax({
         url: eventlistLink,
         success: function (response) {
@@ -32966,7 +32966,7 @@ function createSummaryHtml(data) {
   var value = 0;
   var i = 0;
   var key = '';
-  content = content + '<div class="planetHead">' + '<div class="planetname">' + data.translations.summary + '</div>' + '<div class="planetImg"><img src="/cdn/img/layout/sum-bg-empire.jpg"/></div>' + '<div class="planetData">' + '<ul>' + '<li class="coords textLeft"></li>' + '<li class="fields textRight"></li>' + '</ul>' + '</div>' + '<div class="clearfloat"></div>' + '</div>'; // Generate the content
+  content = content + '<div class="planetHead">' + '<div class="planetname">' + data.translations.summary + '</div>' + '<div class="planetImg"><img src="img/layout/sum-bg-empire.jpg"/></div>' + '<div class="planetData">' + '<ul>' + '<li class="coords textLeft"></li>' + '<li class="fields textRight"></li>' + '</ul>' + '</div>' + '<div class="clearfloat"></div>' + '</div>'; // Generate the content
 
   for (group in data.groups) {
     content = content + '<div class="row"></div>' + '<div class="values ' + group + ' group' + group + '">';
@@ -33071,7 +33071,7 @@ function createHeaderHtml(data) {
   } // Add the outer div to the output
 
 
-  content = '<div id="empireTab">' + '<div class="wrapTab">' + '<div class="tab-part01"></div>' + '<h2>' + data.translations.header + '</h2>' + '<span class="reset"><img src="/cdn/img/icons/against.gif" width="16" height="16"><a href="javascript:void(0);" onClick="clearImperiumOrder(); return false;">' + data.translations.reset + '</a></span>' + '<div class="wrapCorner"></div>' + '<br class="clearfloat"/>' + '</div>' + '</div>' + '<div class="header">' + content + '</div>'; // Return the content
+  content = '<div id="empireTab">' + '<div class="wrapTab">' + '<div class="tab-part01"></div>' + '<h2>' + data.translations.header + '</h2>' + '<span class="reset"><img src="img/icons/against.gif" width="16" height="16"><a href="javascript:void(0);" onClick="clearImperiumOrder(); return false;">' + data.translations.reset + '</a></span>' + '<div class="wrapCorner"></div>' + '<br class="clearfloat"/>' + '</div>' + '</div>' + '<div class="header">' + content + '</div>'; // Return the content
 
   return content;
 }
@@ -36810,7 +36810,7 @@ ogame.messages.combatreport = {
 };
 function closeDetails(id, expireTime) {
   var elem = $("#fleet" + id);
-  elem.children(".openDetails").children().children().attr("src", "/cdn/img/layout/fleetOpenDetails.gif");
+  elem.children(".openDetails").children().children().attr("src", "img/layout/fleetOpenDetails.gif");
   elem.children(".quantity").show();
   elem.removeClass("detailsOpened");
   elem.addClass("detailsClosed");
@@ -36821,7 +36821,7 @@ function closeDetails(id, expireTime) {
 
 function openDetails(id, expireTime) {
   var elem = $("#fleet" + id);
-  elem.children(".openDetails").children().children().attr("src", "/cdn/img/layout/fleetCloseDetails.gif");
+  elem.children(".openDetails").children().children().attr("src", "img/layout/fleetCloseDetails.gif");
   elem.children(".quantity").hide();
   elem.removeClass("detailsClosed");
   elem.addClass("detailsOpened");
@@ -37303,7 +37303,7 @@ function openOverlay(url, dialogParams) {
   delete dialogParams.type;
 
   if (type !== 'inline') {
-    var loadImage = $(document.createElement('img')).attr('src', '/cdn/img/layout/ajaxloading2.gif').attr('alt', LocalizationStrings.loading);
+    var loadImage = $(document.createElement('img')).attr('src', 'img/layout/ajaxloading2.gif').attr('alt', LocalizationStrings.loading);
     var centerDiv = $(document.createElement('div')).css('text-align', 'center').css('margin-top', '20px').append(loadImage);
     var dialog = $(document.createElement("div")).addClass('overlayDiv').css('display', 'none').append(centerDiv).appendTo("body");
 
@@ -38397,7 +38397,7 @@ inventoryObj = {
         birthdayDiv = '<div class="event_active_hint"></div>';
       }
 
-      $lastSlide.append('<div class="item_img r_' + item.rarity + '" style="background-image: url(/cdn/img/item-images/' + imageName + ');">' + '<div class="item_img_box">' + birthdayDiv + '<div class="activation ' + activationClass + isActiveClass + '"></div>' + '<a href="javascript:void(0);" tabindex="1" title="' + itemTitle + '" class="detail_button ' + titleClass + ' ' + doSlideIn + '" ref="' + item.ref + '">' + saleBadge + '<span class="ecke"><span class="level ' + amountClass + '">' + amount + '</span></span></a></div>' + remainingTime + pusher + '</div>');
+      $lastSlide.append('<div class="item_img r_' + item.rarity + '" style="background-image: url(img/item-images/' + imageName + ');">' + '<div class="item_img_box">' + birthdayDiv + '<div class="activation ' + activationClass + isActiveClass + '"></div>' + '<a href="javascript:void(0);" tabindex="1" title="' + itemTitle + '" class="detail_button ' + titleClass + ' ' + doSlideIn + '" ref="' + item.ref + '">' + saleBadge + '<span class="ecke"><span class="level ' + amountClass + '">' + amount + '</span></span></a></div>' + remainingTime + pusher + '</div>');
     }
 
     $('#' + slider + 'Box').prepend($newSlider); //Fill up empty Item Slots:
@@ -40885,7 +40885,7 @@ function initTrader() {
         $(traderObj.traderId + ' .selectWrapper .source').removeClass('selected');
         $(traderObj.traderId + ' .js_honor').addClass('selected');
         $(traderObj.traderId + ' .toggleLink').addClass('honor');
-        var selectedContent = '<img height="18" src="/cdn/img/trader/honorPoints.png" alt="' + loca.honorPoints + '"/>' + '<span class="option_source">' + loca.honorPoints + '</span>';
+        var selectedContent = '<img height="18" src="img/trader/honorPoints.png" alt="' + loca.honorPoints + '"/>' + '<span class="option_source">' + loca.honorPoints + '</span>';
         $(traderObj.traderId + ' .js_valSourcePlanet').html(selectedContent);
         $(traderObj.traderId + ' .normalResource').hide();
         $(traderObj.traderId + ' .honorResource').show();
@@ -41371,7 +41371,7 @@ function initTrader() {
       $(traderObj.traderId + ' .bargain_text').html(itemData.bargainText);
       $(traderObj.traderId + ' .bargain_cost').html(itemData.bargainCostText);
       importChangeCost = itemData.bargainCost;
-      $(traderObj.traderId + ' .image_140px img').attr("src", "/cdn/img/item-images/" + itemData.image + "-140x.png");
+      $(traderObj.traderId + ' .image_140px img').attr("src", "img/item-images/" + itemData.image + "-140x.png");
       removeTooltip($(traderObj.traderId + ' .image_140px a'));
       $(traderObj.traderId + ' .image_140px a').attr("ref", itemData.uuid).removeClass("tooltip").addClass("tooltipHTML").attr("title", itemData.tooltip);
       initTooltips($(traderObj.traderId + ' .image_140px a'));
@@ -41438,7 +41438,7 @@ function initTrader() {
       $(traderObj.traderId + ' .bargain_cost').removeClass('hidden');
       $(traderObj.traderId + ' .bargain_overlay').hide();
       $(traderObj.traderId + ' .payment').show();
-      $(traderObj.traderId + ' .image_140px img').attr("src", "/cdn/img/trader/container_" + importData.rarity + ".jpg");
+      $(traderObj.traderId + ' .image_140px img').attr("src", "img/trader/container_" + importData.rarity + ".jpg");
       $(traderObj.traderId + ' .image_140px a').removeClass("slideIn").attr("ref", "").removeClass("tooltipHTML").addClass("tooltip").removeClass('r_common_140px').removeClass('r_uncommon_140px').removeClass('r_rare_140px').removeClass('r_epic_140px').removeClass('r_buddy_140px').addClass('r_' + importData.rarity + '_140px');
       changeTooltip($(traderObj.traderId + ' .image_140px a'), importData.tooltip);
       $(traderObj.traderId + ' .js_import_price').removeClass('green_text').text(number_format(importData.price, 0));
@@ -42254,7 +42254,7 @@ function initTrader() {
                                class=\"slideIn\"\
                                ref=\"" + data.oldAuction.item.uuid + "\">\
                                 <img height=\"30\" width=\"30\"\
-                                     src=\"/cdn/img/item-images/" + data.oldAuction.item.imageSmall + "-small.png\"\
+                                     src=\"img/item-images/" + data.oldAuction.item.imageSmall + "-small.png\"\
                                      alt=\"\" title=\"" + title + "\"\
                                      class=\"item_img tooltipHTML tooltipLeft r_" + data.oldAuction.item.rarity + "\"/>\
                             </a>\
@@ -42282,7 +42282,7 @@ function initTrader() {
 
 
           $('#div_traderAuctioneer .image_140px .detail_button').attr('ref', data.item.uuid).attr('title', '').removeClass('r_common_140px').removeClass('r_uncommon_140px').removeClass('r_rare_140px').removeClass('r_epic_140px').addClass('r_' + data.item.rarity + '_140px');
-          $('#div_traderAuctioneer .image_140px img').attr('src', "/cdn/img/item-images/" + data.item.image + "-140x.png");
+          $('#div_traderAuctioneer .image_140px img').attr('src', "img/item-images/" + data.item.image + "-140x.png");
           $('#div_traderAuctioneer .left_header h2').html(loca.auctionRunning);
           thisObj.setItemTooltip($('#div_traderAuctioneer .image_140px .detail_button'));
           thisObj.setData({
@@ -44936,105 +44936,105 @@ FleetDispatcher.prototype.refreshPriorities = function () {
     $('form input[name="prioFood"]').val(this.prioFood);
   }
 
-  $('#prioM1').attr('src', '/cdn/img/navigation/icon-1-small-off.gif');
-  $('#prioM2').attr('src', '/cdn/img/navigation/icon-2-small-off.gif');
-  $('#prioM3').attr('src', '/cdn/img/navigation/icon-3-small-off.gif');
+  $('#prioM1').attr('src', 'img/navigation/icon-1-small-off.gif');
+  $('#prioM2').attr('src', 'img/navigation/icon-2-small-off.gif');
+  $('#prioM3').attr('src', 'img/navigation/icon-3-small-off.gif');
 
   if (this.lifeformEnabled) {
-    $('#prioM4').attr('src', '/cdn/img/navigation/icon-4-small-off.gif');
+    $('#prioM4').attr('src', 'img/navigation/icon-4-small-off.gif');
   }
 
   switch (this.prioMetal) {
     case 1:
-      $('#prioM1').attr('src', '/cdn/img/navigation/icon-1-small.gif');
+      $('#prioM1').attr('src', 'img/navigation/icon-1-small.gif');
       break;
 
     case 2:
-      $('#prioM2').attr('src', '/cdn/img/navigation/icon-2-small.gif');
+      $('#prioM2').attr('src', 'img/navigation/icon-2-small.gif');
       break;
 
     case 3:
-      $('#prioM3').attr('src', '/cdn/img/navigation/icon-3-small.gif');
+      $('#prioM3').attr('src', 'img/navigation/icon-3-small.gif');
       break;
 
     case 4:
-      $('#prioM4').attr('src', '/cdn/img/navigation/icon-4-small.gif');
+      $('#prioM4').attr('src', 'img/navigation/icon-4-small.gif');
       break;
   }
 
-  $('#prioC1').attr('src', '/cdn/img/navigation/icon-1-small-off.gif');
-  $('#prioC2').attr('src', '/cdn/img/navigation/icon-2-small-off.gif');
-  $('#prioC3').attr('src', '/cdn/img/navigation/icon-3-small-off.gif');
+  $('#prioC1').attr('src', 'img/navigation/icon-1-small-off.gif');
+  $('#prioC2').attr('src', 'img/navigation/icon-2-small-off.gif');
+  $('#prioC3').attr('src', 'img/navigation/icon-3-small-off.gif');
 
   if (this.lifeformEnabled) {
-    $('#prioC4').attr('src', '/cdn/img/navigation/icon-4-small-off.gif');
+    $('#prioC4').attr('src', 'img/navigation/icon-4-small-off.gif');
   }
 
   switch (this.prioCrystal) {
     case 1:
-      $('#prioC1').attr('src', '/cdn/img/navigation/icon-1-small.gif');
+      $('#prioC1').attr('src', 'img/navigation/icon-1-small.gif');
       break;
 
     case 2:
-      $('#prioC2').attr('src', '/cdn/img/navigation/icon-2-small.gif');
+      $('#prioC2').attr('src', 'img/navigation/icon-2-small.gif');
       break;
 
     case 3:
-      $('#prioC3').attr('src', '/cdn/img/navigation/icon-3-small.gif');
+      $('#prioC3').attr('src', 'img/navigation/icon-3-small.gif');
       break;
 
     case 4:
-      $('#prioC4').attr('src', '/cdn/img/navigation/icon-4-small.gif');
+      $('#prioC4').attr('src', 'img/navigation/icon-4-small.gif');
       break;
   }
 
-  $('#prioD1').attr('src', '/cdn/img/navigation/icon-1-small-off.gif');
-  $('#prioD2').attr('src', '/cdn/img/navigation/icon-2-small-off.gif');
-  $('#prioD3').attr('src', '/cdn/img/navigation/icon-3-small-off.gif');
+  $('#prioD1').attr('src', 'img/navigation/icon-1-small-off.gif');
+  $('#prioD2').attr('src', 'img/navigation/icon-2-small-off.gif');
+  $('#prioD3').attr('src', 'img/navigation/icon-3-small-off.gif');
 
   if (this.lifeformEnabled) {
-    $('#prioD4').attr('src', '/cdn/img/navigation/icon-4-small-off.gif');
+    $('#prioD4').attr('src', 'img/navigation/icon-4-small-off.gif');
   }
 
   switch (this.prioDeuterium) {
     case 1:
-      $('#prioD1').attr('src', '/cdn/img/navigation/icon-1-small.gif');
+      $('#prioD1').attr('src', 'img/navigation/icon-1-small.gif');
       break;
 
     case 2:
-      $('#prioD2').attr('src', '/cdn/img/navigation/icon-2-small.gif');
+      $('#prioD2').attr('src', 'img/navigation/icon-2-small.gif');
       break;
 
     case 3:
-      $('#prioD3').attr('src', '/cdn/img/navigation/icon-3-small.gif');
+      $('#prioD3').attr('src', 'img/navigation/icon-3-small.gif');
       break;
 
     case 4:
-      $('#prioD4').attr('src', '/cdn/img/navigation/icon-4-small.gif');
+      $('#prioD4').attr('src', 'img/navigation/icon-4-small.gif');
       break;
   }
 
   if (this.lifeformEnabled) {
-    $('#prioF1').attr('src', '/cdn/img/navigation/icon-1-small-off.gif');
-    $('#prioF2').attr('src', '/cdn/img/navigation/icon-2-small-off.gif');
-    $('#prioF3').attr('src', '/cdn/img/navigation/icon-3-small-off.gif');
-    $('#prioF4').attr('src', '/cdn/img/navigation/icon-4-small-off.gif');
+    $('#prioF1').attr('src', 'img/navigation/icon-1-small-off.gif');
+    $('#prioF2').attr('src', 'img/navigation/icon-2-small-off.gif');
+    $('#prioF3').attr('src', 'img/navigation/icon-3-small-off.gif');
+    $('#prioF4').attr('src', 'img/navigation/icon-4-small-off.gif');
 
     switch (this.prioFood) {
       case 1:
-        $('#prioF1').attr('src', '/cdn/img/navigation/icon-1-small.gif');
+        $('#prioF1').attr('src', 'img/navigation/icon-1-small.gif');
         break;
 
       case 2:
-        $('#prioF2').attr('src', '/cdn/img/navigation/icon-2-small.gif');
+        $('#prioF2').attr('src', 'img/navigation/icon-2-small.gif');
         break;
 
       case 3:
-        $('#prioF3').attr('src', '/cdn/img/navigation/icon-3-small.gif');
+        $('#prioF3').attr('src', 'img/navigation/icon-3-small.gif');
         break;
 
       case 4:
-        $('#prioF4').attr('src', '/cdn/img/navigation/icon-4-small.gif');
+        $('#prioF4').attr('src', 'img/navigation/icon-4-small.gif');
         break;
     }
   }
@@ -45685,7 +45685,7 @@ function renderContentGalaxy(data) {
                     <h3 class="title float_left">${loca.LOCA_EVENTH_ENEMY_INFINITELY_SPACE}</h3>
                     <div id="expeditionDebris" class="name float_left tooltipRel tooltipClose tooltipRight js_hideTipOnMobile js_bday_debris tpd-hideOnClickOutside" rel="debris16">
                         <div style="position: relative;width: 30px;height: 30px;display: inline-block;">
-                            <img class="float_left" src="/cdn/img/galaxy/tf_b.gif" width="30" height="30"/>
+                            <img class="float_left" src="img/galaxy/tf_b.gif" width="30" height="30"/>
                             ${addFleetContainer(galaxyContentObject.position, galaxyContentObject.planets.planetType)}
                         </div>${loca.LOCA_FLEET_DEBRIS}
                         
@@ -46329,7 +46329,7 @@ function renderEventDebris(planet, galaxyContentObject, systemData) {
                rel="debris17"
             >
                 <div style="position: relative;width: 30px;height: 30px;display: inline-block;">
-                    <img class="float_left" src="/cdn/img/event-birthday/event_debris.png" width="30" height="30"/>
+                    <img class="float_left" src="img/event-birthday/event_debris.png" width="30" height="30"/>
                     ${addFleetContainer(galaxyContentObject.position, planet.planetType)}
                 </div>${planet.planetName}
                 ${getEventDebrisTooltip(planet, galaxyContentObject, systemData)}
@@ -46423,7 +46423,7 @@ function getEventDebrisTooltip(planet, galaxyContentObject, systemData) {
             <div class="splitLine"></div>
             <ul class="ListImage">
                 <li><span id="pos-debris">[${galaxy}:${system}:${position}]</span></li>
-                <li><img class="float_left" src="/cdn/img/event-birthday/event_debris.png" width="30" height="30" alt="${headline}"/></li>
+                <li><img class="float_left" src="img/event-birthday/event_debris.png" width="30" height="30" alt="${headline}"/></li>
             </ul>
             <ul class="ListLinks">
                 <li class="debris-content">${loca.LOCA_ALL_DARKMATTER}: ${darkmatter}</li>
@@ -46655,7 +46655,7 @@ function getActivityElement(activityObject) {
     if (showActivity === 60) {
       idle = loca.LOCA_ALL_ACTIVITY + ": " + idleTime + loca.LOCA_ALL_TIME_MINUTE;
     } else {
-      idle = loca.LOCA_ALL_ACTIVITY + ":<div class=\"alert_triangle\"><img src='/cdn/img/galaxy/activity15.gif'/></div>";
+      idle = loca.LOCA_ALL_ACTIVITY + ":<div class=\"alert_triangle\"><img src='img/galaxy/activity15.gif'/></div>";
     }
 
     return `<li>${idle}</li>`;
@@ -46805,12 +46805,12 @@ function initPhalanx() {
     if ($(this).attr("class") == "toggleInfos infosOpen") {
       $(this).removeClass("infosOpen");
       $(this).addClass("infosClosed");
-      $(this).children().attr("src", '/cdn/img/layout/fleetOpenDetails.gif');
+      $(this).children().attr("src", 'img/layout/fleetOpenDetails.gif');
       $("." + id).attr("style", "display: none;");
     } else {
       $(this).addClass("infosOpen");
       $(this).removeClass("infosClosed");
-      $(this).children().attr("src", '/cdn/img/layout/fleetCloseDetails.gif');
+      $(this).children().attr("src", 'img/layout/fleetCloseDetails.gif');
       $("." + id).attr("style", "display: block;");
     }
   });
