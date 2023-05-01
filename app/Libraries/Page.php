@@ -658,8 +658,8 @@ class Page
 
         $sub_pages = [
             ['resourceSettings', $lang->line('lm_resources'), '', 'FFF', '', '1', '4', ''],
-            ['techtree', $lang->line('lm_technology'), '', 'FFF', '', '1', '9', 'true'],
-            ['alliance', $lang->line('lm_alliance_circular'), '&mode=circular', 'FFF', '', '1', '9', ''],
+            ['techtree', $lang->line('lm_technology'), 'tab=3&open=all', 'FFF', '', '1', '9', 'true'],
+            ['alliance', $lang->line('lm_alliance_circular'), 'mode=circular', 'FFF', '', '1', '9', ''],
             ['movement', $lang->line('lm_movement'), '', 'FFF', '', '1', '9', ''],
             ['traderOverview#page=traderResources&animation=false', $lang->line('lm_resource_trader'), '', 'FFF', '', '1', '9', ''],
             ['shop#page=inventory&category=d8d49c315fa620d9c7f1f19963970dea59a0e3be', $lang->line('lm_inventory'), '', 'FFF', '', '1', '9', ''],

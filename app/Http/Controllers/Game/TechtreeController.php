@@ -52,26 +52,36 @@ class TechtreeController extends BaseController
     private function buildPage(): void
     {
         /**
-         * Parse the items
+         * Get tab and item id
          */
-        $page = [
-            'list_of_constructions' => $this->buildBlock('build'),
-            'list_of_research' => $this->buildBlock('tech'),
-            'list_of_ships' => $this->buildBlock('fleet'),
-            'list_of_defenses' => $this->buildBlock('defenses'),
-            'list_of_missiles' => $this->buildBlock('missiles'),
-        ];
+        $tab = filter_input(INPUT_GET, 'tab', FILTER_VALIDATE_INT);
+        $open = filter_input(INPUT_GET, 'open');
+        $tech_id = filter_input(INPUT_GET, 'technologyId', FILTER_VALIDATE_INT);
+        $allowed_tabs = [
+			'1' => 'technologytree',
+			'2' => 'technologyinformation',
+			'3' => 'technologies',
+			'4' => 'applications',
+		];
 
-        // display the page
-        $this->page->display(
-            $this->template->set(
-                'game/techtree_view',
-                array_merge(
-                    $this->langs->language,
-                    $page
-                )
-            ), false
-        );
+        if (!is_null($tab)) {
+            if (array_key_exists($tab, $allowed_tabs)) {
+				$parse['techtree_view'] = $this->template->set('techtree/techtree_' . $allowed_tabs[$tab] . '_view');
+				$parse['current_tab'] = $allowed_tabs[$tab];
+
+				// display the page
+				$this->page->display(
+					$this->template->set(
+						'techtree/techtree_body',
+						$parse
+					), false
+				);
+            } else {
+				Functions::redirect('game.php?page=techtree&technologyId=1&tab=1');
+			}
+        } else {
+			Functions::redirect('game.php?page=techtree&technologyId=1&tab=1');
+		}
     }
 
     /**
@@ -106,6 +116,43 @@ class TechtreeController extends BaseController
      * @return array
      */
     private function getRequirements(int $object): array
+    {
+        $list_of_requirements = [];
+
+        if (!isset($this->_requirements[$object])) {
+            return $list_of_requirements;
+        }
+
+        foreach ($this->_requirements[$object] as $requirement => $level) {
+            $color = 'Red';
+
+            if ((isset($this->user[$this->_resource[$requirement]])
+                && $this->user[$this->_resource[$requirement]] >= $level)
+                or (isset($this->planet[$this->_resource[$requirement]])
+                    && $this->planet[$this->_resource[$requirement]] >= $level)) {
+                $color = 'Green';
+            }
+
+            $list_of_requirements[] = FormatLib::{'color' . $color}(
+                FormatLib::formatLevel(
+                    $this->langs->language[$this->_resource[$requirement]],
+                    $this->langs->line('level'),
+                    $level
+                )
+            );
+        }
+
+        return $list_of_requirements;
+    }
+
+    /**
+     * Build the technologies block
+     *
+     * @param int $object
+     *
+     * @return array
+     */
+    private function buildTechnologiesBlock(): array
     {
         $list_of_requirements = [];
 
