@@ -881,7 +881,7 @@ class UsersController extends BaseController
      */
     private function buildImageCombo($current_image)
     {
-        $images_dir = opendir(XGP_ROOT . DEFAULT_SKINPATH . 'planets');
+        $images_dir = opendir(XGP_ROOT . IMG_PATH . 'planets');
         $exceptions = ['.', '..', '.htaccess', 'index.html', '.DS_Store', 'small'];
         $images_options = '';
 
@@ -893,7 +893,11 @@ class UsersController extends BaseController
                     $images_options .= 'selected = selected';
                 }
 
-                $images_options .= ' value="' . preg_replace('/\\.[^.\\s]{3,4}$/', '', $image_dir) . '">' . $image_dir . '</option>';
+				$image = explode('_', preg_replace('/\\.[^.\\s]{3,4}$/', '', $image_dir));
+				array_pop($image);
+				$image = implode('_', $image);
+
+                $images_options .= ' value="' . $image . '">' . $image . '</option>';
             }
         }
 
@@ -974,7 +978,7 @@ class UsersController extends BaseController
     private function planetsTable($planets_data): array
     {
         $parse = $this->langs->language;
-        $parse['image_path'] = DEFAULT_SKINPATH . 'planets/small/s_';
+        $parse['image_path'] = IMG_PATH . 'planets/';
         $parse['user'] = $this->_user_query['user_name'];
         $prepare_table = [];
 
@@ -1007,7 +1011,7 @@ class UsersController extends BaseController
                     $style = 'class="greyout"';
                 }
 
-                $parse['moon_image'] = "<img src=\"{$parse['image_path']}{$planets['moon_image']}.jpg\" alt=\"{$planets['moon_image']}.jpg\" title=\"{$planets['moon_image']}.jpg\" border=\"0\" " . $style . '>';
+                $parse['moon_image'] = "<img src=\"{$parse['image_path']}moon/{$planets['moon_image']}_3.gif\" style=\"max-width:48px; max-height:48px;\" alt=\"{$planets['moon_image']}.gif\" title=\"{$planets['moon_image']}.gif\" border=\"0\" " . $style . '>';
             }
 
             $prepare_table[] = $parse;
@@ -1025,7 +1029,7 @@ class UsersController extends BaseController
     private function moonsTable($moons_data): array
     {
         $parse = $this->langs->language;
-        $parse['image_path'] = DEFAULT_SKINPATH . 'planets/small/s_';
+        $parse['image_path'] = IMG_PATH . 'planets/moon/';
         $parse['user'] = $this->_user_query['user_name'];
         $prepare_table = [];
 

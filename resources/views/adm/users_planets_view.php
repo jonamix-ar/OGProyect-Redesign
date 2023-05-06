@@ -12,8 +12,8 @@
                 <tr>
                     <td class="text-left">
                         <div class="btn-group">
-                            <img src="{image_path}{planet_image}.jpg" alt="{planet_image}.jpg"
-                                title="{planet_image}.jpg" border="0" {planet_image_style}>
+                            <img src="{image_path}{planet_image}_6.gif" alt="{planet_image}.png"
+                                title="{planet_image}.png" border="0" {planet_image_style}>
                             {moon_image}
                             <button class="btn btn-info dropdown-toggle" data-toggle="dropdown">{planet_name}
                                 {planet_status}

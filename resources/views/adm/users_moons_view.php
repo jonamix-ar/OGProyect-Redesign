@@ -12,7 +12,7 @@
                 <tr>
                     <td class="text-left">
                         <div class="btn-group">
-                            <img src="{image_path}{moon_image}.jpg" alt="{moon_image}.jpg" title="{moon_image}.jpg"
+                            <img src="{image_path}{moon_image}_3.gif" alt="{moon_image}.jpg" title="{moon_image}.jpg"
                                 border="0" {moon_image_style}>
                             <button class="btn btn-info dropdown-toggle" data-toggle="dropdown">{moon_name}
                                 {moon_status}
