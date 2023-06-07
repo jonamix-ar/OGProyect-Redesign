@@ -138,7 +138,6 @@ class Preferences extends Model
                     p.`planet_building_metal_mine_percent` = '0',
                     p.`planet_building_crystal_mine_percent` = '0',
                     p.`planet_building_deuterium_sintetizer_percent` = '0',
-                    p.`planet_building_solar_plant_percent` = '0',
                     p.`planet_building_fusion_reactor_percent` = '0',
                     p.`planet_ship_solar_satellite_percent` = '0'
                 WHERE pr.`preference_user_id` = '" . $user_id . "'
