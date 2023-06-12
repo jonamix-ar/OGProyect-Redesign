@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Game;
 use App\Core\BaseController;
 use App\Core\Enumerators\BuildingsEnumerator as Buildings;
 use App\Core\Enumerators\ResearchEnumerator as Research;
+use App\Core\Enumerators\DefensesEnumerator as Defenses;
+use App\Core\Enumerators\ShipsEnumerator as Ships;
 use App\Helpers\StringsHelper;
 use App\Helpers\UrlHelper;
 use App\Libraries\DevelopmentsLib;
@@ -50,7 +52,7 @@ class TechtreeController extends BaseController
         $this->_requirements = $this->objects->getRelations();
 		$this->_combat_caps = $this->objects->getCombatSpecs();
         $this->_prod_grid = $this->objects->getProduction();
-		$this->_element_id = isset($_GET['technologyId']) ? (int) $_GET['technologyId'] : 21;
+		$this->_element_id = isset($_GET['technologyId']) ? (int) $_GET['technologyId'] : 1;
     }
 
     public function index(): void
@@ -246,9 +248,129 @@ class TechtreeController extends BaseController
 
 	private function get_tab_3($open)
 	{
-		
+		$category_list = [
+			'buildings' => [
+				'BUILDING_METAL_MINE',
+				'BUILDING_METAL_STORE',
+				'BUILDING_CRYSTAL_MINE',
+				'BUILDING_CRYSTAL_STORE',
+				'BUILDING_DEUTERIUM_SINTETIZER',
+				'BUILDING_DEUTERIUM_TANK',
+				'BUILDING_SOLAR_PLANT',
+				'BUILDING_FUSION_REACTOR',
+				'BUILDING_ROBOT_FACTORY',
+				'BUILDING_NANO_FACTORY',
+				'BUILDING_HANGAR',
+				'BUILDING_MISSILE_SILO',
+				'BUILDING_LABORATORY',
+				'BUILDING_ALLY_DEPOSIT',
+				'BUILDING_TERRAFORMER',
+				'BUILDING_MONDBASIS',
+				'BUILDING_PHALANX',
+				'BUILDING_JUMP_GATE',
+			],
+			'research' => [
+				'research_energy_technology',
+				'research_laser_technology',
+				'research_ionic_technology',
+				'research_hyperspace_technology',
+				'research_plasma_technology',
+				'research_espionage_technology',
+				'research_computer_technology',
+				'research_astrophysics',
+				'research_intergalactic_research_network',
+				'research_graviton_technology',
+				'research_combustion_drive',
+				'research_impulse_drive',
+				'research_hyperspace_drive',
+				'research_weapons_technology',
+				'research_shielding_technology',
+				'research_armour_technology',
+			],
+			'ships' => [
+                'ship_light_fighter',
+                'ship_heavy_fighter',
+                'ship_cruiser',
+                'ship_battleship',
+                'ship_battlecruiser',
+                'ship_bomber',
+                'ship_destroyer',
+                'ship_deathstar',
+                'ship_small_cargo_ship',
+                'ship_big_cargo_ship',
+                'ship_colony_ship',
+                'ship_recycler',
+                'ship_espionage_probe',
+                'ship_solar_satellite',
+            ],
+			'defenses' => [
+                'defense_rocket_launcher',
+                'defense_light_laser',
+                'defense_heavy_laser',
+                'defense_gauss_cannon',
+                'defense_ion_cannon',
+                'defense_plasma_turret',
+                'defense_small_shield_dome',
+                'defense_large_shield_dome',
+            ],
+			'missile' => [
+                'defense_anti_ballistic_missile',
+                'defense_interplanetary_missile',
+			],
+		];
 
-		return $this->template->set('techtree/techtree_technologies_view');
+		$cat = '';
+
+		foreach($category_list AS $category => $item_list)
+		{
+			$tech_row = '';
+			$parse['category_id'] = $category;
+			$parse['category_name'] = $this->langs->language['tt_' . $category];
+
+			foreach($item_list AS $item)
+			{
+				$cat_name = ($category == 'missile') ? ucfirst('defenses') : ucfirst($category);
+				$tech_id = constant("App\Core\Enumerators\\{$cat_name}Enumerator::{$item}");
+				$block['tech_name'] = $this->langs->language[$this->_resource[$tech_id]];
+				$block['tech_id'] = $tech_id;
+				$block['tech_class'] = $this->getConstant($this->_resource[$tech_id]);
+				$list = '';
+
+				if (isset($this->_requirements[$tech_id])) {
+					$list = '<a class="prerequisites overlay"
+								href="game.php?page=techtree&amp;ajax=1&amp;technologyId=' . $tech_id . '&amp;tab=1"
+								data-overlay-same="true">
+								<ul>';
+
+					foreach ($this->_requirements[$tech_id] as $requirement => $level) {
+						if (isset($this->user[$this->_resource[$requirement]]) && $this->user[$this->_resource[$requirement]] >= $level) {
+							$list .= '<li class="fulfilled">' . $this->set_level_format($level, $this->langs->language[$this->_resource[$requirement]]);
+						} elseif (isset($this->planet[$this->_resource[$requirement]]) && $this->planet[$this->_resource[$requirement]] >= $level) {
+							$list .= '<li class="fulfilled">' . $this->set_level_format($level, $this->langs->language[$this->_resource[$requirement]]);
+						} elseif(isset($this->planet[$this->_resource[$requirement]]) OR isset($this->user[$this->_resource[$requirement]])) {
+							$current_level = isset($this->planet[$this->_resource[$requirement]]) ? $this->planet[$this->_resource[$requirement]] : $this->user[$this->_resource[$requirement]];
+							$list .= '<li class="unfulfilled">' . $this->set_level_format($level, $this->langs->language[$this->_resource[$requirement]], $current_level);
+						} else {
+							$list .= '<li class="unfulfilled">' . $this->set_level_format($level, $this->langs->language[$this->_resource[$requirement]]);
+						}
+
+						$list .= '</li>';
+					}
+					$list .= '</ul></a>';
+				}
+
+				$block['required_techs'] = $list;
+
+				$tech_row .= $this->template->set('techtree/techtree_technologies_row', $block);
+			}
+			$parse['tech_list'] = $tech_row;
+
+			$cat .= $this->template->set('techtree/techtree_technologies_category', $parse);
+		}
+
+		$body['category_list'] = $cat;
+		
+		return $this->template->set('techtree/techtree_technologies_view', $body);
 	}
 
 	private function get_tab_4($open)
@@ -257,6 +379,7 @@ class TechtreeController extends BaseController
 		//$parse['tech_type'] = $tech_type;
 		$parse['tech_name'] = $this->langs->language[$this->_resource[$this->_element_id]];
 		$parse['require_this_tech'] = '';
+		$parse['tt_tech_requisite_for'] = $this->langs->language['tt_tech_requisite_for'];
 
 		$i=0;
 
@@ -279,7 +402,7 @@ class TechtreeController extends BaseController
 		}
 
 		if($i == 0) {
-			$parse['require_this_tech'] = $this->_lang['is_not_required'];
+			$parse['require_this_tech'] = $this->langs->language['tt_is_not_required'];
 		}
 
 		return $this->template->set('techtree/techtree_applications_view', $parse);
@@ -808,5 +931,22 @@ class TechtreeController extends BaseController
         }
 
         return $list_of_requirements;
+    }
+
+    /**
+     * method set_level_format
+     * param $level
+     * param $tech_name
+     * return (string) format tech with level
+     */
+    private function set_level_format($level, $tech_name, $current_level = NULL)
+    {
+		if($current_level != NULL) {
+			$result = $tech_name . ' (' . $this->langs->language['tt_lvl'] . ' ' . $current_level . '/' . $level . ')';
+		} else {
+			$result = $tech_name . ' (' . $this->langs->language['tt_lvl'] . ' ' . $level . ')';
+		}
+
+        return $result;
     }
 }

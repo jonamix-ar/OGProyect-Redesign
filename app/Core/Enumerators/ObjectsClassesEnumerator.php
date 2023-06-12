@@ -10,7 +10,7 @@ abstract class ObjectsClassesEnumerator
 	public const building_metal_mine = 'metalMine';
     public const building_crystal_mine = 'crystalMine';
     public const building_deuterium_sintetizer = 'deuteriumSynthesizer';
-    public const building_solar_plant = 'solarPLant';
+    public const building_solar_plant = 'solarPlant';
     public const building_fusion_reactor = 'fusionPlant';
     public const building_robot_factory = 'roboticsFactory';
     public const building_nano_factory = 'naniteFactory';
@@ -36,7 +36,7 @@ abstract class ObjectsClassesEnumerator
     public const research_hyperspace_technology = 'hyperspaceTechnology';
     public const research_combustion_drive = 'combustionDriveTechnology';
     public const research_impulse_drive = 'impulseDriveTechnology';
-    public const research_hyperspace_drive = 'hperspaceDriveTechnology';
+    public const research_hyperspace_drive = 'hyperspaceDriveTechnology';
     public const research_laser_technology = 'laserTechnology';
     public const research_ionic_technology = 'ionTechnology';
     public const research_plasma_technology = 'plasmaTechnology';
