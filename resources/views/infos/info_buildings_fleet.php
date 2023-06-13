@@ -3,7 +3,7 @@
     <table width="519">
         <tbody>
             <tr>
-                <td class="c" colspan="2">{in_title_head} {element_typ}</td>
+                <td colspan="2">{in_title_head} {element_typ}</td>
             </tr><tr>
                 <th>{in_name}</th>
                 <th>{name}</th>

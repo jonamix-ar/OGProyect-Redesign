@@ -1,6 +1,6 @@
 <tr>
-    <td class="c">{level}</td>
-    <td class="c">{in_energy_balance}</td>
-    <td class="c">{in_difference}</td>
-    <td class="c">{in_lvl_difference}</td>
+    <th>{level}</th>
+    <th>{in_energy_balance}</th>
+    <th>{in_difference}</th>
+    <th>{in_lvl_difference}</th>
 </tr>

@@ -2,7 +2,7 @@
 <div id="content">
     <table width="569">
         <tr>
-            <td class="c" colspan="2">{construction}</td>
+            <td colspan="2">{construction}</td>
         </tr>
         {list_of_constructions}
         <tr>
@@ -24,7 +24,7 @@
         </tr>
         {/list_of_constructions}
         <tr>
-            <td class="c" colspan="2">{research}</td>
+            <td colspan="2">{research}</td>
         </tr>
         {list_of_research}
         <tr>
@@ -46,7 +46,7 @@
         </tr>
         {/list_of_research}
         <tr>
-            <td class="c" colspan="2">{ships}</td>
+            <td colspan="2">{ships}</td>
         </tr>
         {list_of_ships}
         <tr>
@@ -68,7 +68,7 @@
         </tr>
         {/list_of_ships}
         <tr>
-            <td class="c" colspan="2">{defenses}</td>
+            <td colspan="2">{defenses}</td>
         </tr>
         {list_of_defenses}
         <tr>
@@ -90,7 +90,7 @@
         </tr>
         {/list_of_defenses}
         <tr>
-            <td class="c" colspan="2">{missiles}</td>
+            <td colspan="2">{missiles}</td>
         </tr>
         {list_of_missiles}
         <tr>

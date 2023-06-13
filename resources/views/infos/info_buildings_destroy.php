@@ -1,7 +1,7 @@
 <table width="519">
     <tbody>
         <tr>
-            <td class="c" align="center">
+            <td align="center">
                 {tear_down_url}
             </td>
         </tr>

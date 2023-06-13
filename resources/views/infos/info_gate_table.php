@@ -16,7 +16,7 @@
     </table>
     <table width="519">
         <tr>
-            <td class="c" colspan="2">{in_jump_gate_select_ships}</td>
+            <td colspan="2">{in_jump_gate_select_ships}</td>
         </tr>
         <tr>
             <th class="l" colspan="2" align="right">
