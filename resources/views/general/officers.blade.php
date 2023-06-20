@@ -1,4 +1,4 @@
-<div id="officers" class="  fright">
+<div id="officers" class="{{ $all_active }} {{ $all_short }} fright">
     <a href="game.php?page=premium&amp;openDetail=2"
         class="tooltipHTML {{ $end_premium_officier_commander }} {{ $img_premium_officier_commander }} commander js_hideTipOnMobile "
         title="{{ $of_hire_commander }}|{{ $add_premium_officier_commander }}">
