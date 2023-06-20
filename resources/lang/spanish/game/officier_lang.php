@@ -17,11 +17,14 @@ $lang = [
     'of_hire_engineer' => 'Contratar ingeniero',
     'of_hire_geologist' => 'Contratar geólogo',
     'of_hire_technocrat' => 'Contratar tecnócrata',
+	'of_hire_commanding' => 'Grupo de comando',
     'of_add_premium_officier_commander' => '+40 favoritos, Lista de construcción, Escáner de transportes, Sin publicidad*<span style="font-size:10px;line-height:10px;">(*excepto mensajes sobre el juego)</span>',
     'of_add_premium_officier_admiral' => 'Huecos de flota máximos +2, tasa de retirada de flotas mejorada',
     'of_add_premium_officier_engineer' => 'Minimiza las perdidas de las defensas a la mitad, +10% de producción de energía',
+	'of_add_premium_officier_engineer_short' => '+10% de producción de energía',
     'of_add_premium_officier_geologist' => '+10% producción de mineral',
     'of_add_premium_officier_technocrat' => '+2 al nivel de espionaje, 25% menos de tiempo de investigación',
+	'of_add_premium_officier_commanding' => 'Cantidad de flotas máx. +1, +2 % de producción de energía, +2 % de producción de mineral, +1 al nivel de espionaje, +5 días de vacaciones',
     'officiers' => [
         601 => [
             'name' => 'Comandante',
@@ -47,6 +50,11 @@ $lang = [
             'name' => 'Tecnócrata',
             'description' => 'El gremio de los Tecnócratas está compuesto de auténticos genios y siempre los encontrarás en un mundo donde la lógica humana sería descartada. Desde hace miles de años, ningún ser humano normal ha podido descifrar el código de un tecnócrata. El tecnócrata inspira a los investigadores del imperio con tan sólo su presencia.',
             'benefits' => '+2 al nivel de espionaje, 25% menos de tiempo de investigación',
+        ],
+        610 => [
+            'name' => 'Equipo de comando',
+            'description' => 'Con este lote te harás no solo con un especialista, sino con toda una tripulación. Recibes todos los efectos de los oficiales individuales, además de ventajas adicionales que solo se pueden conseguir con el paquete completo. Mientras el experimentado comandante dirige estratégicamente el proceso, los oficiales se encargan de la gestión de la energía, el abastecimiento de sistemas, la explotación de recursos y el refinado. Además impulsan la investigación y aportan su experiencia de batalla a los enfrentamientos espaciales.',
+            'benefits' => 'Cantidad de flotas máx. +1, +2 % de producción de energía, +2 % de producción de mineral, +1 al nivel de espionaje, +5 días de vacaciones',
         ],
     ],
 ];
