@@ -551,12 +551,10 @@ class Page
         $crystal = FormatLib::prettyNumber($this->current_planet['planet_crystal']);
         $deuterium = FormatLib::prettyNumber($this->current_planet['planet_deuterium']);
         $darkmatter = FormatLib::prettyNumber($this->current_user['premium_dark_matter']);
-        $energy = FormatLib::prettyNumber(
-            $this->current_planet['planet_energy_max'] + $this->current_planet['planet_energy_used']
-        ) . "/" . FormatLib::prettyNumber($this->current_planet['planet_energy_max']);
+        $energy = FormatLib::prettyNumber($this->current_planet['planet_energy_used']);
 
         // METAL
-        if ($this->current_planet['planet_metal'] >= Production::maxStorable($this->current_planet['building_metal_store'])) {
+        /*if ($this->current_planet['planet_metal'] >= Production::maxStorable($this->current_planet['building_metal_store'])) {
             $metal = FormatLib::colorRed($metal);
         }
 
@@ -573,13 +571,22 @@ class Page
         // ENERGY
         if (($this->current_planet['planet_energy_max'] + $this->current_planet['planet_energy_used']) < 0) {
             $energy = FormatLib::colorRed($energy);
-        }
+        }*/
 
         $parse['re_metal'] = $metal;
+		$parse['re_metal_wof'] = $this->current_planet['planet_metal'];
+		$parse['re_metal_max'] = $this->current_planet['planet_metal_max'];
         $parse['re_crystal'] = $crystal;
+		$parse['re_crystal_wof'] = $this->current_planet['planet_crystal'];
+		$parse['re_crystal_max'] = $this->current_planet['planet_crystal_max'];
         $parse['re_deuterium'] = $deuterium;
+		$parse['re_deuterium_wof'] = $this->current_planet['planet_deuterium'];
+		$parse['re_deuterium_max'] = $this->current_planet['planet_deuterium_max'];
         $parse['re_darkmatter'] = $darkmatter;
+		$parse['re_darkmatter_wof'] = $this->current_user['premium_dark_matter'];
         $parse['re_energy'] = $energy;
+        $parse['re_energy_wof'] = ($this->current_planet['planet_energy_max'] + $this->current_planet['planet_energy_used']);
+
 
         return $this->template->set(
             'general/topnav',
@@ -657,7 +664,7 @@ class Page
         ];
 
         $sub_pages = [
-            ['resourceSettings', $lang->line('lm_resources'), '', 'FFF', '', '1', '4', ''],
+            ['resourceSettings', $lang->line('lm_resources_settings'), '', 'FFF', '', '1', '4', ''],
             ['techtree', $lang->line('lm_technology'), 'tab=3&open=all', 'FFF', '', '1', '9', 'true'],
             ['alliance', $lang->line('lm_alliance_circular'), 'mode=circular', 'FFF', '', '1', '9', ''],
             ['movement', $lang->line('lm_movement'), '', 'FFF', '', '1', '9', ''],
@@ -791,6 +798,8 @@ class Page
         $objects = $this->objects->getObjects();
         $officers = $this->objects->getObjectsList('officier');
         $list_of_officiers = [];
+		$i = 0;
+		$short = 0;
 
         foreach ($officers as $officer) {
             $inactive = '';
@@ -799,15 +808,32 @@ class Page
             $shortTime = '';
 
             if (Officiers::isOfficierActive($expiration)) {
+				$i++;
                 $inactive = 'on';
                 $details = Officiers::getOfficierTimeLeft($expiration, $lang->language);
                 $shortTime = Officiers::getOfficierShortTime($expiration);
+
+				if($shortTime == 'shortTime')
+				{
+					$short++;
+				}
             }
 
             $list_of_officiers['img_' . $objects[$officer]] = $inactive;
             $list_of_officiers['add_' . $objects[$officer]] = $details;
             $list_of_officiers['end_' . $objects[$officer]] = $shortTime;
         }
+
+		if(Officiers::isCommandingActive($this->current_user))
+		{
+			if($short > 0)
+			{
+				$list_of_officiers['all_short'] = 'shortTime';
+			}
+			$list_of_officiers['all_active'] = 'all';
+		} elseif($i > 0) {
+			$list_of_officiers['all_active'] = 'one';
+		}
 
         return $list_of_officiers;
     }

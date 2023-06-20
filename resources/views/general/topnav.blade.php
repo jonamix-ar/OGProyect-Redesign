@@ -6,7 +6,7 @@
             data-shop-url="https://s145-ar.ogame.gameforge.com/game/index.php?page=shop#category=d8d49c315fa620d9c7f1f19963970dea59a0e3be&amp;item=859d82d316b83848f7365d21949b3e1e63c7841f">
             <div class="resourceIcon metal"></div>
             <span class="value">
-                <span id="resources_metal" data-raw="1027" class="">1.027</span>
+                <span id="resources_metal" data-raw="1027" class="">{{ $re_metal }}</span>
             </span>
         </div>
     </div>
@@ -16,7 +16,7 @@
             data-shop-url="https://s145-ar.ogame.gameforge.com/game/index.php?page=shop#category=d8d49c315fa620d9c7f1f19963970dea59a0e3be&amp;item=bb2f6843226ef598f0b567b92c51b283de90aa48">
             <div class="resourceIcon crystal"></div>
             <span class="value">
-                <span id="resources_crystal" data-raw="1013" class="">1.013</span>
+                <span id="resources_crystal" data-raw="1013" class="">{{ $re_crystal }}</span>
             </span>
         </div>
     </div>
@@ -26,7 +26,7 @@
             data-shop-url="https://s145-ar.ogame.gameforge.com/game/index.php?page=shop#category=d8d49c315fa620d9c7f1f19963970dea59a0e3be&amp;item=cb72ed207dd871832a850ee29f1c1f83aa3f4f36">
             <div class="resourceIcon deuterium"></div>
             <span class="value">
-                <span id="resources_deuterium" data-raw="0" class="">0</span>
+                <span id="resources_deuterium" data-raw="0" class="">{{ $re_deuterium }}</span>
             </span>
         </div>
     </div>
@@ -35,7 +35,7 @@
             title="Energia|&lt;table class=&quot;resourceTooltip&quot;&gt;&lt;tr&gt;&lt;th&gt;Disponible:&lt;/th&gt;&lt;td&gt;&lt;span class=&quot;&quot;&gt;0&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;Producción actual:&lt;/th&gt;&lt;td&gt;&lt;span class=&quot;overmark&quot;&gt;0&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;Uso&lt;/th&gt;&lt;td&gt;&lt;span class=&quot;overmark&quot;&gt;0&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;">
             <div class="resourceIcon energy"></div>
             <span class="value">
-                <span id="resources_energy" data-raw="0" class="">0</span>
+                <span id="resources_energy" data-raw="0" class="">{{ $re_energy }}</span>
             </span>
         </div>
     </div>
@@ -66,7 +66,7 @@
                 <div class="resourceIcon darkmatter"></div>
             </a>
             <span class="value">
-                <span id="resources_darkmatter" data-raw="25000" class="overlay">25.000</span>
+                <span id="resources_darkmatter" data-raw="25000" class="overlay">{{ $re_darkmatter }}</span>
             </span>
         </div>
     </div>
@@ -137,17 +137,17 @@
         reloadResources({
             "resources": {
                 "metal": {
-                    "amount": 1087026,
-                    "storage": 10000,
+                    "amount": {{ $re_metal_wof }},
+                    "storage": {{ $re_metal_max }},
                     "baseProduction": 0.04083333333333333,
                     "production": 0.2808333333333333,
-                    "tooltip": "Metal|<table class=\"resourceTooltip\"><tr><th>Disponible:<\/th><td><span class=\"overmark\">1.087.026<\/span><\/td><\/tr><tr><th>Capacidad de almacenamiento<\/th><td><span class=\"overmark\">10.000<\/span><\/td><\/tr><tr><th>Producci\u00f3n actual:<\/th><td><span class=\"overmark\">0<\/span><\/td><\/tr><tr><th>Capacidad de camuflaje:<\/th><td><span class=\"overermark\">0<\/span><\/td><\/tr><\/table>",
+                    "tooltip": "Metal|<table class=\"resourceTooltip\"><tr><th>Disponible:<\/th><td><span class=\"overmark\">{{ $re_metal }}<\/span><\/td><\/tr><tr><th>Capacidad de almacenamiento<\/th><td><span class=\"normalmark\">{{ $re_metal_max }}<\/span><\/td><\/tr><tr><th>Producci\u00f3n actual:<\/th><td><span class=\"overmark\">0<\/span><\/td><\/tr><tr><th>Capacidad de camuflaje:<\/th><td><span class=\"overermark\">0<\/span><\/td><\/tr><\/table>",
                     "classesListItem": "",
                     "shopUrl": "https:\/\/s142-ar.ogame.gameforge.com\/game\/index.php?page=shop#category=d8d49c315fa620d9c7f1f19963970dea59a0e3be&item=859d82d316b83848f7365d21949b3e1e63c7841f"
                 },
                 "crystal": {
-                    "amount": 10000,
-                    "storage": 10000,
+                    "amount": {{ $re_crystal_wof }},
+                    "storage": {{ $re_crystal_max }},
                     "baseProduction": 0.016666666666666666,
                     "production": 0.07027777777777777,
                     "tooltip": "Cristal|<table class=\"resourceTooltip\"><tr><th>Disponible:<\/th><td><span class=\"overmark\">10.000<\/span><\/td><\/tr><tr><th>Capacidad de almacenamiento<\/th><td><span class=\"overmark\">10.000<\/span><\/td><\/tr><tr><th>Producci\u00f3n actual:<\/th><td><span class=\"overmark\">0<\/span><\/td><\/tr><tr><th>Capacidad de camuflaje:<\/th><td><span class=\"overermark\">0<\/span><\/td><\/tr><\/table>",
@@ -155,8 +155,8 @@
                     "shopUrl": "https:\/\/s142-ar.ogame.gameforge.com\/game\/index.php?page=shop#category=d8d49c315fa620d9c7f1f19963970dea59a0e3be&item=bb2f6843226ef598f0b567b92c51b283de90aa48"
                 },
                 "deuterium": {
-                    "amount": 10000,
-                    "storage": 10000,
+                    "amount": {{ $re_deuterium_wof }},
+                    "storage": {{ $re_deuterium_max }},
                     "baseProduction": 0,
                     "production": 0.03777777777777778,
                     "tooltip": "Deuterio|<table class=\"resourceTooltip\"><tr><th>Disponible:<\/th><td><span class=\"overmark\">10.000<\/span><\/td><\/tr><tr><th>Capacidad de almacenamiento<\/th><td><span class=\"overmark\">10.000<\/span><\/td><\/tr><tr><th>Producci\u00f3n actual:<\/th><td><span class=\"overmark\">0<\/span><\/td><\/tr><tr><th>Capacidad de camuflaje:<\/th><td><span class=\"overermark\">0<\/span><\/td><\/tr><\/table>",
@@ -164,13 +164,13 @@
                     "shopUrl": "https:\/\/s142-ar.ogame.gameforge.com\/game\/index.php?page=shop#category=d8d49c315fa620d9c7f1f19963970dea59a0e3be&item=cb72ed207dd871832a850ee29f1c1f83aa3f4f36"
                 },
                 "energy": {
-                    "amount": 82,
+                    "amount": {{ $re_energy_wof }},
                     "tooltip": "Energia|<table class=\"resourceTooltip\"><tr><th>Disponible:<\/th><td><span class=\"\">82<\/span><\/td><\/tr><tr><th>Producci\u00f3n actual:<\/th><td><span class=\"undermark\">+212<\/span><\/td><\/tr><tr><th>Uso<\/th><td><span class=\"overmark\">-130<\/span><\/td><\/tr><\/table>",
                     "classesListItem": ""
                 },
                 "darkmatter": {
-                    "amount": 250,
-                    "tooltip": "Materia Oscura|<table class=\"resourceTooltip\"><tr><th>Disponible:<\/th><td><span class=\"\">250<\/span><\/td><\/tr><tr><th>Comprada<\/th><td><span class=\"\">0<\/span><\/td><\/tr><tr><th>Encontrada<\/th><td><span class=\"\">250<\/span><\/td><\/tr><\/table>",
+                    "amount": {{ $re_darkmatter_wof }},
+                    "tooltip": "Materia Oscura|<table class=\"resourceTooltip\"><tr><th>Disponible:<\/th><td><span class=\"\">{{ $re_darkmatter }}<\/span><\/td><\/tr><tr><th>Comprada<\/th><td><span class=\"\">0<\/span><\/td><\/tr><tr><th>Encontrada<\/th><td><span class=\"\">250<\/span><\/td><\/tr><\/table>",
                     "classesListItem": "",
                     "classes": "overlay",
                     "link": "https:\/\/s142-ar.ogame.gameforge.com\/game\/index.php?page=payment",
