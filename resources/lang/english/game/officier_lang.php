@@ -9,7 +9,7 @@ $lang = [
     'of_get_darkmatter' => 'Get dark matter',
     'of_months' => '3 month for',
     'of_week' => '1 Week for',
-    'of_time_remaining_less' => 'Active for another %s days',
+    'of_time_remaining_less' => 'Active for another %s',
     'of_time_remaining_one' => '1 day remaining',
     'of_time_remaining_many' => 'Still active for more than %s days',
     'of_hire_commander' => 'Hire Commander',
@@ -17,11 +17,15 @@ $lang = [
     'of_hire_engineer' => 'Hire Engineer',
     'of_hire_geologist' => 'Hire Geologist',
     'of_hire_technocrat' => 'Hire Technocrat',
+	'of_hire_commanding' => 'Hire Command staff',
     'of_add_premium_officier_commander' => '+40 favourites, Building queue, Transport scanner, Advertisement free',
     'of_add_premium_officier_admiral' => 'Max. fleet slots +2, Max. expeditions +1, Improved fleet escape rate',
     'of_add_premium_officier_engineer' => 'Halves losses to defences, +10% energy production',
+	'of_add_premium_officier_engineer_short' => '+10% energy production',
     'of_add_premium_officier_geologist' => '+10% mine production',
     'of_add_premium_officier_technocrat' => '+2 espionage levels, 25% less research time',
+	'of_add_premium_officier_commanding' => 'Max. fleet slots +1, +2% energy production, +2% mine production, +1 espionage levels',
+	'of_add_premium_officier_commanding_short' => '+2% energy production, +2% mine production',
     'officiers' => [
         601 => [
             'name' => 'Commander',
@@ -47,6 +51,11 @@ $lang = [
             'name' => 'Technocrat',
             'description' => 'The guild of The Technocrats is composed of genius scientists, and you will find them always over the realm where all human logic would be defied. For thousands of years, no normal humans have ever cracked the code of a Technocrat. The Technocrat inspires the researchers of the empire with his presence.',
             'benefits' => '+2 espionage levels, 25% less research time',
+        ],
+        610 => [
+            'name' => 'Command staff',
+            'description' => 'This bundle provides you with not just one specialist, but an entire staff instead. You receive all effects of the individual officers along with additional advantages that only the full pack provides. While the strategically adept Commander keeps overwatch, the Officers take care of energy management, system supply, resource provision and refinement. Furthermore they press ahead with the research and bring their battle experience to space battles too.',
+            'benefits' => 'Max. fleet slots +1, +2% energy production, +2% mine production, +1 espionage levels',
         ],
     ],
 ];
