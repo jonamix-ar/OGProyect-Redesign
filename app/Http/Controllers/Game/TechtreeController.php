@@ -314,7 +314,7 @@ class TechtreeController extends BaseController
                 'defense_large_shield_dome',
             ],
 			'missile' => [
-                'defense_anti_ballistic_missile',
+                'defense_anti-ballistic_missile',
                 'defense_interplanetary_missile',
 			],
 		];
@@ -675,6 +675,8 @@ class TechtreeController extends BaseController
         // BOOST
         $geologe_boost = 1 + (1 * (Officiers::isOfficierActive($this->user['premium_officier_geologist']) ? GEOLOGUE : 0));
         $engineer_boost = 1 + (1 * (Officiers::isOfficierActive($this->user['premium_officier_engineer']) ? ENGINEER_ENERGY : 0));
+		$commanding_production_boost = (1 * (Officiers::isCommandingActive($this->user) ? COMMAND_PRODUCTION : 0));
+		$commanding_energy_boost = (1 * (Officiers::isCommandingActive($this->user) ? COMMAND_ENERGY : 0));
 
         // PRODUCTION FORMULAS
         $metal_prod = eval($this->_prod_grid[$this->_element_id]['formule']['metal']);
@@ -683,12 +685,12 @@ class TechtreeController extends BaseController
         $energy_prod = eval($this->_prod_grid[$this->_element_id]['formule']['energy']);
 
         // PRODUCTION
-        $Prod[1] = ProductionLib::productionAmount($metal_prod, $geologe_boost, $game_resource_multiplier);
-        $Prod[2] = ProductionLib::productionAmount($crystal_prod, $geologe_boost, $game_resource_multiplier);
-        $Prod[3] = ProductionLib::productionAmount($deuterium_prod, $geologe_boost, $game_resource_multiplier);
+        $Prod[1] = ProductionLib::productionAmount($metal_prod, ($geologe_boost + $commanding_production_boost), $game_resource_multiplier);
+        $Prod[2] = ProductionLib::productionAmount($crystal_prod, ($geologe_boost + $commanding_production_boost), $game_resource_multiplier);
+        $Prod[3] = ProductionLib::productionAmount($deuterium_prod, ($geologe_boost + $commanding_production_boost), $game_resource_multiplier);
 
         if ($this->_element_id >= 4) {
-            $Prod[4] = ProductionLib::productionAmount($energy_prod, $engineer_boost, 0, true);
+            $Prod[4] = ProductionLib::productionAmount($energy_prod, ($engineer_boost + $commanding_energy_boost), 0, true);
             $ActualProd = floor($Prod[4]);
         } else {
             $Prod[4] = ProductionLib::productionAmount($energy_prod, 1, 0, true);
@@ -717,12 +719,12 @@ class TechtreeController extends BaseController
             $energy_prod = eval($this->_prod_grid[$this->_element_id]['formule']['energy']);
 
             // PRODUCTION
-            $Prod[1] = ProductionLib::productionAmount($metal_prod, $geologe_boost, $game_resource_multiplier);
-            $Prod[2] = ProductionLib::productionAmount($crystal_prod, $geologe_boost, $game_resource_multiplier);
-            $Prod[3] = ProductionLib::productionAmount($deuterium_prod, $geologe_boost, $game_resource_multiplier);
+            $Prod[1] = ProductionLib::productionAmount($metal_prod, ($geologe_boost + $commanding_production_boost), $game_resource_multiplier);
+            $Prod[2] = ProductionLib::productionAmount($crystal_prod, ($geologe_boost + $commanding_production_boost), $game_resource_multiplier);
+            $Prod[3] = ProductionLib::productionAmount($deuterium_prod, ($geologe_boost + $commanding_production_boost), $game_resource_multiplier);
 
             if ($this->_element_id >= 4) {
-                $Prod[4] = ProductionLib::productionAmount($energy_prod, $engineer_boost, 0, true);
+                $Prod[4] = ProductionLib::productionAmount($energy_prod, ($engineer_boost + $commanding_energy_boost), 0, true);
             } else {
                 $Prod[4] = ProductionLib::productionAmount($energy_prod, 1, 0, true);
             }
