@@ -56,14 +56,6 @@ class Officiers
     {
         $days_left = round(Timing::getDaysLeft($expiration));
 
-<<<<<<< Updated upstream
         return ($days_left <= 2) ? 'shortTime' : '';
-=======
-        if ($days_left <= 2) {
-            return 'shortTime';
-        } else {
-            return '';
-        }
->>>>>>> Stashed changes
     }
 }

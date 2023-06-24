@@ -244,28 +244,12 @@ class FormatLib
 
     public static function shortlyNumber($n, $floor = true)
     {
-<<<<<<< Updated upstream
         $lang = new Language();
         $unit = '';
 
         if ($floor) {
             $n = ($n !== null && $n !== 0) ? floor($n) : 0;
             $precision = 0;
-=======
-        // MAS DEL TRILLON
-        if ($number >= 1000000000000000000000000) {
-            return self::prettyNumber(($number / 1000000000000000000)) . 'T+';
-        } elseif ($number >= 1000000000000000000 && $number < 1000000000000000000000000) {
-            return self::prettyNumber(($number / 1000000000000000000)) . 'T';
-        } elseif ($number >= 1000000000000 && $number < 1000000000000000000) {
-            return self::prettyNumber(($number / 1000000000000)) . 'B';
-        } elseif ($number >= 1000000 && $number < 1000000000000) {
-            return self::prettyNumber(($number / 1000000)) . 'M';
-        } elseif ($number >= 10000 && $number < 1000000) {
-            return self::prettyNumber(($number / 1000)) . 'K';
-        } else {
-            return self::prettyNumber($number);
->>>>>>> Stashed changes
         }
 
         if ($n >= 1000000000) {

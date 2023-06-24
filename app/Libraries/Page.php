@@ -810,14 +810,14 @@ class Page
             $list_of_officiers['end_' . $objects[$officer]] = $shortTime;
         }
 
-        // if (Officiers::isCommandingActive($this->current_user)) {
-        //     if ($short > 0) {
-        //         $list_of_officiers['all_short'] = 'shortTime';
-        //     }
-        //     $list_of_officiers['all_active'] = 'all';
-        // } elseif ($i > 0) {
-        //     $list_of_officiers['all_active'] = 'one';
-        // }
+        if (Officiers::isCommandingActive($this->current_user)) {
+            if ($short > 0) {
+                $list_of_officiers['all_short'] = 'shortTime';
+            }
+            $list_of_officiers['all_active'] = 'all';
+        } elseif ($i > 0) {
+            $list_of_officiers['all_active'] = 'one';
+        }
 
         return $list_of_officiers;
     }

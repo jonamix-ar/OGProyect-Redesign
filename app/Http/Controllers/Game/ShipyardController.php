@@ -688,15 +688,9 @@ class ShipyardController extends BaseController
         ];
 
         foreach ($current_queue as $item => $amount) {
-<<<<<<< Updated upstream
-            if (
-                $item == Defenses::defense_anti_ballistic_missile
-                or $item == Defenses::defense_interplanetary_missile
-            ) {
-=======
             if ($item == Defenses::defense_anti-ballistic_missile
-                or $item == Defenses::defense_interplanetary_missile) {
->>>>>>> Stashed changes
+                or $item == Defenses::defense_interplanetary_missile)
+			{
                 $queue_missiles[$item] += $amount;
             }
         }
