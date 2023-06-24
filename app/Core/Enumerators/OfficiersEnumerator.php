@@ -11,4 +11,5 @@ abstract class OfficiersEnumerator
     public const PREMIUM_OFFICIER_ENGINEER = 603;
     public const PREMIUM_OFFICIER_GEOLOGIST = 604;
     public const PREMIUM_OFFICIER_TECHNOCRAT = 605;
+	public const PREMIUM_OFFICIER_COMMANDING = 610;
 }

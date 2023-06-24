@@ -57,13 +57,14 @@ $resource = [
     406 => 'defense_plasma_turret',
     407 => 'defense_small_shield_dome',
     408 => 'defense_large_shield_dome',
-    502 => 'defense_anti_ballistic_missile',
+    502 => 'defense_anti-ballistic_missile',
     503 => 'defense_interplanetary_missile',
     601 => 'premium_officier_commander',
     602 => 'premium_officier_admiral',
     603 => 'premium_officier_engineer',
     604 => 'premium_officier_geologist',
     605 => 'premium_officier_technocrat',
+	610 => 'premium_officier_commanding',
 ];
 
 $requeriments = [
@@ -180,6 +181,7 @@ $pricelist = [
     603 => ['darkmatter_week' => 5000, 'darkmatter_month' => 50000, 'img_big' => 'ogame_ingenieur', 'img_small' => 'ingenieur_ikon'],
     604 => ['darkmatter_week' => 12500, 'darkmatter_month' => 125000, 'img_big' => 'ogame_geologe', 'img_small' => 'geologe_ikon'],
     605 => ['darkmatter_week' => 10000, 'darkmatter_month' => 100000, 'img_big' => 'ogame_technokrat', 'img_small' => 'technokrat_ikon'],
+	610 => ['darkmatter_week' => 42500, 'darkmatter_month' => 425000, 'img_big' => 'ogame_commanding', 'img_small' => 'commanding_ikon'],
 ];
 
 $CombatCaps = [
@@ -242,7 +244,7 @@ $ProdGrid = [
         'formule' => [
             'metal' => 'return "0";',
             'crystal' => 'return "0";',
-            'deuterium' => 'return - (10 * $BuildLevel * pow(1.1,$BuildLevel) * (0.1 * $BuildLevelFactor));',
+            'deuterium' => 'return - (10 * $BuildLevel * pow(1.1, $BuildLevel) * (0.1 * $BuildLevelFactor));',
             'energy' => 'return (30 * $BuildLevel * pow((1.05 + $BuildEnergy * 0.01), $BuildLevel)) * (0.1 * $BuildLevelFactor);'],
     ],
     212 => ['metal' => 0, 'crystal' => 2000, 'deuterium' => 500, 'energy' => 0, 'factor' => 0.5,
@@ -250,7 +252,7 @@ $ProdGrid = [
             'metal' => 'return "0";',
             'crystal' => 'return "0";',
             'deuterium' => 'return "0";',
-            'energy' => 'return ((($BuildTemp + 140) / 6) * (0.1 * $BuildLevelFactor) * $BuildLevel);'],
+            'energy' => 'return (floor(($BuildTemp + 140) / 6) * (0.1 * $BuildLevelFactor) * $BuildLevel);'],
     ],
 ];
 

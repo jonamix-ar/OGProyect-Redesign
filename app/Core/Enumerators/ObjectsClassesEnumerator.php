@@ -71,6 +71,6 @@ abstract class ObjectsClassesEnumerator
     public const defense_large_shield_dome = 'shieldDomeLarge';
 
 	// missiles
-    public const defense_anti_ballistic_missile = 'missileInterceptor';
+    public const defense_anti-ballistic_missile = 'missileInterceptor';
     public const defense_interplanetary_missile = 'missileInterplanetary';
 }
