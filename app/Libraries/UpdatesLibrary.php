@@ -467,6 +467,12 @@ class UpdatesLibrary
             $engineer_boost = 1 + (1 * (Officiers::isOfficierActive(
                 $current_user['premium_officier_engineer']
             ) ? ENGINEER_ENERGY : 0));
+			$commanding_production_boost = (1 * (Officiers::isCommandingActive(
+				$current_user
+			) ? COMMAND_PRODUCTION : 0));
+			$commanding_energy_boost = (1 * (Officiers::isCommandingActive(
+				$current_user
+			) ? COMMAND_ENERGY : 0));
 
             // PRODUCTION FORMULAS
             $metal_prod = eval($ProdGrid[$ProdID]['formule']['metal']);
@@ -481,17 +487,17 @@ class UpdatesLibrary
 
             // PRODUCTION BOOST WITH OFFICERS
             $Caps['planet_metal_perhour'] += Production::currentProduction(
-                Production::productionAmount($metal_prod, $geologe_boost, $game_resource_multiplier),
+                Production::productionAmount($metal_prod, $geologe_boost + $commanding_production_boost, $game_resource_multiplier),
                 $post_percent
             );
 
             $Caps['planet_crystal_perhour'] += Production::currentProduction(
-                Production::productionAmount($crystal_prod, $geologe_boost, $game_resource_multiplier),
+                Production::productionAmount($crystal_prod, $geologe_boost + $commanding_production_boost, $game_resource_multiplier),
                 $post_percent
             );
 
             $Caps['planet_deuterium_perhour'] += Production::currentProduction(
-                Production::productionAmount($deuterium_prod, $geologe_boost, $game_resource_multiplier),
+                Production::productionAmount($deuterium_prod, $geologe_boost + $commanding_production_boost, $game_resource_multiplier),
                 $post_percent
             );
 
@@ -518,7 +524,7 @@ class UpdatesLibrary
 
                 $Caps['planet_energy_max'] += Production::productionAmount(
                     $energy_prod,
-                    $engineer_boost,
+                    $engineer_boost + $commanding_energy_boost,
                     0,
                     true
                 );

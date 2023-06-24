@@ -10,4 +10,6 @@ $lang = [
     'rs_daily' => 'Total per day:',
     'rs_weekly' => 'Total per week:',
     'rs_calculate' => 'Recalculate',
+	'rs_production_disabled' => 'You are in vacation mode. For that reason, your production is deactivated.',
+	'rs_production_factor' => 'Production factor:',
 ];

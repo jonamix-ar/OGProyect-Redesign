@@ -5,7 +5,7 @@
         </div>
         <div class="contentRS">
             <div class="headerRS"><a
-                    href="https://s142-ar.ogame.gameforge.com/game/index.php?page=ingame&amp;component=supplies"
+                    href="game.php?page=resources"
                     class="close_details close_ressources"></a></div>
             <div class="mainRS">
                 <form method="POST" action="#">
@@ -18,14 +18,12 @@
                                 <td colspan="7" id="factor">
                                     <div class="secondcol">
                                         <div style="width:376px; margin: 0px auto;">
-                                            <span class="factorkey">Factor de producción: 93%</span>
-                                            <span class="factorbutton">
-                                                <input class="btn_blue" name="action" type="submit"
-                                                    value="{{ $rs_calculate }}">
-                                            </span>
+                                            <span class="factorkey">{{ $rs_production_factor }} {{ $production_factor }}</span>
+                                            {!! $recalculate_button !!}
                                             <br class="clearfloat">
                                         </div>
                                     </div>
+									{!! $second_overmark !!}
                                 </td>
                             </tr>
                             <tr>
@@ -69,88 +67,23 @@
                                 <td></td>
                             </tr>
                             {!! $resource_row !!}
-                            {{-- <tr class=" 217">
+							<tr class="122">
                                 <td class="label">
-                                    Taladrador (Número: 0/272)
+                                    {{ $research_plasma_technology }} ({{ $level }}{{ $plasma_level }})
                                 </td>
                                 <td>
                                 </td>
-                                <td class="normalmark">
-                                    <span class="tooltipCustom " title="0">
-                                        0
+                                <td class="undermark">
+                                    <span class="tooltipCustom " title="{{ $plasmametal }}">
+                                        {{ $plasma_metal }}
                                     </span>
                                 </td>
-                                <td class="normalmark">
-                                    <span class="tooltipCustom " title="0">
-                                        0
-                                    </span>
-                                </td>
-                                <td class="normalmark">
-                                    <span class="tooltipCustom " title="0">
-                                        0
-                                    </span>
-                                </td>
-                                <td class="overmark">
-                                    <span class="tooltipCustom " title="0">
-                                        0
-                                    </span>
-                                </td>
-                                <td>
-                                    <select name="last217" size="1" class="undermark dropdownInitialized"
-                                        style="display: none;">
-                                        <option disabled="disabled"
-                                            class="overcharge tooltipCustom grayscale tooltipRight js_hideTipOnMobile"
-                                            title="¡Sobrecarga permitida solo con el Recolector!" value="150">150%
-                                        </option>
-                                        <option disabled="disabled"
-                                            class="overcharge tooltipCustom grayscale tooltipRight js_hideTipOnMobile"
-                                            title="¡Sobrecarga permitida solo con el Recolector!" value="140">140%
-                                        </option>
-                                        <option disabled="disabled"
-                                            class="overcharge tooltipCustom grayscale tooltipRight js_hideTipOnMobile"
-                                            title="¡Sobrecarga permitida solo con el Recolector!" value="130">130%
-                                        </option>
-                                        <option disabled="disabled"
-                                            class="overcharge tooltipCustom grayscale tooltipRight js_hideTipOnMobile"
-                                            title="¡Sobrecarga permitida solo con el Recolector!" value="120">120%
-                                        </option>
-                                        <option disabled="disabled"
-                                            class="overcharge tooltipCustom grayscale tooltipRight js_hideTipOnMobile"
-                                            title="¡Sobrecarga permitida solo con el Recolector!" value="110">110%
-                                        </option>
-                                        <option class="undermark" value="100" selected="">100%</option>
-                                        <option class="undermark" value="90">90%</option>
-                                        <option class="undermark" value="80">80%</option>
-                                        <option class="undermark" value="70">70%</option>
-                                        <option class="middlemark" value="60">60%</option>
-                                        <option class="middlemark" value="50">50%</option>
-                                        <option class="middlemark" value="40">40%</option>
-                                        <option class="overmark" value="30">30%</option>
-                                        <option class="overmark" value="20">20%</option>
-                                        <option class="overmark" value="10">10%</option>
-                                        <option class="overmark" value="0">0%</option>
-                                    </select><span class="dropdown currentlySelected undermark" rel="dropdown794"
-                                        style="width: 67px;"><a class="undermark" data-value="100" rel="dropdown794"
-                                            href="javascript:void(0);">100%</a></span>
-                                </td>
-                            </tr> --}}
-                            <tr class="122">
-                                <td class="label">
-                                    {{ $research_plasma_technology }} ({{ $level }}: {{ $plasma_level }})
-                                </td>
-                                <td>
-                                </td>
-                                <td class="normalmark">
-                                    <span class="tooltipCustom " title="{{ $plasma_level }}">
-                                        {{ $plasma_level }}
-                                    </span>
-                                </td>
-                                <td class="normalmark">
+                                <td class="undermark">
                                     <span class="tooltipCustom " title="{{ $plasma_crystal }}">
                                         {{ $plasma_crystal }}
                                     </span>
                                 </td>
-                                <td class="normalmark">
+                                <td class="undermark">
                                     <span class="tooltipCustom " title="{{ $plasma_deuterium }}">
                                         {{ $plasma_deuterium }}
                                     </span>
@@ -163,29 +96,25 @@
                                 <td>
                                 </td>
                             </tr>
-                            <tr class="alt 1001">
+                            <tr class="122">
                                 <td class="label">
-                                    Geólogo
+                                    {{ $research_plasma_technology }} ({{ $level }}{{ $plasma_level }})
                                 </td>
                                 <td>
-                                    <div class="tooltipCustom smallOfficer geologe" title="+10% producción de mineral">
-                                        <img src="https://gf2.geo.gfsrv.net/cdndf/3e567d6f16d040326c7a0ea29a4f41.gif"
-                                            width="25" height="25">
-                                    </div>
                                 </td>
                                 <td class="undermark">
-                                    <span class="tooltipCustom " title="784.7">
-                                        784
+                                    <span class="tooltipCustom " title="{{ $plasmametal }}">
+                                        {{ $plasma_metal }}
                                     </span>
                                 </td>
                                 <td class="undermark">
-                                    <span class="tooltipCustom " title="251">
-                                        251
+                                    <span class="tooltipCustom " title="{{ $plasma_crystal }}">
+                                        {{ $plasma_crystal }}
                                     </span>
                                 </td>
                                 <td class="undermark">
-                                    <span class="tooltipCustom " title="119.8">
-                                        119
+                                    <span class="tooltipCustom " title="{{ $plasma_deuterium }}">
+                                        {{ $plasma_deuterium }}
                                     </span>
                                 </td>
                                 <td class="normalmark">
@@ -196,16 +125,11 @@
                                 <td>
                                 </td>
                             </tr>
-                            <tr class=" 1002">
+							<tr class="alt 1001">
                                 <td class="label">
-                                    Ingeniero
+                                    Objetos
                                 </td>
                                 <td>
-                                    <div class="tooltipCustom smallOfficer engineer"
-                                        title="10% + de producción de energía">
-                                        <img src="https://gf2.geo.gfsrv.net/cdndf/3e567d6f16d040326c7a0ea29a4f41.gif"
-                                            width="25" height="25">
-                                    </div>
                                 </td>
                                 <td class="normalmark">
                                     <span class="tooltipCustom " title="0">
@@ -222,62 +146,196 @@
                                         0
                                     </span>
                                 </td>
-                                <td class="undermark">
-                                    <span class="tooltipCustom " title="113.214">
-                                        113
+                                <td class="normalmark">
+                                    <span class="tooltipCustom " title="0">
+                                        0
                                     </span>
                                 </td>
                                 <td>
                                 </td>
                             </tr>
-                            <tr class="alt 1003">
+                            <tr class=" 604">
                                 <td class="label">
-                                    Equipo de comando
+                                    {{ $officiers[604]['name'] }}
                                 </td>
                                 <td>
-                                    <div class="tooltipCustom smallOfficer stab"
-                                        title="+2% producción de mineral<br>2% + de producción de energía">
-                                        <img src="https://gf2.geo.gfsrv.net/cdndf/3e567d6f16d040326c7a0ea29a4f41.gif"
+                                    <div class="tooltipCustom smallOfficer geologe {{ $geologe_grayscale }}"
+										title="{{ $geologe_description }}">
+                                        <img src="{{ $img_path }}/layout/pixel.gif"
                                             width="25" height="25">
                                     </div>
                                 </td>
                                 <td class="undermark">
-                                    <span class="tooltipCustom " title="156.94">
-                                        156
+                                    <span class="tooltipCustom {{ $geologe_disabled }}" title="{{ $geologe_metal }}">
+										{{ $geologe_metal }}
                                     </span>
                                 </td>
                                 <td class="undermark">
-                                    <span class="tooltipCustom " title="50.2">
-                                        50
+                                    <span class="tooltipCustom {{ $geologe_disabled }}" title="{{ $geologe_crystal }}">
+                                        {{ $geologe_crystal }}
                                     </span>
                                 </td>
                                 <td class="undermark">
-                                    <span class="tooltipCustom " title="23.96">
-                                        23
+                                    <span class="tooltipCustom {{ $geologe_disabled }}" title="{{ $geologe_deuterium }}">
+                                        {{ $geologe_deuterium }}
                                     </span>
                                 </td>
-                                <td class="undermark">
-                                    <span class="tooltipCustom " title="22.642">
-                                        22
+                                <td class="normalmark">
+                                    <span class="tooltipCustom {{ $geologe_disabled }}" title="0">
+                                        0
                                     </span>
                                 </td>
                                 <td>
                                 </td>
                             </tr>
-                            <tr class="">
+                            <tr class="alt 603">
+                                <td class="label">
+									{{ $officiers[603]['name'] }}
+                                </td>
+                                <td>
+                                    <div class="tooltipCustom smallOfficer engineer {{ $engineer_grayscale }}"
+                                        title="{{ $engineer_description }}">
+                                        <img src="{{ $img_path }}/layout/pixel.gif"
+                                            width="25" height="25">
+                                    </div>
+                                </td>
+                                <td class="normalmark">
+                                    <span class="tooltipCustom {{ $engineer_disabled }}" title="0">
+                                        0
+                                    </span>
+                                </td>
+                                <td class="normalmark">
+                                    <span class="tooltipCustom {{ $engineer_disabled }}" title="0">
+                                        0
+                                    </span>
+                                </td>
+                                <td class="normalmark">
+                                    <span class="tooltipCustom {{ $engineer_disabled }}" title="0">
+                                        0
+                                    </span>
+                                </td>
+                                <td class="undermark">
+                                    <span class="tooltipCustom {{ $engineer_disabled }}" title="{{ $engineer_energy }}">
+                                        {{ $engineer_energy }}
+                                    </span>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr class=" 610">
+                                <td class="label">
+                                    {{ $officiers[610]['name'] }}
+                                </td>
+                                <td>
+                                    <div class="tooltipCustom smallOfficer stab {{ $commanding_grayscale }}"
+                                        title="{{ $commanding_description }}">
+                                        <img src="{{ $img_path }}/layout/pixel.gif"
+                                            width="25" height="25">
+                                    </div>
+                                </td>
+                                <td class="undermark">
+                                    <span class="tooltipCustom {{ $commanding_disabled }}" title="{{ $commanding_metal }}">
+                                        {{ $commanding_metal }}
+                                    </span>
+                                </td>
+                                <td class="undermark">
+                                    <span class="tooltipCustom {{ $commanding_disabled }}" title="{{ $commanding_crystal }}">
+                                        {{ $commanding_crystal }}
+                                    </span>
+                                </td>
+                                <td class="undermark">
+                                    <span class="tooltipCustom {{ $commanding_disabled }}" title="{{ $commanding_deuterium }}">
+                                        {{ $commanding_deuterium }}
+                                    </span>
+                                </td>
+                                <td class="undermark">
+                                    <span class="tooltipCustom {{ $commanding_disabled }}" title="{{ $commanding_energy }}">
+                                        {{ $commanding_energy }}
+                                    </span>
+                                </td>
+                                <td>
+                                </td>
+                            </tr><tr class="alt 1003">
+                                <td class="label">
+                                    Clase
+                                </td>
+                                <td>
+									<div class="tooltipCustom  sprite characterclass medium warrior" title="">
+                                            <img src="{{ $img_path }}/layout/pixel.gif" width="25" height="25">
+                                        </div>
+								</td>
+                                <td class="normalmark">
+                                    <span class="tooltipCustom " title="0">
+                                        0
+                                    </span>
+                                </td>
+                                <td class="normalmark">
+                                    <span class="tooltipCustom " title="0">
+                                        0
+                                    </span>
+                                </td>
+                                <td class="normalmark">
+                                    <span class="tooltipCustom " title="0">
+                                        0
+                                    </span>
+                                </td>
+                                <td class="normalmark">
+                                    <span class="tooltipCustom " title="0">
+                                        0
+                                    </span>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr class=" 1003">
+                                <td class="label">
+                                    Clase de alianza
+                                </td>
+                                <td>
+									<a href="https://s137-ar.ogame.gameforge.com/game/index.php?page=ingame&amp;component=alliance&amp;tab=classselection"
+										class="tooltipCustom sprite allianceclass medium none grayscale js_hideTipOnMobile tpd-hideOnClickOutside"
+										title="">
+										<img src="{{ $img_path }}/layout/pixel.gif" width="25" height="25">
+									</a>
+								</td>
+                                <td class="undermark">
+                                    <span class="tooltipCustom disabled" title="0">
+                                        0
+                                    </span>
+                                </td>
+                                <td class="undermark">
+                                    <span class="tooltipCustom disabled" title="0">
+                                        0
+                                    </span>
+                                </td>
+                                <td class="undermark">
+                                    <span class="tooltipCustom disabled" title="0">
+                                        0
+                                    </span>
+                                </td>
+                                <td class="undermark">
+                                    <span class="tooltipCustom disabled" title="0">
+                                        0
+                                    </span>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            
+                            <tr class="alt">
                                 <td colspan="2" class="label">{{ $rs_storage_capacity }}</td>
-                                <td class="overmark left2">
-                                    <span class="tooltipCustom" title="{{ $planet_metal_max }}">
+                                <td class="{{ $class_metal_max }} left2">
+                                    <span class="tooltipCustom" title="{{ $planet_metal_max_wof }}">
                                         {{ $planet_metal_max }}
                                     </span>
                                 </td>
-                                <td class="normalmark left2">
-                                    <span class="tooltipCustom" title="{{ $planet_deuterium_max }}">
-                                        {{ $planet_deuterium_max }}
+                                <td class="{{ $class_crystal_max }} left2">
+                                    <span class="tooltipCustom" title="{{ $planet_crystal_max_wof }}">
+                                        {{ $planet_crystal_max }}
                                     </span>
                                 </td>
-                                <td class="normalmark left2">
-                                    <span class="tooltipCustom" title="{{ $planet_deuterium_max }}">
+                                <td class="{{ $class_deuterium_max }} left2">
+                                    <span class="tooltipCustom" title="{{ $planet_deuterium_max_wof }}">
                                         {{ $planet_deuterium_max }}
                                     </span>
                                 </td>
@@ -287,7 +345,7 @@
                                     </span>
                                 </td>
                             </tr>
-                            <tr class="summary alt">
+                            <tr class="summary">
                                 <td colspan="2" class="label"><em>{{ $rs_sum }}</em></td>
                                 <td class="undermark">
                                     <span class="tooltipCustom" title="{{ $hour_metal }}">
@@ -304,14 +362,14 @@
                                         {{ $hour_deuterium }}
                                     </span>
                                 </td>
-                                <td class="overmark">
-                                    <span class="tooltipCustom" title="{{ $energy_total }}">
-                                        {{ $energy_total }}
+                                <td class="{{ $energy_class }}">
+                                    <span class="tooltipCustom" title="{{ $energy_total }}/{{ $energy_total2 }}">
+                                        {{ $energy_total }}/{{ $energy_total2 }}
                                     </span>
                                 </td>
                                 <td></td>
                             </tr>
-                            <tr class="">
+                            <tr class="alt">
                                 <td colspan="2" class="label"><em>{{ $rs_daily }}</em></td>
                                 <td class="undermark">
                                     <span class="tooltipCustom" title="{{ $daily_metal }}">
@@ -328,14 +386,14 @@
                                         {{ $daily_deuterium }}
                                     </span>
                                 </td>
-                                <td class="overmark">
-                                    <span class="tooltipCustom" title="{{ $energy_total }}">
-                                        {{ $energy_total }}
+                                <td class="{{ $energy_class }}">
+                                    <span class="tooltipCustom" title="{{ $energy_total }}/{{ $energy_total2 }}">
+                                        {{ $energy_total }}/{{ $energy_total2 }}
                                     </span>
                                 </td>
                                 <td></td>
                             </tr>
-                            <tr class="alt">
+                            <tr class="">
                                 <td colspan="2" class="label"><em>{{ $rs_weekly }}:</em></td>
                                 <td class="undermark">
                                     <span class="tooltipCustom" title="{{ $weekly_metal }}">
@@ -352,9 +410,9 @@
                                         {{ $weekly_deuterium }}
                                     </span>
                                 </td>
-                                <td class="overmark">
-                                    <span class="tooltipCustom" title="{{ $energy_total }}">
-                                        {{ $energy_total }}
+                                <td class="{{ $energy_class }}">
+                                    <span class="tooltipCustom" title="{{ $energy_total }}/{{ $energy_total2 }}">
+                                        {{ $energy_total }}/{{ $energy_total2 }}
                                     </span>
                                 </td>
                                 <td></td>

@@ -194,6 +194,10 @@ define('ENGINEER_ENERGY', 0.1);
 define('GEOLOGUE', 0.1);
 define('TECHNOCRATE_SPY', 2);
 define('TECHNOCRATE_SPEED', 0.25);
+define('COMMAND_PRODUCTION', 0.02);
+define('COMMAND_ENERGY', 0.02);
+define('COMMAND_FLEET', 1);
+define('COMMAND_SPY', 1);
 
 // INVISIBLES DEBRIS
 define('DEBRIS_LIFE_TIME', ONE_WEEK);
