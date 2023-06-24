@@ -574,16 +574,16 @@ class Page
         }*/
 
         $parse['re_metal'] = $metal;
-		$parse['re_metal_wof'] = $this->current_planet['planet_metal'];
-		$parse['re_metal_max'] = $this->current_planet['planet_metal_max'];
+        $parse['re_metal_wof'] = $this->current_planet['planet_metal'];
+        $parse['re_metal_max'] = $this->current_planet['planet_metal_max'];
         $parse['re_crystal'] = $crystal;
-		$parse['re_crystal_wof'] = $this->current_planet['planet_crystal'];
-		$parse['re_crystal_max'] = $this->current_planet['planet_crystal_max'];
+        $parse['re_crystal_wof'] = $this->current_planet['planet_crystal'];
+        $parse['re_crystal_max'] = $this->current_planet['planet_crystal_max'];
         $parse['re_deuterium'] = $deuterium;
-		$parse['re_deuterium_wof'] = $this->current_planet['planet_deuterium'];
-		$parse['re_deuterium_max'] = $this->current_planet['planet_deuterium_max'];
+        $parse['re_deuterium_wof'] = $this->current_planet['planet_deuterium'];
+        $parse['re_deuterium_max'] = $this->current_planet['planet_deuterium_max'];
         $parse['re_darkmatter'] = $darkmatter;
-		$parse['re_darkmatter_wof'] = $this->current_user['premium_dark_matter'];
+        $parse['re_darkmatter_wof'] = $this->current_user['premium_dark_matter'];
         $parse['re_energy'] = $energy;
         $parse['re_energy_wof'] = ($this->current_planet['planet_energy_max'] + $this->current_planet['planet_energy_used']);
 
@@ -798,8 +798,8 @@ class Page
         $objects = $this->objects->getObjects();
         $officers = $this->objects->getObjectsList('officier');
         $list_of_officiers = [];
-		$i = 0;
-		$short = 0;
+        $i = 0;
+        $short = 0;
 
         foreach ($officers as $officer) {
             $inactive = '';
@@ -808,15 +808,14 @@ class Page
             $shortTime = '';
 
             if (Officiers::isOfficierActive($expiration)) {
-				$i++;
+                $i++;
                 $inactive = 'on';
                 $details = Officiers::getOfficierTimeLeft($expiration, $lang->language);
                 $shortTime = Officiers::getOfficierShortTime($expiration);
 
-				if($shortTime == 'shortTime')
-				{
-					$short++;
-				}
+                if ($shortTime == 'shortTime') {
+                    $short++;
+                }
             }
 
             $list_of_officiers['img_' . $objects[$officer]] = $inactive;
@@ -824,16 +823,14 @@ class Page
             $list_of_officiers['end_' . $objects[$officer]] = $shortTime;
         }
 
-		if(Officiers::isCommandingActive($this->current_user))
-		{
-			if($short > 0)
-			{
-				$list_of_officiers['all_short'] = 'shortTime';
-			}
-			$list_of_officiers['all_active'] = 'all';
-		} elseif($i > 0) {
-			$list_of_officiers['all_active'] = 'one';
-		}
+        // if (Officiers::isCommandingActive($this->current_user)) {
+        //     if ($short > 0) {
+        //         $list_of_officiers['all_short'] = 'shortTime';
+        //     }
+        //     $list_of_officiers['all_active'] = 'all';
+        // } elseif ($i > 0) {
+        //     $list_of_officiers['all_active'] = 'one';
+        // }
 
         return $list_of_officiers;
     }

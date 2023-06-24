@@ -45,13 +45,8 @@ class Officiers
 
     public static function getOfficierShortTime(int $expiration): string
     {
-        $seconds_left = $expiration - time();
-        $days_left = floor($seconds_left / (60 * 60 * 24));
+        $days_left = round(Timing::getDaysLeft($expiration));
 
-        if ($days_left == 2) {
-            return 'shortTime';
-        } else {
-            return '';
-        }
+        return ($days_left <= 2) ? 'shortTime' : '';
     }
 }

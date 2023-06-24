@@ -65,9 +65,6 @@ class ShipyardController extends BaseController
      */
     private function setUpShipyard()
     {
-        // validate and display
-        $this->showShipyardRequiredMessage();
-
         // set a list of allowed items
         $this->setAllowedItems();
 
@@ -95,9 +92,11 @@ class ShipyardController extends BaseController
 
             foreach ($items as $item => $amount) {
                 // avoid elements that not match the criteria
-                if (!in_array($item, $this->allowed_items)
+                if (
+                    !in_array($item, $this->allowed_items)
                     or ($amount <= 0)
-                    or $this->isShieldDomeAvailable($item)) {
+                    or $this->isShieldDomeAvailable($item)
+                ) {
                     continue;
                 }
 
@@ -296,21 +295,26 @@ class ShipyardController extends BaseController
      */
     private function getItemInsertBlock($item_id)
     {
-        if (!$this->building_in_progress && !$this->userLibrary->isOnVacations($this->user)
-        ) {
-            if ($this->isShieldDomeAvailable($item_id)) {
-                return FormatLib::colorRed($this->langs->line('sy_protection_shield_only_one'));
-            } else {
-                $box_data = [];
-                $box_data['item_id'] = $item_id;
-                $box_data['tab_index'] = $item_id;
 
-                return $this->template->set(
-                    'shipyard/shipyard_build_box',
-                    $box_data
-                );
+        if (DevelopmentsLib::isDevelopmentAllowed($this->user, $this->planet, $item_id)) {
+            if (
+                !$this->building_in_progress && !$this->userLibrary->isOnVacations($this->user)
+            ) {
+                if ($this->isShieldDomeAvailable($item_id)) {
+                    return FormatLib::colorRed($this->langs->line('sy_protection_shield_only_one'));
+                } else {
+                    $box_data = [];
+                    $box_data['item_id'] = $item_id;
+                    $box_data['tab_index'] = $item_id;
+
+                    return $this->template->set(
+                        'shipyard/shipyard_build_box',
+                        $box_data
+                    );
+                }
             }
         }
+
 
         return '';
     }
@@ -334,6 +338,7 @@ class ShipyardController extends BaseController
      */
     private function getBuildItemsButton()
     {
+
         if (!$this->building_in_progress && !$this->userLibrary->isOnVacations($this->user)) {
             return $this->template->set(
                 'shipyard/shipyard_build_button',
@@ -448,32 +453,9 @@ class ShipyardController extends BaseController
             ],
         ];
 
-        $this->allowed_items = array_filter($allowed_buildings[$this->getCurrentPage()], function ($value) {
-            return DevelopmentsLib::isDevelopmentAllowed(
-                $this->user,
-                $this->planet,
-                $value
-            );
-        });
+        $this->allowed_items = array_filter($allowed_buildings[$this->getCurrentPage()]);
     }
 
-    /**
-     * Display a message that indicating that the shipyard building is required
-     *
-     * @return void
-     */
-    private function showShipyardRequiredMessage()
-    {
-        if ($this->planet[$this->objects->getObjects(21)] == 0) {
-            Functions::message($this->langs->line('sy_shipyard_required'), '', '', true);
-        }
-    }
-
-    /**
-     * Check if the robot factory, nanobots factory or hangar is being built
-     *
-     * @return void
-     */
     private function isAnyFacilityWorking()
     {
         // by default is false ...
@@ -706,8 +688,10 @@ class ShipyardController extends BaseController
         ];
 
         foreach ($current_queue as $item => $amount) {
-            if ($item == Defenses::defense_anti_ballistic_missile
-                or $item == Defenses::defense_interplanetary_missile) {
+            if (
+                $item == Defenses::defense_anti_ballistic_missile
+                or $item == Defenses::defense_interplanetary_missile
+            ) {
                 $queue_missiles[$item] += $amount;
             }
         }
