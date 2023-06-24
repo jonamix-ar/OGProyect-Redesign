@@ -8,6 +8,11 @@ $lang = [
     'dark_matter' => 'Dark Matter',
     'energy' => 'Energy',
 
+    // units
+    "unit_milliard" => "Bn",
+    "unit_mega" => "Mn",
+    "unit_kilo" => "K",
+
     // types of planets or galaxy objects
     'planet_type' => [
         1 => 'Planet',

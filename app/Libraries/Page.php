@@ -517,75 +517,62 @@ class Page
     {
         $lang = $this->langs->loadLang(['game/global', 'game/navigation', 'game/officier'], true);
 
-        $parse['img_path'] = IMG_PATH;
-        $parse['image'] = $this->current_planet['planet_image'];
-        $parse['planetlist'] = $this->buildPlanetList();
-        $parse['show_umod_notice'] = '';
+        // Resources
+        $metal = $this->current_planet['planet_metal'];
+        $crystal = $this->current_planet['planet_crystal'];
+        $deuterium = $this->current_planet['planet_deuterium'];
+        $energy_used = $this->current_planet['planet_energy_used'];
+        $energy_max = $this->current_planet['planet_energy_max'];
 
-        // When vacation mode did not expire
-        if ($this->current_user['preference_vacation_mode'] > 0) {
-            $parse['color'] = '#1DF0F0';
-            $parse['message'] = $lang->line('tn_vacation_mode') . Timing::formatExtendedDate($this->current_user['preference_vacation_mode']);
-            $parse['jump_line'] = '<br/>';
+        // Resources storage
+        $metal_max = $this->current_planet['planet_metal_max'];
+        $crystal_max = $this->current_planet['planet_crystal_max'];
+        $deuterium_max = $this->current_planet['planet_deuterium_max'];
 
-            $parse['show_umod_notice'] = $this->template->set(
-                'general/notices_view',
-                $parse
-            );
-        }
+        // Lifeforms
 
-        if ($this->current_user['preference_delete_mode'] > 0) {
-            // When it is in delete mode
-            $parse['color'] = '#FF0000';
-            $parse['message'] = $lang->line('tn_delete_mode') . Timing::formatExtendedDate($this->current_user['preference_delete_mode'] + (60 * 60 * 24 * 7));
-            $parse['jump_line'] = '';
+        // Premium
+        $darkmatter = $this->current_user['premium_dark_matter'];
 
-            $parse['show_umod_notice'] = $this->template->set(
-                'general/notices_view',
-                $parse
-            );
-        }
+        // Energy Production
 
         // RESOURCES FORMAT
-        $metal = FormatLib::prettyNumber($this->current_planet['planet_metal']);
-        $crystal = FormatLib::prettyNumber($this->current_planet['planet_crystal']);
-        $deuterium = FormatLib::prettyNumber($this->current_planet['planet_deuterium']);
-        $darkmatter = FormatLib::prettyNumber($this->current_user['premium_dark_matter']);
-        $energy = FormatLib::prettyNumber($this->current_planet['planet_energy_used']);
-
-        // METAL
-        /*if ($this->current_planet['planet_metal'] >= Production::maxStorable($this->current_planet['building_metal_store'])) {
-            $metal = FormatLib::colorRed($metal);
-        }
-
-        // CRYSTAL
-        if ($this->current_planet['planet_crystal'] >= Production::maxStorable($this->current_planet['building_crystal_store'])) {
-            $crystal = FormatLib::colorRed($crystal);
-        }
-
-        // DEUTERIUM
-        if ($this->current_planet['planet_deuterium'] >= Production::maxStorable($this->current_planet['building_deuterium_tank'])) {
-            $deuterium = FormatLib::colorRed($deuterium);
-        }
-
-        // ENERGY
-        if (($this->current_planet['planet_energy_max'] + $this->current_planet['planet_energy_used']) < 0) {
-            $energy = FormatLib::colorRed($energy);
-        }*/
-
         $parse['re_metal'] = $metal;
-        $parse['re_metal_wof'] = $this->current_planet['planet_metal'];
-        $parse['re_metal_max'] = $this->current_planet['planet_metal_max'];
+        $parse['re_metal_raw'] = floor($metal);
+        $parse['re_metal_pretty'] = FormatLib::prettyNumber($metal);
+        $parse['re_metal_short'] = FormatLib::shortlyNumber($metal);
+
+        $parse['re_metal_max'] = $metal_max;
+        $parse['re_metal_max_raw'] = floor($metal_max);
+        $parse['re_metal_max_pretty'] = FormatLib::prettyNumber($metal_max);
+
         $parse['re_crystal'] = $crystal;
-        $parse['re_crystal_wof'] = $this->current_planet['planet_crystal'];
-        $parse['re_crystal_max'] = $this->current_planet['planet_crystal_max'];
-        $parse['re_deuterium'] = $deuterium;
-        $parse['re_deuterium_wof'] = $this->current_planet['planet_deuterium'];
-        $parse['re_deuterium_max'] = $this->current_planet['planet_deuterium_max'];
-        $parse['re_darkmatter'] = $darkmatter;
-        $parse['re_darkmatter_wof'] = $this->current_user['premium_dark_matter'];
-        $parse['re_energy'] = $energy;
-        $parse['re_energy_wof'] = ($this->current_planet['planet_energy_max'] + $this->current_planet['planet_energy_used']);
+        $parse['re_crystal_raw'] = floor($crystal);
+        $parse['re_crystal_pretty'] = FormatLib::prettyNumber($crystal);
+        $parse['re_crystal_short'] = FormatLib::shortlyNumber($crystal);
+
+        $parse['re_crystal_max'] = $crystal_max;
+        $parse['re_crystal_max_raw'] = floor($crystal_max);
+        $parse['re_crystal_max_pretty'] = FormatLib::prettyNumber($crystal_max);
+
+        $parse['re_deuterium_raw'] = floor($deuterium);
+        $parse['re_deuterium_pretty'] = FormatLib::prettyNumber($deuterium);
+        $parse['re_deuterium_short'] = FormatLib::shortlyNumber($deuterium);
+
+        $parse['re_deuterium_max'] = $deuterium_max;
+        $parse['re_deuterium_max_raw'] = floor($deuterium_max);
+        $parse['re_deuterium_max_pretty'] = FormatLib::prettyNumber($deuterium_max);
+
+        $parse['re_energy_raw'] = floor($energy_used);
+        $parse['re_energy_used'] = FormatLib::prettyNumber($energy_used);
+
+
+        $parse['pr_darkmatter_raw'] = floor($darkmatter);
+        $parse['pr_darkmatter_pretty'] = FormatLib::prettyNumber($darkmatter);
+        $parse['pr_darkmatter_short'] = FormatLib::shortlyNumber($darkmatter);
+
+        // Others
+        $parse['img_path'] = IMG_PATH;
 
 
         return $this->template->set(
