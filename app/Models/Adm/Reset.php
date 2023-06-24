@@ -27,7 +27,7 @@ class Reset extends Model
             `defense_plasma_turret` = '0',
             `defense_small_shield_dome` = '0',
             `defense_large_shield_dome` = '0',
-            `defense_anti_ballistic_missile` = '0',
+            `defense_anti-ballistic_missile` = '0',
             `defense_interplanetary_missile` = '0'"
         );
     }
@@ -166,7 +166,8 @@ class Reset extends Model
                 `premium_officier_admiral` = '0',
                 `premium_officier_engineer` = '0',
                 `premium_officier_geologist` = '0',
-                `premium_officier_technocrat` = '0'"
+                `premium_officier_technocrat` = '0',
+				`premium_officier_commanding` = '0'"
         );
     }
 

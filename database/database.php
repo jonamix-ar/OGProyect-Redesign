@@ -133,7 +133,7 @@ $tables['defenses'] = "CREATE TABLE `" . DEFENSES . "` (
 `defense_plasma_turret` int(11) NOT NULL DEFAULT '0',
 `defense_small_shield_dome` int(11) NOT NULL DEFAULT '0',
 `defense_large_shield_dome` int(11) NOT NULL DEFAULT '0',
-`defense_anti_ballistic_missile` int(11) NOT NULL DEFAULT '0',
+`defense_anti-ballistic_missile` int(11) NOT NULL DEFAULT '0',
 `defense_interplanetary_missile` int(11) NOT NULL DEFAULT '0',
 PRIMARY KEY (`defense_id`),
 UNIQUE KEY `defense_planet_id` (`defense_planet_id`)

@@ -195,7 +195,7 @@ $lang = [
     'us_user_defense_plasma_turret' => 'Cañón de plasma',
     'us_user_defense_small_shield_dome' => 'Cúpula pequeña de protección',
     'us_user_defense_large_shield_dome' => 'Cúpula grande de protección',
-    'us_user_defense_anti_ballistic_missile' => 'Misiles antibalísticos',
+    'us_user_defense_anti-ballistic_missile' => 'Misiles antibalísticos',
     'us_user_defense_interplanetary_missile' => 'Misil interplanetario',
 
     // list of elements for the queue list - lines below need review

@@ -333,7 +333,7 @@ $queries[] = "INSERT INTO " . DB_NAME . ".`" . DEFENSES . "`(
                     `defense_plasma_turret`,
                     `defense_small_shield_dome`,
                     `defense_large_shield_dome`,
-                    `defense_anti_ballistic_missile`,
+                    `defense_anti-ballistic_missile`,
                     `defense_interplanetary_missile`)
                 SELECT
                     `id`,

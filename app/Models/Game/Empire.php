@@ -59,7 +59,7 @@ class Empire extends Model
                     d.`defense_plasma_turret`,
                     d.`defense_small_shield_dome`,
                     d.`defense_large_shield_dome`,
-                    d.`defense_anti_ballistic_missile`,
+                    d.`defense_anti-ballistic_missile`,
                     d.`defense_interplanetary_missile`,
                     s.`ship_small_cargo_ship`,
                     s.`ship_big_cargo_ship`,
