@@ -3,7 +3,7 @@
     {BuildListScript}
     <table width=530>
         {BuildList}
-        {}
+        {list_of_buildings}
         <tr>
             <td class="l" width="120" height="120">
                 <a href="game.php?page=infos&gid={i}">
