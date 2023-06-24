@@ -3,6 +3,7 @@
 namespace App\Libraries;
 
 use App\Core\Enumerators\ImportanceEnumerator as Importance;
+use App\Core\Language;
 use App\Helpers\UrlHelper;
 use DateTime;
 
@@ -60,13 +61,7 @@ class FormatLib
         return implode(' ', $timeParts);
     }
 
-    /**
-     * prettyTimeHour
-     *
-     * @param int $seconds Seconds
-     *
-     * @return string
-     */
+
     public static function prettyTimeHour($seconds)
     {
         $min = floor(intval($seconds / 60) % 60);
@@ -155,91 +150,69 @@ class FormatLib
 
     public static function classColorNumber($n, $s = '')
     {
-        if ($n >= 0) {
-            if ($s != '') {
-                $s = self::undermark($s);
-            } else {
-                $s = self::undermark($n);
-            }
-        } elseif ($n < 0) {
-            if ($s != '') {
-                $s = self::colorRed($s);
-            } else {
-                $s = self::colorRed($n);
-            }
+        if ($n == 0) {
+            $s = $n;
         } else {
-            if ($s != '') {
-                $s = $s;
+            if ($n >= 0) {
+                if ($s != '') {
+                    $s = self::undermark($s);
+                } else {
+                    $s = self::undermark($n);
+                }
+            } elseif ($n < 0) {
+                if ($s != '') {
+                    $s = self::overmark($s);
+                } else {
+                    $s = self::overmark($n);
+                }
             } else {
-                $s = $n;
+                if ($s != '') {
+                    $s = $s;
+                } else {
+                    $s = $n;
+                }
             }
         }
 
         return $s;
     }
 
-    public function undermark($string)
+    public static function undermark(string $string): string
     {
-        return 'undermark';
+        return 'undermark'; // #99CC00
     }
 
-    /**
-     * Set a red color
-     *
-     * @param string $string String
-     *
-     * @return string
-     */
+    public static function overmark(string $string): string
+    {
+        return 'overmark';
+    }
+
+    public static function middlemark(string $string): string
+    {
+        return 'middlemark';
+    }
+
     public static function colorRed($string)
     {
         return '<font color="#ff0000">' . $string . '</font>';
     }
 
-    /**
-     * Set a green color
-     *
-     * @param string $string String
-     *
-     * @return string
-     */
     public static function colorGreen($string)
     {
         return '<font color="#00ff00">' . $string . '</font>';
     }
 
-    /**
-     * Return a provided color
-     *
-     * @param string $string String
-     * @param string $color  Color
-     *
-     * @return string
-     */
     public static function customColor($string, $color)
     {
         return '<font color="' . $color . '">' . $string . '</font>';
     }
 
-    /**
-     * Create a new span HTML element
-     *
-     * @param string $content
-     * @param string|null $class
-     * @return string
-     */
     public static function spanElement(string $content, ?string $class = ''): string
     {
         return '<span class="' . $class . '">' . $content . '</span>';
     }
 
-    /**
-     * prettyNumber
-     *
-     * @param int     $n     Number
-     * @param boolean $floor Floor
-     *
-     * @return string
-     */
+
     public static function prettyNumber($n, $floor = true)
     {
         if ($floor) {
@@ -249,40 +222,33 @@ class FormatLib
         return number_format($n, 0, ',', '.');
     }
 
-    /**
-     * shortlyNumber
-     *
-     * @param $number
-     *
-     * @return string
-     */
-    public static function shortlyNumber($number)
+    public static function shortlyNumber($n, $floor = true)
     {
-        // MAS DEL TRILLON
-        if ($number >= 1000000000000000000000000) {
-            return self::prettyNumber(($number / 1000000000000000000)) . ' T+';
-        } elseif ($number >= 1000000000000000000 && $number < 1000000000000000000000000) {
-            return self::prettyNumber(($number / 1000000000000000000)) . ' T';
-        } elseif ($number >= 1000000000000 && $number < 1000000000000000000) {
-            return self::prettyNumber(($number / 1000000000000)) . ' B';
-        } elseif ($number >= 1000000 && $number < 1000000000000) {
-            return self::prettyNumber(($number / 1000000)) . ' M';
-        } elseif ($number >= 10000 && $number < 1000000) {
-            return self::prettyNumber(($number / 1000)) . ' K';
-        } else {
-            return self::prettyNumber($number);
+        $lang = new Language();
+        $unit = '';
+
+        if ($floor) {
+            $n = ($n !== null && $n !== 0) ? floor($n) : 0;
+            $precision = 0;
         }
+
+        if ($n >= 1000000000) {
+            $unit = $lang->loadLang('game/global', true)->line('unit_milliard');
+            $n = $n / 1000000000;
+            $precision = 3;
+        } elseif ($n >= 1000000) {
+            $unit = $lang->loadLang('game/global', true)->line('unit_mega');
+            $n = $n / 1000000;
+            $precision = 3;
+        } elseif ($n >= 1000) {
+            $unit = '';
+            $n = $n / 1000;
+            $precision = 3;
+        }
+
+        return number_format($n, $precision, '.', '.') . $unit;
     }
 
-    /**
-     * method floatToString
-     *
-     * @param int     $numeric Number
-     * @param int     $pro     Pro
-     * @param boolean $output  Output
-     *
-     * @return string
-     */
     public static function floatToString($numeric, $pro = 0, $output = false)
     {
         return ($output) ? str_replace(
