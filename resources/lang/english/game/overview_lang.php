@@ -2,7 +2,7 @@
 
 $lang = [
     'overview_title' => 'Overview',
-    'overview_place' => '',
+    'overview_place' => 'Place',
     'overview_of' => 'of',
     'overview_diameter' => 'Diameter',
     'overview_distance_unit' => 'km',
