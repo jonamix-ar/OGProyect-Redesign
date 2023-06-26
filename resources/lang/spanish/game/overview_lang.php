@@ -14,6 +14,7 @@ $lang = [
     'overview_points' => 'Puntos',
     'overview_fields' => 'Campos',
     'overview_switch' => 'Cambiar a ',
+	'overview_honour_points' => 'Puntos de honor',
     'overview_planet_move' => 'Reubicar',
     'overview_planet_move_tooltip' => 'La reubicación te permite mover tu planeta a otra posición en un sistema todo lo alejado que quieras.<br />
     <br />

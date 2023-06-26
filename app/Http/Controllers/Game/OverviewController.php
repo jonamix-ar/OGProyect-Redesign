@@ -74,6 +74,7 @@ class OverviewController extends BaseController
                         'galaxy_system' => $this->planet['planet_system'],
                         'galaxy_planet' => $this->planet['planet_planet'],
                         'user_rank' => $this->getUserRank(),
+						//'free_movements' => $this->getFreeMovements(),
                     ]
                 )
             )
@@ -344,5 +345,25 @@ class OverviewController extends BaseController
         }
 
         return $user_rank;
+    }
+
+
+    /**
+     * method getFreeMovements
+     * param
+     * return the current user free planet movements
+     */
+    private function getFreeMovements()
+    {
+        $free_movements = '';
+
+        if ($this->user['user_planet_movements'] > 0) {
+
+            $free_movements = '<span class="undermark tooltip tpd-hideOnClickOutside" title="">
+									(' . $this->user['user_planet_movements'] . ')
+								</span>';
+        }
+
+        return $free_movements;
     }
 }

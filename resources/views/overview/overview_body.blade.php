@@ -54,20 +54,26 @@
                                     <span id="scoreContentField"></span>
                                 </td>
                             </tr>
-                            {{-- HONNOR POINTS --}}
+                            <tr>
+								<td class="desc">
+									<span id="honorField"></span>
+								</td>
+								<td class="data ">
+									<span id="honorContentField"></span>
+								</td>
+							</tr>
                         </table>
                     </div>
                     <div id="planetOptions">
-                        {{-- 
                         <div class="planetMoveStart fleft" style="display: inline">
                             <a class="tooltipLeft dark_highlight_tablet fleft" style="display: inline-block"
                                 href='https://s145-ar.ogame.gameforge.com/game/index.php?page=ingame&amp;component=galaxy'
                                 title='{{ $overview_planet_move_tooltip }}' data-tooltip-button="A la galaxia">
                                 <span class="planetMoveIcons settings planetMoveDefault icon fleft"></span>
                                 <span class="planetMoveOverviewMoveLink">{{ $overview_planet_move }}</span>
+								<!-- {!! $free_movements !!} -->
                             </a>
-                        </div> --}}
-
+                        </div>
                         <a class="dark_highlight_tablet float_right openPlanetRenameGiveupBox"
                             href="javascript:void(0);">
                             <span class="planetMoveOverviewGivUpLink">{{ $overview_rename_abandon_planet }}</span>
@@ -146,7 +152,7 @@
             `<a href="game.php?page=galaxy&mode=0&galaxy={{ $galaxy_galaxy }}&system={{ $galaxy_system }}">[{{ $galaxy_galaxy }}:{{ $galaxy_system }}:{{ $galaxy_planet }}]</a>`,
             "{{ $overview_points }}:",
             `{!! $user_rank !!}`,
-            "Puntos de honor:",
+            "{{ $overview_honour_points }}",
             "0"
         ];
 

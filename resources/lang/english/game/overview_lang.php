@@ -14,6 +14,7 @@ $lang = [
     'overview_points' => 'Points',
     'overview_fields' => 'Fields',
     'overview_switch' => 'Switch to ',
+	'overview_honour_points' => 'Honour points',
     'overview_planet_move' => 'Relocate',
     'overview_planet_move_tooltip' => 'The relocation allows you to move your planets to another position in a distant system of your choosing.<br />
     <br />
