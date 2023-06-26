@@ -71,7 +71,7 @@
                                 title='{{ $overview_planet_move_tooltip }}' data-tooltip-button="A la galaxia">
                                 <span class="planetMoveIcons settings planetMoveDefault icon fleft"></span>
                                 <span class="planetMoveOverviewMoveLink">{{ $overview_planet_move }}</span>
-								<!-- {!! $free_movements !!} -->
+								{!! $free_movements !!}
                             </a>
                         </div>
                         <a class="dark_highlight_tablet float_right openPlanetRenameGiveupBox"

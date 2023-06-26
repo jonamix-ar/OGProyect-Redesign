@@ -74,7 +74,7 @@ class OverviewController extends BaseController
                         'galaxy_system' => $this->planet['planet_system'],
                         'galaxy_planet' => $this->planet['planet_planet'],
                         'user_rank' => $this->getUserRank(),
-						//'free_movements' => $this->getFreeMovements(),
+						'free_movements' => $this->getFreeMovements(),
                     ]
                 )
             )
