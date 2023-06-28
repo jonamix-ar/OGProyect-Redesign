@@ -67,7 +67,7 @@
                     <div id="planetOptions">
                         <div class="planetMoveStart fleft" style="display: inline">
                             <a class="tooltipLeft dark_highlight_tablet fleft" style="display: inline-block"
-                                href='https://s145-ar.ogame.gameforge.com/game/index.php?page=ingame&amp;component=galaxy'
+                                href='game.php?page=galaxy'
                                 title='{{ $overview_planet_move_tooltip }}' data-tooltip-button="A la galaxia">
                                 <span class="planetMoveIcons settings planetMoveDefault icon fleft"></span>
                                 <span class="planetMoveOverviewMoveLink">{{ $overview_planet_move }}</span>
