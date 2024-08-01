@@ -15,6 +15,7 @@ $resource = [
     31 => 'building_laboratory',
     33 => 'building_terraformer',
     34 => 'building_ally_deposit',
+	36 => 'building_repair_dock',
     41 => 'building_mondbasis',
     42 => 'building_phalanx',
     43 => 'building_jump_gate',
@@ -57,7 +58,7 @@ $resource = [
     406 => 'defense_plasma_turret',
     407 => 'defense_small_shield_dome',
     408 => 'defense_large_shield_dome',
-    502 => 'defense_anti-ballistic_missile',
+    502 => 'defense_anti_ballistic_missile',
     503 => 'defense_interplanetary_missile',
     601 => 'premium_officier_commander',
     602 => 'premium_officier_admiral',
@@ -72,6 +73,7 @@ $requeriments = [
     15 => [14 => 10, 108 => 10],
     21 => [14 => 2],
     33 => [15 => 1, 113 => 12],
+	36 => [21 => 2],
     42 => [41 => 1],
     43 => [41 => 1, 114 => 7],
     44 => [21 => 1],
@@ -132,6 +134,7 @@ $pricelist = [
     31 => ['metal' => 200, 'crystal' => 400, 'deuterium' => 200, 'energy' => 0, 'factor' => 2],
     33 => ['metal' => 0, 'crystal' => 50000, 'deuterium' => 100000, 'energy_max' => 1000, 'factor' => 2],
     34 => ['metal' => 20000, 'crystal' => 40000, 'deuterium' => 0, 'energy' => 0, 'factor' => 2],
+	36 => ['metal' => 200, 'crystal' => 0, 'deuterium' => 50, 'energy' => 50, 'factor' => 5],
     41 => ['metal' => 20000, 'crystal' => 40000, 'deuterium' => 20000, 'energy' => 0, 'factor' => 2],
     42 => ['metal' => 20000, 'crystal' => 40000, 'deuterium' => 20000, 'energy' => 0, 'factor' => 2],
     43 => ['metal' => 2000000, 'crystal' => 4000000, 'deuterium' => 2000000, 'energy' => 0, 'factor' => 2],
@@ -258,12 +261,12 @@ $ProdGrid = [
 
 // new ogame
 $reslist['resources'] = [1, 2, 3, 4, 12, 22, 23, 24];
-$reslist['facilities'] = [14, 15, 21, 31, 33, 34, 41, 42, 43, 44];
+$reslist['facilities'] = [14, 15, 21, 31, 33, 34, 36, 41, 42, 43, 44];
 $reslist['defenses'] = [401, 402, 403, 404, 405, 406, 407, 408];
 $reslist['missiles'] = [502, 503];
 
 // old ogame
-$reslist['build'] = [1, 2, 3, 4, 12, 14, 15, 21, 22, 23, 24, 31, 33, 34, 41, 42, 43, 44];
+$reslist['build'] = [1, 2, 3, 4, 12, 14, 15, 21, 22, 23, 24, 31, 33, 34, 36, 41, 42, 43, 44];
 $reslist['tech'] = [106, 108, 109, 110, 111, 113, 114, 115, 117, 118, 120, 121, 122, 123, 124, 199];
 $reslist['fleet'] = [202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215];
 $reslist['defense'] = [401, 402, 403, 404, 405, 406, 407, 408, 502, 503];

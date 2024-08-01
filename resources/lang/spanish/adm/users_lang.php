@@ -169,6 +169,7 @@ $lang = [
     'us_user_building_laboratory' => 'Laboratorio de investigación',
     'us_user_building_terraformer' => 'Terraformer',
     'us_user_building_ally_deposit' => 'Depósito de la Alianza',
+	'us_user_building_repair_dock' => 'Muelle Espacial',
     'us_user_building_missile_silo' => 'Silo',
     'us_user_building_mondbasis' => 'Base lunar',
     'us_user_building_phalanx' => 'Sensor Phalanx',
@@ -195,7 +196,7 @@ $lang = [
     'us_user_defense_plasma_turret' => 'Cañón de plasma',
     'us_user_defense_small_shield_dome' => 'Cúpula pequeña de protección',
     'us_user_defense_large_shield_dome' => 'Cúpula grande de protección',
-    'us_user_defense_anti-ballistic_missile' => 'Misiles antibalísticos',
+    'us_user_defense_anti_ballistic_missile' => 'Misiles antibalísticos',
     'us_user_defense_interplanetary_missile' => 'Misil interplanetario',
 
     // list of elements for the queue list - lines below need review

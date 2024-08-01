@@ -21,6 +21,7 @@ abstract class ObjectsClassesEnumerator
     public const building_laboratory = 'researchLaboratory';
     public const building_terraformer = 'terraformer';
     public const building_ally_deposit = 'allianceDepot';
+	public const building_repair_dock = 'repairDock';
     public const building_mondbasis = 'moonbase';
     public const building_phalanx = 'sensorPhalanx';
     public const building_jump_gate = 'jumpGate';
@@ -71,6 +72,6 @@ abstract class ObjectsClassesEnumerator
     public const defense_large_shield_dome = 'shieldDomeLarge';
 
 	// missiles
-    public const defense_anti-ballistic_missile = 'missileInterceptor';
+    public const defense_anti_ballistic_missile = 'missileInterceptor';
     public const defense_interplanetary_missile = 'missileInterplanetary';
 }

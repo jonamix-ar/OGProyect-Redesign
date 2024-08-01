@@ -14,6 +14,6 @@ abstract class DefensesEnumerator
     public const defense_plasma_turret = 406;
     public const defense_small_shield_dome = 407;
     public const defense_large_shield_dome = 408;
-    public const defense_anti-ballistic_missile = 502;
+    public const defense_anti_ballistic_missile = 502;
     public const defense_interplanetary_missile = 503;
 }

@@ -58,7 +58,7 @@ class StatisticsLibrary
      */
     public function rebuildPoints($user_id, $planet_id, $what)
     {
-        if (!in_array(DB_PREFIX . $what, [BUILDINGS, DEFENSES, RESEARCH, SHIPS])) {
+        if (!in_array('{xgp_prefix}' . $what, [BUILDINGS, DEFENSES, RESEARCH, SHIPS])) {
             return false;
         }
 
@@ -67,34 +67,61 @@ class StatisticsLibrary
 
         if ($what == 'research') {
             $objectsToUpdate = $this->statisticsLibraryModel->getResearchToUpdate($user_id);
+			if (!is_null($objects)) {
+				foreach ($objects as $id => $object) {
+					if (isset($objectsToUpdate[$object])) {
+						$price = Objects::getInstance()->getPrice($id);
+						$total = $price['metal'] + $price['crystal'] + $price['deuterium'];
+						$level = $objectsToUpdate[$object];
+
+						if ($price['factor'] > 1) {
+							$s = (pow($price['factor'], $level) - 1) / ($price['factor'] - 1);
+						} else {
+							$s = $price['factor'] * $level;
+						}
+
+						$points += ($total * $s) / Functions::readConfig('stat_points');
+					}
+				}
+
+				if ($points >= 0) {
+					$what = strtr($what, ['research' => 'technology']);
+
+					$this->statisticsLibraryModel->updatePoints($what, $points, $user_id);
+
+					return true;
+				}
+			}
         } else {
-            $objectsToUpdate = $this->statisticsLibraryModel->getPlanetElementToUpdate($what, $planet_id);
-        }
+			$planetsToUpdate = $this->statisticsLibraryModel->getPlanetsByUserId($user_id);
+			if (!is_null($objects)) {
+				foreach($planetsToUpdate AS $planet) {
+					$objectsToUpdate = $this->statisticsLibraryModel->getPlanetElementToUpdate($what, $planet['planet_id']);
+					foreach ($objects as $id => $object) {
+						if (isset($objectsToUpdate[$object])) {
+							$price = Objects::getInstance()->getPrice($id);
+							$total = $price['metal'] + $price['crystal'] + $price['deuterium'];
+							$level = $objectsToUpdate[$object];
 
-        if (!is_null($objects)) {
-            foreach ($objects as $id => $object) {
-                if (isset($objectsToUpdate[$object])) {
-                    $price = Objects::getInstance()->getPrice($id);
-                    $total = $price['metal'] + $price['crystal'] + $price['deuterium'];
-                    $level = $objectsToUpdate[$object];
+							if ($price['factor'] > 1) {
+								$s = (pow($price['factor'], $level) - 1) / ($price['factor'] - 1);
+							} else {
+								$s = $price['factor'] * $level;
+							}
 
-                    if ($price['factor'] > 1) {
-                        $s = (pow($price['factor'], $level) - 1) / ($price['factor'] - 1);
-                    } else {
-                        $s = $price['factor'] * $level;
-                    }
+							$points += ($total * $s) / Functions::readConfig('stat_points');
+						}
+					}
+				}
 
-                    $points += ($total * $s) / 1000;
-                }
-            }
+				if ($points >= 0) {
+					$what = strtr($what, ['research' => 'technology']);
 
-            if ($points >= 0) {
-                $what = strtr($what, ['research' => 'technology']);
+					$this->statisticsLibraryModel->updatePoints($what, $points, $user_id);
 
-                $this->statisticsLibraryModel->updatePoints($what, $points, $user_id);
-
-                return true;
-            }
+					return true;
+				}
+			}
         }
 
         return false;

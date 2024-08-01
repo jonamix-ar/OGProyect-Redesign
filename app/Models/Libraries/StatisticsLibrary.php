@@ -39,6 +39,21 @@ class StatisticsLibrary extends Model
     }
 
     /**
+     *
+     * @param int    $user_id User ID
+     *
+     * @return array
+     */
+    public function getPlanetsByUserId($user_id)
+    {
+        return $this->db->queryFetchAll(
+            "SELECT *
+            FROM `" . PLANETS . "`
+            WHERE planet_user_id = '" . $user_id . "';"
+        );
+    }
+
+    /**
      * Update points based on the provided parameters
      *
      * @param string $what    What

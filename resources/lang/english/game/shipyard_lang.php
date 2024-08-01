@@ -35,7 +35,7 @@ $lang = [
         'defense_plasma_turret' => 'Plasma Turrets release the energy of a solar flare and surpass even the destroyer in destructive effect.',
         'defense_small_shield_dome' => 'The small shield dome covers an entire planet with a field which can absorb a tremendous amount of energy.',
         'defense_large_shield_dome' => 'The evolution of the small shield dome can employ significantly more energy to withstand attacks.',
-        'defense_anti-ballistic_missile' => 'Anti-Ballistic Missiles destroy attacking interplanetary missiles',
+        'defense_anti_ballistic_missile' => 'Anti-Ballistic Missiles destroy attacking interplanetary missiles',
         'defense_interplanetary_missile' => 'Interplanetary Missiles destroy enemy defences. Your interplanetary missiles have got a coverage of %s systems.',
     ],
 ];

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Game;
 
 use App\Core\BaseController;
+use App\Core\Enumerators\PlanetTypesEnumerator;
+use App\Libraries\FormatLib;
 use App\Libraries\Functions;
 use App\Libraries\Users;
 use App\Models\Game\Renameplanet;
@@ -40,6 +42,7 @@ class RenameplanetController extends BaseController
         $parse = $this->langs->language;
         $parse['planet_name'] = $this->planet['planet_name'];
         $parse['planet_id'] = $this->planet['planet_id'];
+		$parse['planet_image'] = $this->getPlanetName();
         $parse['galaxy_galaxy'] = $this->planet['planet_galaxy'];
         $parse['galaxy_system'] = $this->planet['planet_system'];
         $parse['galaxy_planet'] = $this->planet['planet_planet'];
@@ -70,6 +73,11 @@ class RenameplanetController extends BaseController
             ),
             $full = false
         );
+    }
+
+	private function getPlanetName()
+    {
+        return IMG_PATH . 'planets/' . $this->planet['planet_image'] . ($this->planet['planet_type'] == PlanetTypesEnumerator::PLANET ? '_6.gif' : '_3.gif');
     }
 
     /**

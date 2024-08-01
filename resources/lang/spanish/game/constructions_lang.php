@@ -17,6 +17,7 @@ $lang = [
     'building_laboratory' => 'Laboratorio de investigación',
     'building_terraformer' => 'Terraformer',
     'building_ally_deposit' => 'Depósito de la Alianza',
+	'building_repair_dock' => 'Muelle espacial',
     'building_mondbasis' => 'Base lunar',
     'building_phalanx' => 'Sensor Phalanx',
     'building_jump_gate' => 'Salto cuántico',

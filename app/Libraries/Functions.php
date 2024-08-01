@@ -5,6 +5,7 @@ namespace App\Libraries;
 use App\Core\Database;
 use App\Core\Enumerators\MessagesEnumerator;
 use App\Core\Language;
+use App\Core\Objects;
 use App\Core\Options;
 use App\Core\Template;
 use App\Helpers\StringsHelper;
@@ -428,7 +429,8 @@ abstract class Functions
 		$db = new Database();
 		$template = new Template();
 		$langs = new Language();
-		$lang = $langs->loadLang(['game/global', 'game/menu'], true);
+		$objects = new Objects();
+		$lang = $langs->loadLang(['game/global', 'game/menu', 'game/constructions'], true);
 		$list           = '';
 		$parse['system_version'] = SYSTEM_VERSION;
         $user_planets   = self::sortPlanets($current_user);
@@ -448,7 +450,7 @@ abstract class Functions
 				if($planets['planet_b_building_id'] > 0)
 				{
 					$current_build = explode(',', $planets['planet_b_building_id']);
-					$parse['is_build']		= '<a class="constructionIcon tooltip js_hideTipOnMobile" href="index.php?page=' . $page . '&amp;cp=' . $planets['planet_id'] . '" title="' . $planets['planet_id']/*$lang->line('tech')[$current_build[0]]*/ . '">
+					$parse['is_build']		= '<a class="constructionIcon tooltip js_hideTipOnMobile" href="index.php?page=' . $page . '&amp;cp=' . $planets['planet_id'] . '" title="' . $lang->language[$objects->getObjects($current_build[0])] . '">
 													<span class="icon12px icon_wrench"></span>
 												</a>';
 				} else {

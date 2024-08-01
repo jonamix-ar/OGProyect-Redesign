@@ -35,7 +35,7 @@ $lang = [
         'defense_plasma_turret' => 'Los cañones de plasma liberan la energía de una pequeña erupción solar en una bala de plasma. La energía destructiva es incluso superior a la del Destructor.',
         'defense_small_shield_dome' => 'La cúpula pequeña de protección cubre el planeta con un delgado campo protector que puede absorber inmensas cantidades de energía.',
         'defense_large_shield_dome' => 'La cúpula grande de protección proviene de una tecnología de defensa mejorada que absorbe incluso más energía antes de colapsarse.',
-        'defense_anti-ballistic_missile' => 'Los misiles antibalísticos destruyen los misiles interplanetarios.',
+        'defense_anti_ballistic_missile' => 'Los misiles antibalísticos destruyen los misiles interplanetarios.',
         'defense_interplanetary_missile' => 'Los misiles interplanetarios destruyen los sistemas de defensa del enemigo. Tus misiles interplanetarios tienen actualmente un alcance de %s sistemas.',
     ],
 ];

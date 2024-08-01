@@ -50,7 +50,7 @@ class Missile extends Missions
                 $single = '_single';
             }
 
-            if ($target_data['defense_anti-ballistic_missile'] >= $fleet_row['fleet_amount']) {
+            if ($target_data['defense_anti_ballistic_missile'] >= $fleet_row['fleet_amount']) {
                 $message = $this->langs->line('mis_all_destroyed') . '<br>';
                 $amount = $fleet_row['fleet_amount'];
             } else {
@@ -58,14 +58,14 @@ class Missile extends Missions
                 $result = [];
                 $amount = 0;
 
-                if ($target_data['defense_anti-ballistic_missile'] > 0) {
-                    $result[502] = $target_data['defense_anti-ballistic_missile'];
-                    $message = $target_data['defense_anti-ballistic_missile'] .
+                if ($target_data['defense_anti_ballistic_missile'] > 0) {
+                    $result[502] = $target_data['defense_anti_ballistic_missile'];
+                    $message = $target_data['defense_anti_ballistic_missile'] .
                     $this->langs->line('mis_some_destroyed') . ' <br>';
                 }
 
                 $attack = floor(
-                    ($fleet_row['fleet_amount'] - $target_data['defense_anti-ballistic_missile']) * ($this->combat_caps[503]['attack'] * (1 + ($attacker_data['research_weapons_technology'] / 10)))
+                    ($fleet_row['fleet_amount'] - $target_data['defense_anti_ballistic_missile']) * ($this->combat_caps[503]['attack'] * (1 + ($attacker_data['research_weapons_technology'] / 10)))
                 );
                 $attack_order = $this->setAttackOrder($fleet_row['fleet_target_obj']);
 

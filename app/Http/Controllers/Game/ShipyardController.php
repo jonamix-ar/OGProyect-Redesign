@@ -17,7 +17,7 @@ class ShipyardController extends BaseController
 {
     public const MODULE_ID = 7;
     private array $missiles = [
-        Defenses::defense_anti-ballistic_missile => 0,
+        Defenses::defense_anti_ballistic_missile => 0,
         Defenses::defense_interplanetary_missile => 0,
     ];
     private array $resources_consumed = [
@@ -448,7 +448,7 @@ class ShipyardController extends BaseController
                 Defenses::defense_plasma_turret,
                 Defenses::defense_small_shield_dome,
                 Defenses::defense_large_shield_dome,
-                Defenses::defense_anti-ballistic_missile,
+                Defenses::defense_anti_ballistic_missile,
                 Defenses::defense_interplanetary_missile,
             ],
         ];
@@ -504,7 +504,7 @@ class ShipyardController extends BaseController
         }
 
         // set the construction limit for missiles
-        if (in_array($item_id, [Defenses::defense_anti-ballistic_missile, Defenses::defense_interplanetary_missile])) {
+        if (in_array($item_id, [Defenses::defense_anti_ballistic_missile, Defenses::defense_interplanetary_missile])) {
             $max_missiles = $this->getMissilesItemLimit($item_id, $amount_requested);
 
             if ($amount_requested > $max_missiles) {
@@ -523,7 +523,7 @@ class ShipyardController extends BaseController
 
         // last verification for missiles,
         // I'm sure I can do all this process better
-        if (in_array($item_id, [Defenses::defense_anti-ballistic_missile, Defenses::defense_interplanetary_missile])) {
+        if (in_array($item_id, [Defenses::defense_anti_ballistic_missile, Defenses::defense_interplanetary_missile])) {
             // keep track of the amount of missiles
             $this->missiles[$item_id] += $amount_requested;
         }
@@ -607,11 +607,11 @@ class ShipyardController extends BaseController
 
         // start applying formulas
         $silo_size = $this->planet[$this->objects->getObjects(44)] * 10;
-        $taken_space = $this->missiles[Defenses::defense_anti-ballistic_missile] + ($this->missiles[Defenses::defense_interplanetary_missile] * 2);
+        $taken_space = $this->missiles[Defenses::defense_anti_ballistic_missile] + ($this->missiles[Defenses::defense_interplanetary_missile] * 2);
         $max_amount = $silo_size - $taken_space;
         $amount = 0;
 
-        if ($item_id == Defenses::defense_anti-ballistic_missile) {
+        if ($item_id == Defenses::defense_anti_ballistic_missile) {
             $amount = $max_amount;
         }
 
@@ -676,19 +676,19 @@ class ShipyardController extends BaseController
     {
         // get the amount of missiles stored in the planet
         $planet_missiles = [
-            Defenses::defense_anti-ballistic_missile => $this->planet[$this->objects->getObjects(Defenses::defense_anti-ballistic_missile)],
+            Defenses::defense_anti_ballistic_missile => $this->planet[$this->objects->getObjects(Defenses::defense_anti_ballistic_missile)],
             Defenses::defense_interplanetary_missile => $this->planet[$this->objects->getObjects(Defenses::defense_interplanetary_missile)],
         ];
 
         // get the amount of missiles in the current queue
         $current_queue = $this->processQueueToArray();
         $queue_missiles = [
-            Defenses::defense_anti-ballistic_missile => 0,
+            Defenses::defense_anti_ballistic_missile => 0,
             Defenses::defense_interplanetary_missile => 0,
         ];
 
         foreach ($current_queue as $item => $amount) {
-            if ($item == Defenses::defense_anti-ballistic_missile
+            if ($item == Defenses::defense_anti_ballistic_missile
                 or $item == Defenses::defense_interplanetary_missile)
 			{
                 $queue_missiles[$item] += $amount;
@@ -698,7 +698,7 @@ class ShipyardController extends BaseController
         // add the amount of missiles stored in the planet, and the amount of
         // missiles in the current queue, and finally the amount of missiles in
         //  the queue that's being developed.
-        $this->missiles[Defenses::defense_anti-ballistic_missile] += $planet_missiles[Defenses::defense_anti-ballistic_missile] + $queue_missiles[Defenses::defense_anti-ballistic_missile];
+        $this->missiles[Defenses::defense_anti_ballistic_missile] += $planet_missiles[Defenses::defense_anti_ballistic_missile] + $queue_missiles[Defenses::defense_anti_ballistic_missile];
         $this->missiles[Defenses::defense_interplanetary_missile] += $planet_missiles[Defenses::defense_interplanetary_missile] + $queue_missiles[Defenses::defense_interplanetary_missile];
     }
 

@@ -20,6 +20,7 @@ abstract class BuildingsEnumerator
     public const BUILDING_LABORATORY = 31;
     public const BUILDING_TERRAFORMER = 33;
     public const BUILDING_ALLY_DEPOSIT = 34;
+	public const BUILDING_REPAIR_DOCK = 36;
     public const BUILDING_MONDBASIS = 41;
     public const BUILDING_PHALANX = 42;
     public const BUILDING_JUMP_GATE = 43;

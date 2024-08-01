@@ -798,7 +798,7 @@ class Missions extends Model
             $this->db->query(
                 'UPDATE ' . DEFENSES . " SET
                 {$data['destroyed_query']}
-                `defense_anti-ballistic_missile` = '" . $data['amount'] . "'
+                `defense_anti_ballistic_missile` = '" . $data['amount'] . "'
                 WHERE defense_planet_id = '" . (int) $data['planet_id'] . "';"
             );
         }

@@ -341,7 +341,7 @@ class OverviewController extends BaseController
 
         if ($this->noob->isRankVisible($this->user['user_authlevel'])) {
 
-            $user_rank = '<a href="' . SYSTEM_ROOT . 'game.php?page=highscore&range=' . $total_rank . '">' . $total_rank . ' (' . $this->langs->line('overview_place') . ' ' . FormatLib::prettyNumber($this->user['user_statistic_total_points']) . ' ' . $this->langs->line('overview_of') . ' ' . $this->planet['stats_users'] . ')<\/a>';
+            $user_rank = '<a href="' . SYSTEM_ROOT . 'game.php?page=highscore&range=' . $total_rank . '">' . FormatLib::prettyNumber($this->user['user_statistic_total_points']) . ' (' . $this->langs->line('overview_place') . ' ' . $total_rank . ' ' . $this->langs->line('overview_of') . ' ' . $this->planet['stats_users'] . ')<\/a>';
         }
 
         return $user_rank;

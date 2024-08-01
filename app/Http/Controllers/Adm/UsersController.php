@@ -1102,7 +1102,7 @@ class UsersController extends BaseController
         $exclude_buildings = ['building_mondbasis', 'building_phalanx', 'building_jump_gate'];
 
         if ($type == 3) {
-            $exclude_buildings = ['building_metal_mine', 'building_crystal_mine', 'building_deuterium_sintetizer', 'building_solar_plant', 'building_fusion_reactor', 'building_nano_factory', 'building_laboratory', 'building_terraformer', 'building_ally_deposit', 'building_missile_silo'];
+            $exclude_buildings = ['building_metal_mine', 'building_crystal_mine', 'building_deuterium_sintetizer', 'building_solar_plant', 'building_fusion_reactor', 'building_nano_factory', 'building_laboratory', 'building_terraformer', 'building_ally_deposit', 'building_repair_dock', 'building_missile_silo'];
         }
 
         $prepare_table = [];
@@ -1165,7 +1165,7 @@ class UsersController extends BaseController
         $exclude_buildings = [''];
 
         if ($type == 3) {
-            $exclude_buildings = ['defense_anti-ballistic_missile', 'defense_interplanetary_missile'];
+            $exclude_buildings = ['defense_anti_ballistic_missile', 'defense_interplanetary_missile'];
         }
 
         $prepare_table = [];

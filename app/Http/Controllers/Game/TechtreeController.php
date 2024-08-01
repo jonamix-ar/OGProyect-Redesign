@@ -264,6 +264,7 @@ class TechtreeController extends BaseController
 				'BUILDING_MISSILE_SILO',
 				'BUILDING_LABORATORY',
 				'BUILDING_ALLY_DEPOSIT',
+				'BUILDING_REPAIR_DOCK',
 				'BUILDING_TERRAFORMER',
 				'BUILDING_MONDBASIS',
 				'BUILDING_PHALANX',
@@ -314,7 +315,7 @@ class TechtreeController extends BaseController
                 'defense_large_shield_dome',
             ],
 			'missile' => [
-                'defense_anti-ballistic_missile',
+                'defense_anti_ballistic_missile',
                 'defense_interplanetary_missile',
 			],
 		];

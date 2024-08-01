@@ -33,6 +33,7 @@ $lang = [
         'building_phalanx' => 'Usando el sensor phalanx, las flotas de otros imperios pueden ser descubiertas y observadas. Cuanto mayor sea la cadena de sensores phalanx, mayor el rango que pueda escanear.',
         'building_jump_gate' => 'El saltos cuánticos son transmisores enormes que son capaces de enviar grandes flotas a través del universo sin perdida de tiempo.',
         'building_missile_silo' => 'El silo es un lugar de almacenamiento y lanzamiento de misiles planetarios.',
+		'building_repair_dock' => 'En el Astillero Orbital se pueden reparar restos procedentes de pecios.',
     ],
     'bd_building_queue_build_order' => 'Orden de construcción',
     'bd_building_queue_destroy_order' => 'Orden de destrucción',
